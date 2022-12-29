@@ -1,0 +1,19 @@
+.modalHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modalCloseBtn{
+    border: none;
+    font-size: 25px;
+    color: #575757;
+    cursor: pointer;
+}
+
+.buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}

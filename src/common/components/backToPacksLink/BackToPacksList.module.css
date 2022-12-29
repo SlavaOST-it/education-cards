@@ -1,0 +1,15 @@
+.back {
+    display: flex;
+    margin: 10px;
+}
+
+.backLink img{
+    margin-right: 10px;
+}
+
+.backLink, .backLink:visited {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+}

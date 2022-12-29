@@ -1,0 +1,12 @@
+.coverBlock{
+    display: flex;
+    flex-direction: column;
+}
+.coverHeader{
+    display: flex;
+    justify-content: space-between;
+}
+.coverImage img{
+    max-width: 350px;
+    height: 100px;
+}

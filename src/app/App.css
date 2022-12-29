@@ -1,0 +1,13 @@
+.App {
+    text-align: center;
+}
+
+.circularProgress {
+    margin-bottom: 40px;
+    position: fixed;
+    top: 50%;
+    text-align: center;
+    width: 100%;
+}
+
+

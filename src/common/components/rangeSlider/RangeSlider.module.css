@@ -1,0 +1,7 @@
+.container{
+    display: flex;
+}
+.value{
+    width: 25px;
+    padding: 0 10px;
+}

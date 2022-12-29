@@ -1,0 +1,29 @@
+.error_page {
+    text-align: center;
+}
+
+.error_404 {
+    font-size: 35px;
+    font-weight: 600;
+    margin: 20px 0;
+}
+
+.error_text {
+    color: gray;
+    font-size: 18px;
+    margin: 20px 0;
+}
+
+.error_btn {
+    border: 1px solid #6e6e6e;
+    border-radius: 5px;
+    padding: 7px 15px;
+
+    font-weight: bolder;
+}
+
+.error_img {
+    margin-top: 20px;
+    width: 300px;
+    height: 300px;
+}

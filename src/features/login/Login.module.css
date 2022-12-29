@@ -1,0 +1,12 @@
+.checkbox{
+    display: flex;
+    justify-content: left;
+    padding-left: 10px;
+}
+
+.forgot{
+    text-decoration: none;
+    color:#091430;
+    text-align: right;
+    padding: 0 10px 10px 0;
+}
