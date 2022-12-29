@@ -1,0 +1,17 @@
+{
+  "files": {
+    "main.css": "/education-cards/static/css/main.e58db1e9.css",
+    "main.js": "/education-cards/static/js/main.d3f484c2.js",
+    "static/js/787.80ecba5f.chunk.js": "/education-cards/static/js/787.80ecba5f.chunk.js",
+    "static/media/avatar_user.png": "/education-cards/static/media/avatar_user.da4813bd8d4b2bb1c5cc.png",
+    "static/media/down-arrow-svgrepo-com.svg": "/education-cards/static/media/down-arrow-svgrepo-com.53e4ffd174554c1a117e166bb8f860c6.svg",
+    "index.html": "/education-cards/index.html",
+    "main.e58db1e9.css.map": "/education-cards/static/css/main.e58db1e9.css.map",
+    "main.d3f484c2.js.map": "/education-cards/static/js/main.d3f484c2.js.map",
+    "787.80ecba5f.chunk.js.map": "/education-cards/static/js/787.80ecba5f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.e58db1e9.css",
+    "static/js/main.d3f484c2.js"
+  ]
+}
