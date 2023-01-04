@@ -1,17 +1,17 @@
 {
   "files": {
     "main.css": "/education-cards/static/css/main.34c1fd30.css",
-    "main.js": "/education-cards/static/js/main.3f987aa1.js",
+    "main.js": "/education-cards/static/js/main.43c5be92.js",
     "static/js/787.80ecba5f.chunk.js": "/education-cards/static/js/787.80ecba5f.chunk.js",
     "static/media/avatar_user.png": "/education-cards/static/media/avatar_user.da4813bd8d4b2bb1c5cc.png",
     "static/media/down-arrow-svgrepo-com.svg": "/education-cards/static/media/down-arrow-svgrepo-com.53e4ffd174554c1a117e166bb8f860c6.svg",
     "index.html": "/education-cards/index.html",
     "main.34c1fd30.css.map": "/education-cards/static/css/main.34c1fd30.css.map",
-    "main.3f987aa1.js.map": "/education-cards/static/js/main.3f987aa1.js.map",
+    "main.43c5be92.js.map": "/education-cards/static/js/main.43c5be92.js.map",
     "787.80ecba5f.chunk.js.map": "/education-cards/static/js/787.80ecba5f.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.34c1fd30.css",
-    "static/js/main.3f987aa1.js"
+    "static/js/main.43c5be92.js"
   ]
 }
