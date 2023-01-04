@@ -1,4 +1,4 @@
-import {forgotPassAPI} from "../../api/authAPI";
+import {authAPI} from "../../api/authAPI";
 import {AppThunkType} from "../store/store";
 import {setAppStatusAC, SetAppStatusAT} from "./app-reducer";
 import {baseErrorHandler} from "../../utils/error-utils/error-utils";
@@ -33,7 +33,7 @@ export const setNewPassAC = (infoMessage: string) => ({type: "NEW_PASS/SET_NEW_P
 export const setNewPassTC = (newPassword: string, token: string | undefined): AppThunkType => async (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     try {
-        let res = await forgotPassAPI.setNewPas(newPassword, token)
+        let res = await authAPI.setNewPas(newPassword, token)
         dispatch(setNewPassAC(res.info))
         dispatch(setAppStatusAC('succeed'))
     } catch (e) {

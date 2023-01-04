@@ -37,12 +37,10 @@ export const setRegisterIn = (isRegisterIn: boolean) => {
 export const RegisterTC = (data: RegisterType): AppThunkType => async (dispatch) => {
     dispatch(setAppStatusAC('loading'))
     try {
-        const res = await authAPI.register(data)
+        await authAPI.register(data)
         dispatch(setRegisterIn(true))
         dispatch(setAppStatusAC('succeed'))
     } catch (e) {
         baseErrorHandler(e as Error | AxiosError, dispatch)
     }
 }
-
-

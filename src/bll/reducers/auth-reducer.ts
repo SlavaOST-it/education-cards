@@ -59,7 +59,7 @@ export const loginThunkCreator = (email: string, password: string, rememberMe: b
 
 export const logoutThunkCreator = (): AppThunkType => async (dispatch) => {
     dispatch(setAppStatusAC('loading'))
-    const res = await authAPI.logout()
+    await authAPI.logout()
     try {
         dispatch(loggedInAC(false))
         dispatch(setAppStatusAC('succeed'))

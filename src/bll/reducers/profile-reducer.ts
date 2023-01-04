@@ -1,8 +1,9 @@
-import {profileAPI} from "../../api/authAPI";
+import {profileAPI} from "../../api/profileAPI";
 import {AppThunkType} from "../store/store";
 import {setAppStatusAC, SetAppStatusAT} from "./app-reducer";
 import {baseErrorHandler} from "../../utils/error-utils/error-utils";
 import {AxiosError} from "axios";
+
 
 export type SetUserProfileAT = ReturnType<typeof setUserProfileAC>
 export type SetUserNameAC = ReturnType<typeof setUserNameAC>
