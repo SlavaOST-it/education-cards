@@ -54,7 +54,7 @@ const mailMessage = `<div style="text-align: center; background-color: #fff; col
     <p style="opacity: 0.5; line-height: 24px; text-align: center;">Click on the button</p>
     <div style="text-align: center">
         <a 
-        href="https://SlavaOST-it.github.io/Education_cards/#/setNewPass/$token$"
+        href="https://SlavaOST-it.github.io/education-cards/#/setNewPass/$token$"
         style="
             color: #fff; 
             display: inline-block; 
