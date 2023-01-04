@@ -1,9 +1,9 @@
 import React, {useState} from 'react'
 import {useFormik} from 'formik'
 import {Navigate, NavLink} from 'react-router-dom'
-import {RegisterTC} from '../../bll/reducers/registration-reducer'
-import {PATH} from '../../utils/routes/routes'
-import {useAppDispatch, useAppSelector} from '../../utils/hooks/hooks'
+import {RegisterTC} from '../../../bll/reducers/registration-reducer'
+import {PATH} from '../../../utils/routes/routes'
+import {useAppDispatch, useAppSelector} from '../../../utils/hooks/hooks'
 import {
     FormControl,
     FormGroup,
@@ -13,11 +13,11 @@ import {
     OutlinedInput,
     TextField
 } from '@mui/material'
-import {validator} from "../../common/components/validator/validator";
-import commonStyle from "../../common/styles/commonStyles.module.css";
+import commonStyle from "../../../common/styles/commonStyles.module.css";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
-import {ButtonForm} from "../../common/components/buttons/buttonForm/ButtonForm";
-import {InputPasswordType} from "../../common/types/types";
+import {ButtonForm} from "../../../common/components/buttons/buttonForm/ButtonForm";
+import {InputPasswordType} from "../../../common/types/types";
+import * as Yup from "yup";
 
 
 export const Registration = () => {
@@ -34,9 +34,11 @@ export const Registration = () => {
             password: '',
             confirmPassword: ''
         },
-        validate: values => {
-            return validator(values)
-        },
+        validationSchema: Yup.object({
+            email: Yup.string().email("Invalid email address").required("Email field is required"),
+            password: Yup.string().required("Password field is required").min(8, 'Password length less than 8 characters'),
+            confirmPassword: Yup.string().required("Password field is required").min(8, 'Password length less than 8 characters')
+        }),
         onSubmit: values => {
             dispatch(RegisterTC(values))
         },

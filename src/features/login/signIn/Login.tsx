@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
 import {useFormik} from "formik";
 import s from './Login.module.css'
-import commonStyle from "../../common/styles/commonStyles.module.css"
-import {loginThunkCreator} from "../../bll/reducers/auth-reducer";
-import {useAppDispatch, useAppSelector} from "../../utils/hooks/hooks";
+import commonStyle from "../../../common/styles/commonStyles.module.css"
+import {loginThunkCreator} from "../../../bll/reducers/auth-reducer";
+import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
 import {Navigate, NavLink} from "react-router-dom";
 import {
     Checkbox,
@@ -17,11 +17,10 @@ import {
     TextField
 } from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
-import {PATH} from "../../utils/routes/routes";
-import {validator} from "../../common/components/validator/validator";
-import {ButtonForm} from "../../common/components/buttons/buttonForm/ButtonForm";
-import {InputPasswordType} from "../../common/types/types";
-import Button from "@mui/material/Button";
+import {PATH} from "../../../utils/routes/routes";
+import * as Yup from 'yup';
+import {ButtonForm} from "../../../common/components/buttons/buttonForm/ButtonForm";
+import {InputPasswordType} from "../../../common/types/types";
 
 
 export const Login = () => {
@@ -35,8 +34,10 @@ export const Login = () => {
             password: '',
             rememberMe: false
         },
-        // validate: values => validator(values),
-
+        validationSchema: Yup.object({
+            email: Yup.string().email("Invalid email address").required("Email field is required"),
+            password: Yup.string().required("Password field is required").min(8, 'Password length less than 8 characters'),
+        }),
         onSubmit: values => {
             dispatch((loginThunkCreator(values.email, values.password, values.rememberMe)))
         }
@@ -102,7 +103,6 @@ export const Login = () => {
                             Forgot Password?
                         </NavLink>
 
-                        {/*<Button sx={{width: 234}} variant="outlined" type='submit'>Sign in</Button>*/}
                         <ButtonForm nameButton={"Sign in"}/>
 
                     </FormGroup>

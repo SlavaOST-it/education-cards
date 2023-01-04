@@ -1,15 +1,15 @@
 import React, {useState} from 'react';
 import {useFormik} from "formik";
 import {NavLink} from "react-router-dom";
-import {PATH} from "../../utils/routes/routes";
-import commonStyle from "../../common/styles/commonStyles.module.css"
-import {sendEmailTC} from "../../bll/reducers/passRecovery-reducer";
-import {useAppDispatch, useAppSelector} from "../../utils/hooks/hooks";
+import {PATH} from "../../../utils/routes/routes";
+import commonStyle from "../../../common/styles/commonStyles.module.css"
+import {sendEmailTC} from "../../../bll/reducers/passRecovery-reducer";
+import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
 import FormGroup from "@mui/material/FormGroup";
 import TextField from "@mui/material/TextField";
-import {CheckEmail} from "./checkEmail/CheckEmail";
-import {validator} from "../../common/components/validator/validator";
-import {ButtonForm} from "../../common/components/buttons/buttonForm/ButtonForm";
+import {CheckEmail} from "../checkEmail/CheckEmail";
+import {ButtonForm} from "../../../common/components/buttons/buttonForm/ButtonForm";
+import * as Yup from "yup";
 
 
 export const PasswordRecovery = () => {
@@ -22,9 +22,9 @@ export const PasswordRecovery = () => {
         initialValues: {
             email: ''
         },
-        validate: (values) => {
-            return validator(values)
-        },
+        validationSchema: Yup.object({
+            email: Yup.string().email("Invalid email address").required("Email field is required")
+        }),
         onSubmit: (values) => {
             dispatch(sendEmailTC(values.email))
             setEmail(values.email)
