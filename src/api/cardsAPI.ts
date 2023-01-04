@@ -1,4 +1,4 @@
-import {instance} from "./instance"
+import {instance} from "./apiConfig/instance"
 
 
 export const packsAPI = {
