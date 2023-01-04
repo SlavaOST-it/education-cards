@@ -1,12 +1,12 @@
 import React from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
 import {PATH} from "../../utils/routes/routes";
-import {Login} from "../login/Login";
+import {Login} from "../login/signIn/Login";
 import {Profile} from "../profile/Profile";
-import {Error404} from "../../common/components/errorPage/Error404";
-import {PasswordRecovery} from "../passwordRecovery/PasswordRecovery";
-import {Registration} from '../registration/Registration';
-import {NewPass} from "../newPassword/NewPass";
+import {PageNotFound} from "../errorPage/PageNotFound";
+import {PasswordRecovery} from "../login/passwordRecovery/PasswordRecovery";
+import {Registration} from '../login/registration/Registration';
+import {NewPass} from "../login/newPassword/NewPass";
 import {PacksList} from "../cards/PacksList";
 import {CardList} from "../cards/cards/CardList";
 
@@ -23,7 +23,7 @@ export const Main = () => {
                 <Route path={PATH.setNewPassword} element={<NewPass/>}/>
                 <Route path={PATH.packList} element={<PacksList/>}/>
                 <Route path={PATH.cardList} element={<CardList/>}/>
-                <Route path={'/*'} element={<Error404/>}/>
+                <Route path={'/*'} element={<PageNotFound/>}/>
             </Routes>
         </div>
     );
