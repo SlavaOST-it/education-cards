@@ -4,16 +4,16 @@ import {loggedInAC} from "./auth-reducer";
 import {AppThunkType} from "../store/store";
 import {baseErrorHandler} from "../../utils/error-utils/error-utils";
 import {AxiosError} from "axios";
+import {AppStatus} from "../../common/types/types";
 
-export type AppStatusType = 'idle' | 'loading' | 'succeed' | 'failed'
+
 export type SetInitializedAT = ReturnType<typeof setInitializedAC>
 export type SetAppStatusAT = ReturnType<typeof setAppStatusAC>
 export type SetAppErrorAT = ReturnType<typeof setAppErrorAC>
 export type AppActionType = SetInitializedAT | SetAppStatusAT | SetAppErrorAT
 
-
 const initialState = {
-    status: 'idle' as AppStatusType,
+    status: AppStatus.IDLE,
     error: null as string | null,
     isInitialized: false
 }
@@ -37,7 +37,7 @@ export const appReducer = (state: InitialStateType = initialState, action: AppAc
 
 // ===== ActionCreators ===== //
 export const setInitializedAC = (value: boolean) => ({type: "APP/SET-INITIALIZED", value} as const)
-export const setAppStatusAC = (status: AppStatusType) => ({
+export const setAppStatusAC = (status: AppStatus) => ({
     type: 'APP/SET-APP-STATUS' as const,
     status
 })
@@ -45,13 +45,13 @@ export const setAppErrorAC = (error: string | null) => ({type: 'APP/SET-ERROR', 
 
 // ===== ThunkCreators ===== //
 export const initializeAppTC = (): AppThunkType => async (dispatch) => {
-    dispatch(setAppStatusAC('loading'))
+    dispatch(setAppStatusAC(AppStatus.LOADING))
     try {
         const res = await authAPI.me()
         dispatch(loggedInAC(true))
         dispatch(setInitializedAC(true))
         dispatch(setUserProfileAC(res))
-        dispatch(setAppStatusAC('succeed'))
+        dispatch(setAppStatusAC(AppStatus.SUCCEED))
     } catch (e) {
         baseErrorHandler(e as Error | AxiosError, dispatch)
     } finally {

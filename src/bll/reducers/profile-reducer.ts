@@ -3,6 +3,7 @@ import {AppThunkType} from "../store/store";
 import {setAppStatusAC, SetAppStatusAT} from "./app-reducer";
 import {baseErrorHandler} from "../../utils/error-utils/error-utils";
 import {AxiosError} from "axios";
+import {AppStatus} from "../../common/types/types";
 
 
 export type SetUserProfileAT = ReturnType<typeof setUserProfileAC>
@@ -53,21 +54,22 @@ export const setUserPhotoAC = (photo: string) => ({type: "PROFILE/SET_USER_PHOTO
 
 // ==================THUNK CREATORS =======================//
 export const changeNameThunkCreator = (newName: string): AppThunkType => async (dispatch) => {
+    dispatch(setAppStatusAC(AppStatus.LOADING))
     try {
         let res = await profileAPI.changeName(newName)
         dispatch(setUserNameAC(res.updatedUser.name))
-        dispatch(setAppStatusAC('succeed'))
+        dispatch(setAppStatusAC(AppStatus.SUCCEED))
     } catch (e) {
         baseErrorHandler(e as Error | AxiosError, dispatch)
     }
 }
 
 export const changeAvatarThunkCreator = (avatar: string): AppThunkType => async (dispatch) => {
-    dispatch(setAppStatusAC('loading'))
+    dispatch(setAppStatusAC(AppStatus.LOADING))
     try {
         let res = await profileAPI.updatePhoto(avatar)
         dispatch(setUserPhotoAC(res.updatedUser.avatar))
-        dispatch(setAppStatusAC('succeed'))
+        dispatch(setAppStatusAC(AppStatus.SUCCEED))
     } catch (e) {
         baseErrorHandler(e as Error | AxiosError, dispatch)
     }

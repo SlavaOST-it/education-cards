@@ -3,6 +3,7 @@ import {setAppStatusAC} from "./app-reducer";
 import {AppThunkType} from "../store/store";
 import {baseErrorHandler} from "../../utils/error-utils/error-utils";
 import {AxiosError} from "axios";
+import {AppStatus} from "../../common/types/types";
 
 export type SetRegisterInType = ReturnType<typeof setRegisterIn>
 export type RegisterType = {
@@ -35,11 +36,11 @@ export const setRegisterIn = (isRegisterIn: boolean) => {
 
 // ===== Thunk Creators ===== //
 export const RegisterTC = (data: RegisterType): AppThunkType => async (dispatch) => {
-    dispatch(setAppStatusAC('loading'))
+    dispatch(setAppStatusAC(AppStatus.LOADING))
     try {
         await authAPI.register(data)
         dispatch(setRegisterIn(true))
-        dispatch(setAppStatusAC('succeed'))
+        dispatch(setAppStatusAC(AppStatus.SUCCEED))
     } catch (e) {
         baseErrorHandler(e as Error | AxiosError, dispatch)
     }

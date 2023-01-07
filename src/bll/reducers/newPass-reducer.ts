@@ -3,6 +3,7 @@ import {AppThunkType} from "../store/store";
 import {setAppStatusAC, SetAppStatusAT} from "./app-reducer";
 import {baseErrorHandler} from "../../utils/error-utils/error-utils";
 import {AxiosError} from "axios";
+import {AppStatus} from "../../common/types/types";
 
 export type SetNewPassAT = ReturnType<typeof setNewPassAC>
 export type NewPassReducerActionType = SetNewPassAT | SetAppStatusAT
@@ -31,11 +32,11 @@ export const setNewPassAC = (infoMessage: string) => ({type: "NEW_PASS/SET_NEW_P
 
 // ===== Thunk Creators ===== //
 export const setNewPassTC = (newPassword: string, token: string | undefined): AppThunkType => async (dispatch) => {
-    dispatch(setAppStatusAC('loading'))
+    dispatch(setAppStatusAC(AppStatus.LOADING))
     try {
         let res = await authAPI.setNewPas(newPassword, token)
         dispatch(setNewPassAC(res.info))
-        dispatch(setAppStatusAC('succeed'))
+        dispatch(setAppStatusAC(AppStatus.SUCCEED))
     } catch (e) {
         baseErrorHandler(e as Error | AxiosError, dispatch)
     }

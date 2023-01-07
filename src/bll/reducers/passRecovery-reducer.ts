@@ -3,6 +3,7 @@ import {AppThunkType} from "../store/store";
 import {setAppStatusAC, SetAppStatusAT} from "./app-reducer";
 import {baseErrorHandler} from "../../utils/error-utils/error-utils";
 import {AxiosError} from "axios";
+import {AppStatus} from "../../common/types/types";
 
 
 export type InfoMessageAT = ReturnType<typeof infoMessageAC>
@@ -15,7 +16,7 @@ const initialState = {
 }
 type InitialStateType = typeof initialState
 
-export const passRecoveryReducer = (state: InitialStateType = initialState, action: PassRecoveryActionType) :InitialStateType => {      // вместо any указать типизицию
+export const passRecoveryReducer = (state: InitialStateType = initialState, action: PassRecoveryActionType): InitialStateType => {      // вместо any указать типизицию
     switch (action.type) {
         case "PASS_RECOVERY/passRecovery":
             return {
@@ -39,13 +40,13 @@ export const statusSendMessageAC = (status: boolean) => ({
 } as const)
 
 // ======ThunkCreators ===== //
-export const sendEmailTC = (email: string):AppThunkType => async (dispatch) => {
-    dispatch(setAppStatusAC('loading'))
+export const sendEmailTC = (email: string): AppThunkType => async (dispatch) => {
+    dispatch(setAppStatusAC(AppStatus.LOADING))
     try {
         let res = await authAPI.sendEmail(email)
         dispatch(infoMessageAC(res.info))
         dispatch(statusSendMessageAC(true))
-        dispatch(setAppStatusAC('succeed'))
+        dispatch(setAppStatusAC(AppStatus.SUCCEED))
     } catch (e) {
         baseErrorHandler(e as Error | AxiosError, dispatch)
     }
