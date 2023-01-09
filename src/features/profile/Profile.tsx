@@ -1,17 +1,20 @@
 import React, {ChangeEvent, useRef, useState} from 'react';
-import s from './Profile.module.css'
-import pencilLogo from '../../assets/img/icons/pencil.png'
-import {changeAvatarThunkCreator, changeNameThunkCreator, setUserPhotoAC} from "../../bll/reducers/profile-reducer";
-import {useAppDispatch, useAppSelector} from "../../utils/hooks/hooks";
 import {Navigate} from "react-router-dom";
-import {PATH} from "../../utils/routes/routes";
-import {LogOutButton} from "../../common/components/buttons/logOutButton/LogOutButton";
-import {BackToPacksList} from "../../common/components/backToPacksLink/BackToPacksList";
-import {AvatarUser} from "./avatarUser/AvatarUser";
-import photoCamera from "../../assets/img/icons/photo-camera-svgrepo-com.svg";
-import {convertFileToBase64} from "../../utils/convertFileToBase64/convertFileToBase64";
-import customAvatar from "../../assets/img/icons/avatar_user.png"
+import s from './Profile.module.css'
+
+import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
+import {changeAvatarThunkCreator, changeNameThunkCreator, setUserPhotoAC} from "../../bll/reducers/profile-reducer";
 import {setAppErrorAC} from "../../bll/reducers/app-reducer";
+
+import {PATH} from "../../utils/routes/routes";
+import {useAppDispatch, useAppSelector} from "../../utils/hooks/hooks";
+import {convertFileToBase64} from "../../utils/convertFileToBase64/convertFileToBase64";
+
+import {BackToPacksList} from "../../common/components/backToPacksLink/BackToPacksList";
+import {LogOutButton} from "../../common/components/buttons/logOutButton/LogOutButton";
+import {AvatarUser} from "./avatarUser/AvatarUser";
+import camera from "../../assets/img/icons/camera.png"
+import customAvatar from "../../assets/img/icons/avatar_user.png"
 
 
 export const Profile = () => {
@@ -79,7 +82,7 @@ export const Profile = () => {
         dispatch(setAppErrorAC('Broken picture'))
     }
 
-    if(isAvaBroken){
+    if (isAvaBroken) {
         dispatch(setUserPhotoAC(customAvatar))
         setIsAvaBroken(false)
     }
@@ -97,20 +100,19 @@ export const Profile = () => {
                 <h2>Personal Information</h2>
 
                 <div className={s.avatarBlock}>
-                    <div>
+                    <div className={s.ava}>
                         <AvatarUser
                             onError={errorHandler}
                             className={s.avatar}/>
                     </div>
 
-                    <div>
-                        <button className={s.changeAvatarBtn} onClick={selectFileHandler}>
-                            <img
-                                className={s.changeAvatarBtn}
-                                src={""}
-                                alt={'change_photo'}
-                            />
-                        </button>
+                    <div className={s.avaCamera}>
+                        <img
+                            onClick={selectFileHandler}
+                            className={s.changeAvatarBtn}
+                            src={camera}
+                            alt={'change_photo'}
+                        />
                         <input
                             style={{display: 'none'}}
                             ref={inputRef}
@@ -140,8 +142,9 @@ export const Profile = () => {
                             onDoubleClick={activateEditMode}
                         >
                             {userName}
-                            <img src={pencilLogo} alt={'change name'}/>
+                            <BorderColorOutlinedIcon fontSize={'small'} sx={{marginLeft: '15px'}}/>
                         </span>
+
                         </div>)}
                 </div>
 

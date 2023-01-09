@@ -7,6 +7,7 @@ import {initializeAppTC} from "../bll/reducers/app-reducer";
 import {ErrorSnackbar} from "../common/components/ErrorSnackbar/ErrorSnackbar";
 import CircularProgress from "@mui/material/CircularProgress";
 import LinearProgress from "@mui/material/LinearProgress";
+import {AppStatus} from "../common/types/types";
 
 const App = () => {
     const isInitialized = useAppSelector((state) => state.app.isInitialized)
@@ -27,7 +28,7 @@ const App = () => {
         <div className="App">
             <ErrorSnackbar/>
             <Header/>
-            {loadingStatus === 'loading' && <LinearProgress/>}
+            {loadingStatus === AppStatus.LOADING && <LinearProgress/>}
             <Main/>
         </div>
     );

@@ -1,14 +1,17 @@
 import React from 'react';
 import {Navigate, Route, Routes} from "react-router-dom";
+
 import {PATH} from "../../utils/routes/routes";
+
 import {Login} from "../login/signIn/Login";
-import {Profile} from "../profile/Profile";
 import {PageNotFound} from "../errorPage/PageNotFound";
 import {PasswordRecovery} from "../login/passwordRecovery/PasswordRecovery";
 import {Registration} from '../login/registration/Registration';
 import {NewPass} from "../login/newPassword/NewPass";
-import {PacksList} from "../cards/PacksList";
+import {Packs} from "../packs/Packs";
 import {CardList} from "../cards/cards/CardList";
+import {Profile} from "../profile/Profile";
+
 
 export const Main = () => {
 
@@ -21,7 +24,7 @@ export const Main = () => {
                 <Route path={PATH.profile} element={<Profile/>}/>
                 <Route path={PATH.passwordRecovery} element={<PasswordRecovery/>}/>
                 <Route path={PATH.setNewPassword} element={<NewPass/>}/>
-                <Route path={PATH.packList} element={<PacksList/>}/>
+                <Route path={PATH.packList} element={<Packs/>}/>
                 <Route path={PATH.cardList} element={<CardList/>}/>
                 <Route path={'/*'} element={<PageNotFound/>}/>
             </Routes>

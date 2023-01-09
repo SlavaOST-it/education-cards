@@ -1,5 +1,6 @@
 import {applyMiddleware, combineReducers, legacy_createStore} from 'redux'
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from 'redux-thunk'
+
 import {AppActionType, appReducer} from '../reducers/app-reducer'
 import {authReducer, LoginActionType} from '../reducers/auth-reducer'
 import {registerReducer, SetRegisterInType} from '../reducers/registration-reducer'
@@ -17,8 +18,8 @@ const rootReducer = combineReducers({
     profile: profileReducer,
     passRecovery: passRecoveryReducer,
     newPassword: setNewPassReducer,
-    packList: packsReducer,
-    cards: cardsReducer
+    packs: packsReducer,
+    cards: cardsReducer,
 })
 
 // ===== Принимаем типизацию всех редьюсеров ===== //

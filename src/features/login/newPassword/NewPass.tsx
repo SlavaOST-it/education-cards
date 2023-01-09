@@ -25,9 +25,11 @@ export const NewPass = () => {
         initialValues: {
             password: ''
         },
+
         validationSchema: Yup.object({
             password: Yup.string().required("Password field is required").min(8, 'Password length less than 8 characters'),
         }),
+
         onSubmit: (values) => {
             dispatch(setNewPassTC(values.password, token))
             formik.resetForm()

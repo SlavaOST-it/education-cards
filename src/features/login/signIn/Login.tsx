@@ -34,10 +34,12 @@ export const Login = () => {
             password: '',
             rememberMe: false
         },
+
         validationSchema: Yup.object({
             email: Yup.string().email("Invalid email address").required("Email field is required"),
             password: Yup.string().required("Password field is required").min(8, 'Password length less than 8 characters'),
         }),
+
         onSubmit: values => {
             dispatch((loginThunkCreator(values.email, values.password, values.rememberMe)))
         }

@@ -1,6 +1,7 @@
 import axios, {AxiosError} from "axios";
 import {setAppErrorAC, SetAppErrorAT, setAppStatusAC, SetAppStatusAT} from "../../bll/reducers/app-reducer";
 import {Dispatch} from "redux";
+import {AppStatus} from "../../common/types/types";
 
 
 export const baseErrorHandler = (e: Error | AxiosError, dispatch: Dispatch<SetAppErrorAT | SetAppStatusAT>) =>{
@@ -9,6 +10,6 @@ export const baseErrorHandler = (e: Error | AxiosError, dispatch: Dispatch<SetAp
         const error = err.response?.data
             ? (err.response.data as ({ error: string })).error
             : err.message
-        dispatch(setAppStatusAC('failed'))
+        dispatch(setAppStatusAC(AppStatus.FAILED))
         dispatch(setAppErrorAC(error))
 }}

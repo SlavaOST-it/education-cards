@@ -11,7 +11,7 @@ type CoverInputType={
 
 export const CoverInput:FC<CoverInputType> = ({deckCover}) => {
     const dispatch =useAppDispatch()
-    const myDeckCover=useAppSelector(state=>state.packList.myDeckCover)
+    const myDeckCover=useAppSelector(state=>state.packs.coverImg)
     const [isCoverBroken, setIsCoverBroken] = useState(false)
 
     const uploadHandler = (e: ChangeEvent<HTMLInputElement>) => {

@@ -11,9 +11,9 @@ type PaginationType = 'cards' | 'packs'
 
 export const BasicPagination = (props: BasicPaginationType) => {
     const dispatch = useAppDispatch()
-    const packsTotalCount = useAppSelector(state => state.packList.cardPacksTotalCount)
+    const packsTotalCount = useAppSelector(state => state.packs.cardPacksTotalCount)
     const cardsTotalCount = useAppSelector(state => state.cards.cardsTotalCount)
-    const pagePacksCount = useAppSelector(state => state.packList.pageCount)
+    const pagePacksCount = useAppSelector(state => state.packs.pageCount)
     const pageCardsCount = useAppSelector(state => state.cards.pageCount)
 
     const onChangeHandler = (e: ChangeEvent<unknown>, page: number) => {

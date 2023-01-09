@@ -17,7 +17,7 @@ type AddPackModalType = {
     setActive: (active:boolean)=>void
 }
 export const AddPackModal:FC<AddPackModalType> = ({active, setActive}) => {
-    const myDeckCover=useAppSelector(state=>state.packList.myDeckCover)
+    const myDeckCover=useAppSelector(state=>state.packs.coverImg)
     const dispatch = useAppDispatch()
     const [value, setValue] = useState('')
     const [checkValue, setCheckValue] = useState(false)

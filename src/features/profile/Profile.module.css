@@ -3,7 +3,7 @@
     margin: 0 auto;
 }
 
-.profile{
+.profile {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,28 +13,40 @@
     padding: 20px 0;
 }
 
-.avatarBlock{
-    display: flex;
-    align-items: flex-end;
+.avatarBlock {
+    position: relative;
+    top: 0;
+    left: 0;
 }
 
-.avatar{
+.ava {
+    position: relative;
+    top: 0;
+    left: 0;
+}
+
+.avaCamera {
+    position: absolute;
+    bottom: 0;
+    right: -12px;
+}
+
+.avatar {
     width: 150px;
     height: 150px;
-    border-radius: 50%;
+    border-radius: 25px;
 }
 
 .changeAvatarBtn {
-    left: -50px;
     z-index: 1;
 
-    height: 28px;
+    height: 35px;
     border: none;
-    opacity: 0.8;
+    border-radius: 5px;
 }
 
 .name {
-
+    margin-top: 15px;
 }
 
 .span_name {
@@ -42,16 +54,6 @@
     font-weight: 500;
     font-size: 20px;
     line-height: 24px;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 15px 0;
-}
-
-.span_name img {
-    height: 18px;
-    margin-left: 10px;
 }
 
 .input_name {

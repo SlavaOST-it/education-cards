@@ -23,7 +23,7 @@ export const EditPackModal:FC<EditPackModalType> = ({deckCover,name,packId,activ
     const dispatch = useAppDispatch()
     const [value, setValue] = useState(name)
     const [checkValue, setCheckValue] = useState(false)
-    const myDeckCover=useAppSelector(state=>state.packList.myDeckCover)
+    const myDeckCover=useAppSelector(state=>state.packs.coverImg)
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setValue(e.currentTarget.value)
