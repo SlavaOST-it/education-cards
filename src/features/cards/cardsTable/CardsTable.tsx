@@ -4,14 +4,15 @@ import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import style from "../PacksList.module.css";
-import {SelectSort} from "../../../common/components/select/SelectSort";
+import style from "../../packs/Packs.module.css";
+
 import TableBody from "@mui/material/TableBody";
 import {styled} from "@mui/material";
 import TableCell, {tableCellClasses} from "@mui/material/TableCell";
 import {useAppSelector} from "../../../utils/hooks/hooks";
 import {BasicRating} from "../ratingCards/RatingCard";
 import {ActionsPack} from "../actionsPack/ActionsPack";
+import {SelectSort} from "../../packs/filters/sortSelect/SelectSort";
 
 export const CardsTable = () => {
     const cards = useAppSelector(state => state.cards.cards)
@@ -41,7 +42,7 @@ export const CardsTable = () => {
                 <TableHead className={style.tableHeader}>
                     <TableRow className={style.tableHeader}>
                         <StyledTableCell align="center">
-                            <div className={style.cards}>Question <SelectSort/></div>
+                            {/*<div className={style.cards}>Question <SelectSort/></div>*/}
                         </StyledTableCell>
                         <StyledTableCell align="center">Answer</StyledTableCell>
                         <StyledTableCell align="center">Last Updated</StyledTableCell>

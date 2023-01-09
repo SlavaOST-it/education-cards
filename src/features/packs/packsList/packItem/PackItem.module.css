@@ -1,0 +1,12 @@
+.truncateLongTexts {
+    overflow: hidden;
+    width: 100px;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
+.namePack{
+    display: flex;
+    align-items: center;
+
+}

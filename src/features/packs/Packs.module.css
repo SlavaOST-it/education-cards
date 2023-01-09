@@ -10,11 +10,11 @@
     padding: 10px 0;
 }
 
-.search {
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-}
+/*.search {*/
+/*    display: flex;*/
+/*    width: 100%;*/
+/*    flex-direction: column;*/
+/*}*/
 
 .showPacksCards {
     display: flex;
@@ -48,6 +48,8 @@
 
 .tableName{
     display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 .pagination{

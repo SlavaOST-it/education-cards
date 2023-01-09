@@ -1,0 +1,118 @@
+import React, {useEffect, useState} from 'react';
+import s from "./Packs.module.css"
+import {Navigate, useSearchParams} from "react-router-dom";
+
+import {PATH} from "../../utils/routes/routes";
+import {useAppDispatch, useAppSelector} from "../../utils/hooks/hooks";
+
+import {AddPackModal} from "../../common/components/modals/addPackModal/AddPackModal";
+import {HeaderTable} from "../../common/components/headerTable/HeaderTable";
+import {BasicPagination} from "../../common/components/pagination/BasicPagination";
+
+import {
+    getPacksTC,
+    setIsMyPacksAC,
+    setPageAC,
+    setPageCountAC,
+    setSearchInputPacksAC,
+    setSortMinMaxCardsAC,
+    setSortPacksValueAC
+} from "../../bll/reducers/packs-reducer";
+import {PacksList} from "./packsList/PacksList";
+import {Filters} from "./filters/Filters";
+
+
+export const Packs = () => {
+    const dispatch = useAppDispatch()
+    const isLoggedIn = useAppSelector(state => state.login.loggedIn)
+    const dataPacks = useAppSelector(state => state.packs.cardPacks)
+    const page = useAppSelector(state => state.packs.page)
+    const pageCount = useAppSelector(state => state.packs.pageCount)
+    const filterSearchValue = useAppSelector(state => state.packs.searchInput)
+    const sortByAllMy = useAppSelector(state => state.packs.sortByAllMy)
+    const sortPacksValue = useAppSelector(state => state.packs.sortPacksValue)
+    const min = useAppSelector(state => state.packs.min)
+    const max = useAppSelector(state => state.packs.max)
+
+    const rerender = useAppSelector(state => state.packs.rerender)
+
+    const [openAddPackModal, setOpenAddPackModal] = useState(false)
+
+    const [searchParams, setSearchParams] = useSearchParams();
+
+
+    useEffect(() => {
+        const fromUrlPage = searchParams.get('page')
+        const fromUrlPageCount = searchParams.get('pageCount')
+        const fromUrlFilterSearchValue = searchParams.get('filterSearchValue')
+        const fromUrlSortByAllMy = searchParams.get('sortByAllMy')
+        const fromUrlSortPacksValue = searchParams.get('sortPacksValue')
+        const fromUrlMin = searchParams.get('min')
+        const fromUrlMax = searchParams.get('max')
+
+        if (fromUrlPage !== null) {
+            dispatch(setPageAC(Number(fromUrlPage)))
+        }
+        if (fromUrlPageCount !== null) {
+            dispatch(setPageCountAC(Number(fromUrlPageCount)))
+        }
+        if (fromUrlFilterSearchValue !== null) {
+            dispatch(setSearchInputPacksAC(fromUrlFilterSearchValue))
+        }
+        if (fromUrlSortByAllMy === 'All' || fromUrlSortByAllMy === 'My') {
+            dispatch(setIsMyPacksAC(fromUrlSortByAllMy))
+        }
+        if (fromUrlSortPacksValue !== null) {
+            dispatch(setSortPacksValueAC(fromUrlSortPacksValue))
+        }
+        if (fromUrlMin !== null || fromUrlMax !== null) {
+            dispatch(setSortMinMaxCardsAC(Number(searchParams.get('min')), Number(searchParams.get('max'))))
+        }
+    }, [])
+
+    useEffect(() => {
+        setSearchParams({
+            page: `${page}`,
+            pageCount: `${pageCount}`,
+            filterSearchValue: `${filterSearchValue}`,
+            sortByAllMy: `${sortByAllMy}`,
+            sortPacksValue: `${sortPacksValue}`,
+            min: `${min}`,
+            max: `${max}`,
+        })
+        dispatch(getPacksTC())
+    }, [page, pageCount, filterSearchValue, sortByAllMy, sortPacksValue, min, max])
+
+
+    const addNewPackHandler = () => {
+        setOpenAddPackModal(!openAddPackModal)
+    }
+
+    if (!isLoggedIn) {
+        return <Navigate to={PATH.login}/>
+    }
+
+    return (
+        <div className={s.container}>
+            <div>
+                <HeaderTable title={'Packs list'} callbackToAdd={addNewPackHandler} titleButton={"Add new pack"}/>
+            </div>
+
+            <AddPackModal active={openAddPackModal} setActive={addNewPackHandler}/>
+
+            {!dataPacks.length && <div>В данной колоде нету карточек удовлетворяющих поиску</div>}
+
+            <div>
+                <Filters/>
+            </div>
+
+            <div>
+                <PacksList/>
+            </div>
+
+            <div className={s.pagination}>
+                <BasicPagination type={'packs'}/>
+            </div>
+        </div>
+    );
+};

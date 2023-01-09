@@ -1,6 +1,6 @@
 import {RegisterType} from '../bll/reducers/registration-reducer'
 import {instance} from "./apiConfig/instance"
-import {LoginResponseType, RegisterResponseType} from "./apiConfig/types";
+import {LoginResponseType, RegisterResponseType} from "./apiConfig/types/types";
 
 
 export const authAPI = {

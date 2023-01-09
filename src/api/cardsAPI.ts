@@ -1,21 +1,23 @@
 import {instance} from "./apiConfig/instance"
+import {SortPacksAllMyType} from "../bll/reducers/packs-reducer";
+import {TPack} from "./myAPI/myAPI";
 
 
 export const packsAPI = {
-    getCardPacks(data: PackRequestType) {
-        return instance.get<CardPacksResponseType>('cards/pack', {params: {...data}})
+    getPacks(data: PackRequestType) {
+        return instance.get<PacksResponseType>('cards/pack', {params: {...data}})
     },
 
-    createPack(value: string, privateStatus?: boolean,deckCover?:string) {
-        return instance.post('cards/pack', {cardsPack: {name: value, private: privateStatus,deckCover:deckCover}})
+    createPack(value: string, privateStatus?: boolean, deckCover?: string) {
+        return instance.post('cards/pack', {cardsPack: {name: value, private: privateStatus, deckCover: deckCover}})
     },
 
     deletePack(id: string) {
         return instance.delete(`cards/pack?id=${id}`)
     },
 
-    updatePack(_id: string, name: string, isPrivate: boolean,deckCover?:string) {
-        return instance.put('cards/pack', {cardsPack: {_id, name, private: isPrivate,deckCover}})
+    updatePack(_id: string, name: string, isPrivate: boolean, deckCover?: string) {
+        return instance.put('cards/pack', {cardsPack: {_id, name, private: isPrivate, deckCover}})
     }
 }
 
@@ -49,16 +51,16 @@ export const cardsAPI = {
     },
 }
 
-export type CardPacksResponseType = {
-    cardPacks: CardsPackType[],
+export type PacksResponseType = {
+    cardPacks: TPack[],
     page: number,
     pageCount: number,
     sort: string,
     search: string,
-    isMyPacks: boolean,
+    cardPacksTotalCount: number,
     minCardsCount: number,
     maxCardsCount: number,
-    cardPacksTotalCount: number
+
 }
 
 export type CardsType = {
@@ -127,6 +129,7 @@ export type CardsResponseType = {
     infoMessage?: string
     sortCards: string
 }
+
 export type CardsPackType = {
     _id: string
     user_id: string,
@@ -140,15 +143,21 @@ export type CardsPackType = {
     rating: number,
     created: string,
     updated: string,
-    deckCover:string
+    deckCover: string,
+
+    packId: '',
+    userID: '',
+    packName: '',
 }
 
 export type PackRequestType = {
-    page: number,
-    pageCount: number,
-    sortPacks: string,
-    packName: string,
-    user_id: string,
-    min: number,
-    max: number
+    page?: number,
+    pageCount?: number,
+    sortByAllMy: SortPacksAllMyType,
+    searchInput?: string
+    sortPacks?: string,
+    packName?: string,
+    user_id?: string,
+    min?: number,
+    max?: number
 }

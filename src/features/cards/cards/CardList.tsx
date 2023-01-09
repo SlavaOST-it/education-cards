@@ -3,7 +3,7 @@ import {Navigate} from "react-router-dom";
 import {PATH} from "../../../utils/routes/routes";
 import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
 import style from "./CardList.module.css"
-import {SearchEngine} from "../../../common/components/search/SearchEngine";
+import {SearchInput} from "../../packs/filters/search/SearchInput";
 import {BasicPagination} from "../../../common/components/pagination/BasicPagination";
 import {getCardsThunk} from '../../../bll/reducers/cards-reducer'
 import {HeaderTable} from "../../../common/components/headerTable/HeaderTable";
@@ -15,7 +15,7 @@ import {BackToPacksList} from "../../../common/components/backToPacksLink/BackTo
 export const CardList = () => {
 
     const dispatch = useAppDispatch()
-    const namePack = useAppSelector(state => state.packList.packName)
+    const namePack = useAppSelector(state => state.packs.cardPacks)
     const isLoggedIn = useAppSelector(state => state.login.loggedIn)
     const packUserId = useAppSelector(state => state.cards.packUserId)
     const minGrade = useAppSelector(state => state.cards.min)
@@ -25,9 +25,9 @@ export const CardList = () => {
     const pageCount = useAppSelector(state => state.cards.pageCount)
     const sortCards = useAppSelector(state => state.cards.sortCards)
     const dataCards = useAppSelector(state => state.cards.cards)
-    const cardsPackId = useAppSelector(state => state.packList.packId)
-    const cardUserId = useAppSelector(state => state.packList.userID)
-    const cardCount = useAppSelector(state => state.packList.cardPacks)
+    // const cardsPackId = useAppSelector(state => state.packs.cardPacks.id)
+    // const cardUserId = useAppSelector(state => state.packs.userID)
+    const cardCount = useAppSelector(state => state.packs.cardPacks)
     const myId = useAppSelector(state => state.profile._id)
 
     const [value, setValue] = useState('')
@@ -44,7 +44,7 @@ export const CardList = () => {
     const callback = () => setActive(!active)
 
     useEffect(() => {
-        dispatch(getCardsThunk(cardsPackId))
+        // dispatch(getCardsThunk(cardsPackId))
     }, [packUserId, minGrade, maxGrade, search, page, pageCount, sortCards])
 
     if (!isLoggedIn) {
@@ -57,25 +57,25 @@ export const CardList = () => {
             <BackToPacksList/>
 
             <div className={style.wrapper}>
-                <EditAndAddCardsModal
-                    answerCard={''}
-                    questionCard={''}
-                    type={'add'}
-                    cardsPackId={cardsPackId}
-                    setActive={callback}
-                    active={active}
-                />
+                {/*<EditAndAddCardsModal*/}
+                {/*    answerCard={''}*/}
+                {/*    questionCard={''}*/}
+                {/*    type={'add'}*/}
+                {/*    cardsPackId={cardsPackId}*/}
+                {/*    setActive={callback}*/}
+                {/*    active={active}*/}
+                {/*/>*/}
 
-                <HeaderTable callbackToAdd={myId === cardUserId ? addNewCard : learnPack}
-                             titleButton={myId === cardUserId ? "Add new card" : "Learn to pack"}
-                             title={namePack}
-                             disabled={((!dataCards.length) && (myId !== cardUserId))}
-                />
+                {/*<HeaderTable callbackToAdd={myId === cardUserId ? addNewCard : learnPack}*/}
+                {/*             titleButton={myId === cardUserId ? "Add new card" : "Learn to pack"}*/}
+                {/*             title={namePack}*/}
+                {/*             disabled={((!dataCards.length) && (myId !== cardUserId))}*/}
+                {/*/>*/}
 
                 {!dataCards.length && <div>В данной колоде нету карточек удовлетворяющих поиску</div>}
 
                 <div className={style.search}>
-                    <SearchEngine setValue={setValue} value={value}/>
+                    <SearchInput type={'card'}/>
                 </div>
 
                 <div className={style.table}>
