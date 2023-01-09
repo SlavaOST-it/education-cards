@@ -9,7 +9,7 @@ import {setPageCardsCountAC} from "../../../bll/reducers/cards-reducer";
 
 export const SelectPage = () => {
     const dispatch=useAppDispatch()
-    const pageCount =useAppSelector(state=>JSON.stringify(state.packList.pageCount))
+    const pageCount =useAppSelector(state=>JSON.stringify(state.packs.pageCount))
     const [page,setPage]=useState(pageCount)
 
     const onChangeHandler=(e:SelectChangeEvent)=>{
@@ -18,6 +18,7 @@ export const SelectPage = () => {
         setPage(e.target.value)
 
     }
+
     return (
         <div>
             <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
