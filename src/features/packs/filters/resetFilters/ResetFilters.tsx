@@ -32,12 +32,23 @@ export const ResetFilters = () => {
 
 
     const onclickResetFiltersHandler = async () => {
+        if (
+            page === 1 &&
+            filterSearchValue === '' &&
+            sortByAllMy === 'All' &&
+            min === 0 &&
+            max === maxCardsCount
+        ) {
+            return
+        }
         dispatch(setPageAC(1))
         dispatch(setSearchInputPacksAC(''))
         dispatch(setSearchCardsAC(''))
         dispatch(setIsMyPacksAC("All"))
         dispatch(setSortPacksValueAC(('0updated')))
+        dispatch(setRerenderAC(false))
         dispatch(setSortMinMaxCardsAC(0, maxCardsCount))
+        dispatch(getPacksTC(true))
     }
 
     return (

@@ -9,20 +9,20 @@ import {sortCardsAC} from "../../../../bll/reducers/cards-reducer";
 
 type SelectSortType = {
     type: PacksOrCardsType,
-    valueSort: any
+    valueSort: string
 }
 export const SelectSort: FC<SelectSortType> = ({type, valueSort}) => {
     const dispatch = useAppDispatch()
     const selected = useAppSelector(state => state.packs.sortPacksValue)
 
     const onclickUpHandler = () => {
-        if (type === "pack") dispatch(setSortPacksValueAC((`0${valueSort}`)))
-        else dispatch(sortCardsAC('0question', false))
+        if (type === "pack") dispatch(setSortPacksValueAC(`0${valueSort}`))
+        else dispatch(sortCardsAC(`0${valueSort}`))
     }
 
     const onclickDownHandler = () => {
-        if (type === "pack") dispatch(setSortPacksValueAC((`1${valueSort}`)))
-        else dispatch(sortCardsAC('0question', false))
+        if (type === "pack") dispatch(setSortPacksValueAC(`1${valueSort}`))
+        else dispatch(sortCardsAC(`1${valueSort}`))
     }
 
     return (

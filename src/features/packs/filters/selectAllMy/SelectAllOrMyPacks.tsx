@@ -24,6 +24,9 @@ export const SelectAllOrMyPacks = () => {
         dispatch(setIsMyPacksAC(value))
         dispatch(setSearchInputPacksAC(''))
         dispatch(setPageAC(1))
+        dispatch(setRerenderAC(false))
+        dispatch(getPacksTC(true))
+        // dispatch(setSortMinMaxCardsAC(0, maxCardsCount))
         setStyleButton(value)
     }
 

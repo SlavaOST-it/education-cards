@@ -14,7 +14,7 @@ export const SearchInput: FC<SearchInputType> = ({type}) => {
     const dispatch = useAppDispatch()
     const appStatus = useAppSelector(state => state.app.status)
     const searchInputPacks = useAppSelector(state => state.packs.searchInput)
-    const searchInputCards = useAppSelector(state => state.cards.cardQuestion)
+    const searchInputCards = useAppSelector(state => state.cards.filterSearchValue)
 
     const valueInput = type === 'pack' ? searchInputPacks : searchInputCards
     const [value, setValue] = useState(valueInput)
