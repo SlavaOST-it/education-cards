@@ -2,7 +2,7 @@ import React, {ChangeEvent, FC, useState} from 'react';
 import {useAppDispatch} from "../../../../utils/hooks/hooks";
 import {BasicModal} from "../BasicModal";
 import TextField from "@mui/material/TextField";
-import {changeCardThunk} from "../../../../bll/reducers/cards-reducer";
+import {changeCardTC} from "../../../../bll/reducers/cards-reducer";
 
 
 const styleButtonMUI = {
@@ -40,7 +40,7 @@ export const ChangeCardModal: FC<ChangeCardModalType> = ({
     }
 
     const onSaveHandler = () => {
-        dispatch(changeCardThunk(packId, cardId, valueQuestion, valueAnswer))
+        dispatch(changeCardTC(packId, cardId, valueQuestion, valueAnswer))
         setActive(false)
     }
 

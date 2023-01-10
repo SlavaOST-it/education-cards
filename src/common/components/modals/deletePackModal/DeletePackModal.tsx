@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import {useAppDispatch} from "../../../../utils/hooks/hooks";
 import {BasicModal} from "../BasicModal";
 import {deletePackTC} from "../../../../bll/reducers/packs-reducer";
-import {deleteCardThunk} from "../../../../bll/reducers/cards-reducer";
+import {deleteCardTC} from "../../../../bll/reducers/cards-reducer";
 
 
 const styleButtonMUI = {
@@ -28,7 +28,7 @@ export const DeletePackModal: FC<DeletePackModalType> = ({cardId, packId, active
         if (type === "pack") {
             dispatch(deletePackTC(packId))
         } else {
-            dispatch(deleteCardThunk(packId, cardId))
+            dispatch(deleteCardTC(packId, cardId))
         }
 
         setActive(false)

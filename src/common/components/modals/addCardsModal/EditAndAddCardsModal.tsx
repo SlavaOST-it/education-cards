@@ -2,7 +2,7 @@ import React, {ChangeEvent, FC, useState} from 'react';
 import {BasicModal} from "../BasicModal";
 import TextField from "@mui/material/TextField";
 import {useAppDispatch, useAppSelector} from "../../../../utils/hooks/hooks";
-import {addCardThunk, changeCardThunk} from "../../../../bll/reducers/cards-reducer";
+import {addCardTC, changeCardTC} from "../../../../bll/reducers/cards-reducer";
 
 
 const styleButtonMUI = {
@@ -11,15 +11,22 @@ const styleButtonMUI = {
 }
 type EditAndAddCardsModalType = {
     active: boolean
-    setActive: (active:boolean)=>void
-    cardsPackId:string
-    type:'edit'|'add'
-    answerCard:string
-    questionCard:string
+    setActive: (active: boolean) => void
+    cardsPackId: string
+    type: 'edit' | 'add'
+    answerCard: string
+    questionCard: string
 }
-export const EditAndAddCardsModal:FC<EditAndAddCardsModalType> = ({answerCard,questionCard,type,active, setActive,cardsPackId}) => {
+export const EditAndAddCardsModal: FC<EditAndAddCardsModalType> = ({
+                                                                       answerCard,
+                                                                       questionCard,
+                                                                       type,
+                                                                       active,
+                                                                       setActive,
+                                                                       cardsPackId
+                                                                   }) => {
     const dispatch = useAppDispatch()
-    const cardID=useAppSelector(state=>state.cards.cardId)
+    //const cardID = useAppSelector(state => state.cards.cards._id)
 
     const [question, setQuestion] = useState(questionCard)
     const [answer, setAnswer] = useState(answerCard)
@@ -34,13 +41,13 @@ export const EditAndAddCardsModal:FC<EditAndAddCardsModalType> = ({answerCard,qu
     }
 
     const onSaveHandler = () => {
-        if(type==='add'){
-            dispatch(addCardThunk(cardsPackId,question,answer))
+        if (type === 'add') {
+            dispatch(addCardTC(cardsPackId, question, answer))
             setActive(false)
             setQuestion('')
             setAnswer('')
-        }else{
-            dispatch(changeCardThunk(cardsPackId,cardID,question,answer))
+        } else {
+            // dispatch(changeCardTC(cardsPackId, cardID, question, answer))
             setActive(false)
         }
 
@@ -58,15 +65,17 @@ export const EditAndAddCardsModal:FC<EditAndAddCardsModalType> = ({answerCard,qu
             active={active}
             setActive={onCancelHandler}
             onSaveCallback={onSaveHandler}
-            disabledButton={question.length === 0||answer.length === 0}
+            disabledButton={question.length === 0 || answer.length === 0}
             styleButton={styleButtonMUI}
         >
             <div>
-                <TextField value={question} label="Card question" margin="normal" fullWidth={true} placeholder={"Card question"}
+                <TextField value={question} label="Card question" margin="normal" fullWidth={true}
+                           placeholder={"Card question"}
                            onChange={onChangeQuestionHandler}/>
             </div>
             <div>
-                <TextField value={answer} label="Card answer" margin="normal" fullWidth={true} placeholder={"Card answer"}
+                <TextField value={answer} label="Card answer" margin="normal" fullWidth={true}
+                           placeholder={"Card answer"}
                            onChange={onChangeAnswerHandler}/>
             </div>
 
