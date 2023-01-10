@@ -9,7 +9,7 @@ import {PasswordRecovery} from "../login/passwordRecovery/PasswordRecovery";
 import {Registration} from '../login/registration/Registration';
 import {NewPass} from "../login/newPassword/NewPass";
 import {Packs} from "../packs/Packs";
-import {CardList} from "../cards/cards/CardList";
+import {Cards} from "../cards/cards/Cards";
 import {Profile} from "../profile/Profile";
 
 
@@ -25,7 +25,7 @@ export const Main = () => {
                 <Route path={PATH.passwordRecovery} element={<PasswordRecovery/>}/>
                 <Route path={PATH.setNewPassword} element={<NewPass/>}/>
                 <Route path={PATH.packList} element={<Packs/>}/>
-                <Route path={PATH.cardList} element={<CardList/>}/>
+                <Route path={PATH.cardList} element={<Cards/>}/>
                 <Route path={'/*'} element={<PageNotFound/>}/>
             </Routes>
         </div>

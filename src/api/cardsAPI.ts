@@ -1,6 +1,6 @@
 import {instance} from "./apiConfig/instance"
 import {SortPacksAllMyType} from "../bll/reducers/packs-reducer";
-import {TPack} from "./myAPI/myAPI";
+import {PackType} from "./apiConfig/types/types";
 
 
 export const packsAPI = {
@@ -22,12 +22,8 @@ export const packsAPI = {
 }
 
 export const cardsAPI = {
-    getCards(payload = {} as CardsType) {
-        return instance.get<CardsResponseType>("cards/card", {
-            params: {
-                ...payload,
-            },
-        })
+    getCards(data: GetCardsRequestType) {
+        return instance.get<GetCardsResponseType>('cards/card', {params: {...data}})
     },
 
     createCard(payload = {} as CardRequestType) {
@@ -51,8 +47,31 @@ export const cardsAPI = {
     },
 }
 
+
+export type GetCardsRequestType = {
+    cardsPack_id: string
+    cardAnswer?: string
+    cardQuestion?: string
+    min?: number
+    max?: number
+    sortCards?: string
+    page?: number
+    pageCount?: number
+}
+
+export type GetCardsResponseType = {
+    packName: string
+    cards: CardResponseType[]
+    cardsTotalCount: number
+    maxGrade: number
+    minGrade: number
+    page: number
+    pageCount: number
+    packUserId: string
+}
+
 export type PacksResponseType = {
-    cardPacks: TPack[],
+    cardPacks: PackType[],
     page: number,
     pageCount: number,
     sort: string,
@@ -119,12 +138,13 @@ export type CardsResponseType = {
     cardsTotalCount: number
     cardAnswer: string
     cardQuestion: string
-    max: number
-    min: number
+    maxGrade: number
+    minGrade: number
     page: number
     pageCount: number
     packUserId: string
     cardsPack_id: string
+    packName: string
     id: string
     infoMessage?: string
     sortCards: string

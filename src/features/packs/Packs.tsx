@@ -13,12 +13,12 @@ import {
     getPacksTC,
     setIsMyPacksAC,
     setPageAC,
-    setPageCountAC,
+    setPageCountAC, setRerenderAC,
     setSearchInputPacksAC,
     setSortMinMaxCardsAC,
     setSortPacksValueAC
 } from "../../bll/reducers/packs-reducer";
-import {PacksList} from "./packsList/PacksList";
+import {PacksTable} from "./packsList/PacksTable";
 import {Filters} from "./filters/Filters";
 
 
@@ -33,8 +33,8 @@ export const Packs = () => {
     const sortPacksValue = useAppSelector(state => state.packs.sortPacksValue)
     const min = useAppSelector(state => state.packs.min)
     const max = useAppSelector(state => state.packs.max)
-
     const rerender = useAppSelector(state => state.packs.rerender)
+
 
     const [openAddPackModal, setOpenAddPackModal] = useState(false)
 
@@ -80,8 +80,13 @@ export const Packs = () => {
             min: `${min}`,
             max: `${max}`,
         })
+        if (!rerender) {
+            dispatch(setRerenderAC(true))
+            return
+        }
+
         dispatch(getPacksTC())
-    }, [page, pageCount, filterSearchValue, sortByAllMy, sortPacksValue, min, max])
+    }, [page, pageCount, filterSearchValue,  sortPacksValue, min, max])
 
 
     const addNewPackHandler = () => {
@@ -107,7 +112,7 @@ export const Packs = () => {
             </div>
 
             <div>
-                <PacksList/>
+                <PacksTable/>
             </div>
 
             <div className={s.pagination}>

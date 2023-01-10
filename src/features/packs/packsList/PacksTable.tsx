@@ -1,41 +1,24 @@
 import React from 'react';
+import s from "../Packs.module.css";
+
 import {styled} from "@mui/material";
 import TableCell, {tableCellClasses} from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
 import TableHead from "@mui/material/TableHead";
-import s from "../Packs.module.css";
-
 import TableBody from "@mui/material/TableBody";
-import {NavLink} from "react-router-dom";
-import {PATH} from "../../../utils/routes/routes";
-import {ActionsPack} from "../../cards/actionsPack/ActionsPack";
 import TableContainer from "@mui/material/TableContainer";
+
 import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
-import {baseDeckCover} from "../../../assets/baseDeckCover";
 import {SelectSort} from "../filters/sortSelect/SelectSort";
 import {PackItem} from "./packItem/PackItem";
+import {StyledTableCell} from "../../../common/styles/StyleForTables";
 // import {setPackIdAC, setPackNameAC, setUserIdAC} from "../../../bll/reducers/packs-reducer";
 
-const StyledTableCell = styled(TableCell)(({theme}) => ({
-    [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.black,
-        color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-        fontSize: 14,
-    },
-}));
 
-const StyledTableRow = styled(TableRow)(({theme}) => ({
-    '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-    },
-    '&:last-child td, &:last-child th': {},
-}));
 
-export const PacksList = () => {
+export const PacksTable = () => {
     const dispatch = useAppDispatch()
     const dataPacks = useAppSelector(state => state.packs.cardPacks)
 
