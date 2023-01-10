@@ -5,41 +5,21 @@ import {NavLink} from "react-router-dom";
 import {PATH} from "../../../../utils/routes/routes";
 import {baseDeckCover} from "../../../../assets/baseDeckCover";
 import {ActionsPack} from "../../../cards/actionsPack/ActionsPack";
-import {styled} from "@mui/material";
-import TableRow from "@mui/material/TableRow";
-import TableCell, {tableCellClasses} from "@mui/material/TableCell";
-import {TPack} from "../../../../api/myAPI/myAPI";
-import {useAppDispatch, useAppSelector} from "../../../../utils/hooks/hooks";
-
-
-const StyledTableRow = styled(TableRow)(({theme}) => ({
-    '&:nth-of-type(odd)': {
-        backgroundColor: theme.palette.action.hover,
-    },
-    '&:last-child td, &:last-child th': {},
-}));
-
-const StyledTableCell = styled(TableCell)(({theme}) => ({
-    [`&.${tableCellClasses.head}`]: {
-        backgroundColor: theme.palette.common.white,
-        color: theme.palette.common.white,
-    },
-    [`&.${tableCellClasses.body}`]: {
-        fontSize: 14,
-    },
-}));
+import {useAppDispatch} from "../../../../utils/hooks/hooks";
+import {PackType} from "../../../../api/apiConfig/types/types";
+import {StyledTableCell, StyledTableRow} from "../../../../common/styles/StyleForTables";
+import {resetCardsStatedAC, setCurrentPackIdAC} from "../../../../bll/reducers/cards-reducer";
 
 
 type PackItemType = {
-    el: TPack
+    el: PackType
 }
 export const PackItem: FC<PackItemType> = ({el}) => {
     const dispatch = useAppDispatch()
 
-    const onClickHandler = (PackID: string, userId: string, name: string) => {
-        // dispatch(setPackIdAC(PackID));
-        // dispatch(setUserIdAC(userId));
-        // dispatch(setPackNameAC(name));
+    const onClickHandler = (cardsPack_id: string) => {
+        dispatch(resetCardsStatedAC())
+        dispatch(setCurrentPackIdAC(cardsPack_id))
     }
 
     return (
@@ -47,7 +27,7 @@ export const PackItem: FC<PackItemType> = ({el}) => {
 
             <StyledTableCell align="center">
                 <NavLink onClick={() => {
-                    // onClickHandler(el._id, el.user_id, el.name)
+                    onClickHandler(el._id)
                 }} to={PATH.cardList}>
                     <div className={s.namePack}>
                         <img src={el.deckCover && el.deckCover.length > 100 ? el.deckCover : baseDeckCover}
