@@ -4,6 +4,7 @@ import {setAppStatusAC, SetAppStatusAT} from "./app-reducer";
 import {baseErrorHandler} from "../../utils/error-utils/error-utils";
 import {AxiosError} from "axios";
 import {AppStatus} from "../../common/types/types";
+import {UserType} from "../../api/apiConfig/types/types";
 
 
 export type SetUserProfileAT = ReturnType<typeof setUserProfileAC>
@@ -11,37 +12,26 @@ export type SetUserNameAC = ReturnType<typeof setUserNameAC>
 export type SetUserPhotoAT = ReturnType<typeof setUserPhotoAC>
 export type ProfileActionsType = SetUserProfileAT | SetUserNameAC | SetUserPhotoAT | SetAppStatusAT
 
-type InitialStateType = {
-    _id: string;
-    email: string;
-    name: string;
-    avatar?: string | null;
-    rememberMe: boolean;
-}
-const initialState: InitialStateType = {
+
+const initialState: UserType = {
     _id: '',
     email: '',
-    name: 'test name',
-    avatar: null,
+    name: 'User',
+    avatar: null as null | string,
+    publicCardPacksCount: 0,
     rememberMe: false,
 }
 
-export const profileReducer = (state: InitialStateType = initialState, action: ProfileActionsType): InitialStateType => {
+export const profileReducer = (state: UserType = initialState, action: ProfileActionsType): UserType => {
     switch (action.type) {
         case "PROFILE/SET_USER_PROFILE":
             return action.profile
 
         case "PROFILE/SET_USER_NAME":
-            return {
-                ...state,
-                name: action.userName
-            }
+            return {...state, name: action.userName}
 
         case "PROFILE/SET_USER_PHOTO":
-            return {
-                ...state,
-                avatar: action.photo
-            }
+            return {...state, avatar: action.photo}
 
         default:
             return {...state}
@@ -57,7 +47,7 @@ export const changeNameThunkCreator = (newName: string): AppThunkType => async (
     dispatch(setAppStatusAC(AppStatus.LOADING))
     try {
         let res = await profileAPI.changeName(newName)
-        dispatch(setUserNameAC(res.updatedUser.name))
+        dispatch(setUserNameAC(res.data.updatedUser.name))
         dispatch(setAppStatusAC(AppStatus.SUCCEED))
     } catch (e) {
         baseErrorHandler(e as Error | AxiosError, dispatch)
@@ -68,7 +58,7 @@ export const changeAvatarThunkCreator = (avatar: string): AppThunkType => async 
     dispatch(setAppStatusAC(AppStatus.LOADING))
     try {
         let res = await profileAPI.updatePhoto(avatar)
-        dispatch(setUserPhotoAC(res.updatedUser.avatar))
+        dispatch(setUserPhotoAC(res.data.updatedUser.avatar))
         dispatch(setAppStatusAC(AppStatus.SUCCEED))
     } catch (e) {
         baseErrorHandler(e as Error | AxiosError, dispatch)

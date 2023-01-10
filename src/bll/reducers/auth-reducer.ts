@@ -6,6 +6,11 @@ import {baseErrorHandler} from "../../utils/error-utils/error-utils";
 import {AxiosError} from "axios";
 import {AppStatus} from "../../common/types/types";
 
+type LoggedInAT = ReturnType<typeof loggedInAC>
+// type PasswordErrorAT = ReturnType<typeof passwordErrorAC>
+export type LoginActionsType = LoggedInAT
+
+
 const initialState = {
     data: {
         email: '',
@@ -14,36 +19,30 @@ const initialState = {
         publicCardPacksCount: 0
     },
     loggedIn: false,
-    passwordError: ''
+    // passwordError: ''
 }
 type InitialStateType = typeof initialState
-export type LoginActionType = loggedInACType | passwordErrorACType
 
-export const authReducer = (state: InitialStateType = initialState, action: LoginActionType): InitialStateType => {
+export const authReducer = (state: InitialStateType = initialState, action: LoginActionsType): InitialStateType => {
     switch (action.type) {
         case "LOGGED_IN": {
             return {...state, loggedIn: action.loggedIn}
         }
-        case "PASSWORD_ERROR": {
-            return {...state, passwordError: action.error}
-        }
+
+        // case "PASSWORD_ERROR": {
+        //     return {...state, passwordError: action.error}
+        // }
+
         default:
             return {...state}
     }
 }
 
-// ===== ActionCreators ===== //
-type loggedInACType = ReturnType<typeof loggedInAC>
-export const loggedInAC = (loggedIn: boolean) => {
-    return {type: "LOGGED_IN", loggedIn} as const
-}
+// ==================ACTION CREATORS =======================//
+export const loggedInAC = (loggedIn: boolean) => ({type: "LOGGED_IN", loggedIn} as const)
+// export const passwordErrorAC = (error: string) => ({type: "PASSWORD_ERROR", error} as const)
 
-type passwordErrorACType = ReturnType<typeof passwordErrorAC>
-export const passwordErrorAC = (error: string) => {
-    return {type: "PASSWORD_ERROR", error} as const
-}
-
-// ===== ThunkCreators ===== //
+// ==================THUNK CREATORS =======================//
 export const loginThunkCreator = (email: string, password: string, rememberMe: boolean): AppThunkType => async (dispatch) => {
     dispatch(setAppStatusAC(AppStatus.LOADING))
     try {

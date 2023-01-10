@@ -8,7 +8,7 @@ import {AppStatus} from "../../common/types/types";
 
 export type InfoMessageAT = ReturnType<typeof infoMessageAC>
 export type StatusSendMessageAT = ReturnType<typeof statusSendMessageAC>
-export type PassRecoveryActionType = InfoMessageAT | StatusSendMessageAT | SetAppStatusAT
+export type PassRecoveryActionsType = InfoMessageAT | StatusSendMessageAT | SetAppStatusAT
 
 const initialState = {
     textMessage: '',
@@ -16,14 +16,14 @@ const initialState = {
 }
 type InitialStateType = typeof initialState
 
-export const passRecoveryReducer = (state: InitialStateType = initialState, action: PassRecoveryActionType): InitialStateType => {      // вместо any указать типизицию
+export const passRecoveryReducer = (state: InitialStateType = initialState, action: PassRecoveryActionsType): InitialStateType => {      // вместо any указать типизицию
     switch (action.type) {
-        case "PASS_RECOVERY/passRecovery":
+        case "PASS_RECOVERY/PASS_RECOVERY":
             return {
                 ...state,
                 textMessage: action.infoMessage
             }
-        case "PASS_RECOVERY/CHANGE-STATUS-SEND-MESSAGE":
+        case "PASS_RECOVERY/CHANGE_STATUS_SEND_MESSAGE":
             return {
                 ...state,
                 statusSendMessage: true
@@ -33,9 +33,10 @@ export const passRecoveryReducer = (state: InitialStateType = initialState, acti
     }
 }
 // ======ActionCreators ===== //
-export const infoMessageAC = (infoMessage: string) => ({type: "PASS_RECOVERY/passRecovery", infoMessage} as const)
+export const infoMessageAC = (infoMessage: string) => ({type: "PASS_RECOVERY/PASS_RECOVERY", infoMessage} as const)
+
 export const statusSendMessageAC = (status: boolean) => ({
-    type: "PASS_RECOVERY/CHANGE-STATUS-SEND-MESSAGE",
+    type: "PASS_RECOVERY/CHANGE_STATUS_SEND_MESSAGE",
     status
 } as const)
 
