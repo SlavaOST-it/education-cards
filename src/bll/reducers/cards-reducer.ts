@@ -1,6 +1,6 @@
 import {AppThunkType} from '../store/store'
 import {setAppStatusAC} from './app-reducer'
-import {CardResponseType, cardsAPI, CardsResponseType, GetCardsResponseType} from '../../api/cardsAPI'
+import {CardResponseType, cardsAPI, GetCardsResponseType} from '../../api/cardsAPI'
 import {baseErrorHandler} from "../../utils/error-utils/error-utils";
 import {AxiosError} from "axios";
 import {AppStatus} from "../../common/types/types";

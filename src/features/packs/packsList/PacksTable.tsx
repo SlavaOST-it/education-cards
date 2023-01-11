@@ -19,14 +19,7 @@ import {StyledTableCell} from "../../../common/styles/StyleForTables";
 
 
 export const PacksTable = () => {
-    const dispatch = useAppDispatch()
     const dataPacks = useAppSelector(state => state.packs.cardPacks)
-
-    const onClickHandler = (PackID: string, userId: string, name: string) => {
-        // dispatch(setPackIdAC(PackID));
-        // dispatch(setUserIdAC(userId));
-        // dispatch(setPackNameAC(name));
-    }
 
     return (
         <TableContainer component={Paper}>
