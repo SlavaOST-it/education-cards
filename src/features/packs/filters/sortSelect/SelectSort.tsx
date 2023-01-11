@@ -4,7 +4,7 @@ import ArrowUpwardOutlinedIcon from '@mui/icons-material/ArrowUpwardOutlined';
 import {useAppDispatch, useAppSelector} from "../../../../utils/hooks/hooks";
 import {setSortPacksValueAC} from "../../../../bll/reducers/packs-reducer";
 import {PacksOrCardsType} from "../../../../common/types/types";
-import {sortCardsAC} from "../../../../bll/reducers/cards-reducer";
+import {getCardsTC, sortCardsAC} from "../../../../bll/reducers/cards-reducer";
 
 
 type SelectSortType = {
@@ -13,21 +13,28 @@ type SelectSortType = {
 }
 export const SelectSort: FC<SelectSortType> = ({type, valueSort}) => {
     const dispatch = useAppDispatch()
-    const selected = useAppSelector(state => state.packs.sortPacksValue)
+    const selectedPacks = useAppSelector(state => state.packs.sortPacksValue)
+    const selectedCards = useAppSelector(state => state.cards.sortCards)
 
     const onclickUpHandler = () => {
         if (type === "pack") dispatch(setSortPacksValueAC(`0${valueSort}`))
-        else dispatch(sortCardsAC(`0${valueSort}`))
+        if (type === "card") {
+            dispatch(sortCardsAC(`0${valueSort}`))
+            dispatch(getCardsTC())
+        }
     }
 
     const onclickDownHandler = () => {
         if (type === "pack") dispatch(setSortPacksValueAC(`1${valueSort}`))
-        else dispatch(sortCardsAC(`1${valueSort}`))
+        if (type === "card") {
+            dispatch(sortCardsAC(`1${valueSort}`))
+            dispatch(getCardsTC())
+        }
     }
 
     return (
         <div>
-            {selected[0] === "1"
+            {(selectedPacks[0] === "1") || (selectedCards[0] === "1")
                 ? <ArrowUpwardOutlinedIcon onClick={onclickUpHandler}/>
                 : <ArrowDownwardOutlinedIcon onClick={onclickDownHandler}/>}
         </div>

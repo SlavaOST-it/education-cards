@@ -14,8 +14,6 @@ import {StyledTableCell} from "../../../common/styles/StyleForTables";
 import {CardItem} from "./cardItem/CardItem";
 
 
-
-
 export const CardsTable = () => {
     const cards = useAppSelector(state => state.cards.cards)
 
@@ -25,11 +23,29 @@ export const CardsTable = () => {
                 <TableHead className={s.tableHeader}>
                     <TableRow className={s.tableHeader}>
                         <StyledTableCell align="center">
-                            <div className={s.cards}>Question <SelectSort type={'card'} valueSort={'question'}/></div>
+                            <div className={s.cards}>
+                                Question
+                                <SelectSort type={'card'} valueSort={'question'}/>
+                            </div>
                         </StyledTableCell>
-                        <StyledTableCell align="center">Answer</StyledTableCell>
-                        <StyledTableCell align="center">Last Updated <SelectSort type={'card'} valueSort={'updated'}/></StyledTableCell>
-                        <StyledTableCell align="center">Grade  <SelectSort type={'card'} valueSort={'grade'}/></StyledTableCell>
+
+                        <StyledTableCell align="center">
+                            Answer
+                        </StyledTableCell>
+
+                        <StyledTableCell align="center">
+                            <div className={s.cards}>
+                                Last Updated
+                                <SelectSort type={'card'} valueSort={'updated'}/>
+                            </div>
+                        </StyledTableCell>
+
+                        <StyledTableCell align="center">
+                            <div className={s.cards}>
+                                Grade
+                                <SelectSort type={'card'} valueSort={'grade'}/>
+                            </div>
+                        </StyledTableCell>
                     </TableRow>
                 </TableHead>
                 <TableBody>
