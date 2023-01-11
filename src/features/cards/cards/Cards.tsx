@@ -5,7 +5,7 @@ import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
 import style from "./CardList.module.css"
 import {SearchInput} from "../../packs/filters/search/SearchInput";
 import {BasicPagination} from "../../../common/components/pagination/BasicPagination";
-import {getCardsTC, setCurrentPackIdAC} from '../../../bll/reducers/cards-reducer'
+import {getCardsTC, setCurrentPackIdAC, sortCardsAC} from '../../../bll/reducers/cards-reducer'
 import {HeaderTable} from "../../../common/components/headerTable/HeaderTable";
 import {CardsTable} from "../cardsTable/CardsTable";
 import {EditAndAddCardsModal} from "../../../common/components/modals/addCardsModal/EditAndAddCardsModal";
@@ -25,17 +25,21 @@ export const Cards = () => {
     const search = useAppSelector(state => state.cards.filterSearchValue)
     const namePack = useAppSelector(state => state.cards.packName)
     const packUserId = useAppSelector(state => state.cards.packUserId)
+    const sortCards = useAppSelector(state => state.cards.sortCards)
     const myId = useAppSelector(state => state.profile._id)
-
 
 
     const [urlParams, setUrlParams] = useSearchParams()
 
     useEffect(() => {
         const fromUrlCurrentPackId = urlParams.get('currentPackId')
+        const fromUrlSortCards = urlParams.get('sortCards')
 
         if (fromUrlCurrentPackId !== null) {
             dispatch(setCurrentPackIdAC(fromUrlCurrentPackId))
+        }
+        if (fromUrlSortCards !== null) {
+            dispatch(sortCardsAC(fromUrlSortCards))
         }
     }, [])
 
@@ -48,17 +52,13 @@ export const Cards = () => {
 
 
     useEffect(() => {
-        if (cardsPack_id) {
-            setUrlParams({
-                currentPackId: `${cardsPack_id}`,
-            })
-        }
+        setUrlParams({
+            currentPackId: `${cardsPack_id}`,
+            sortCards: `${sortCards}`,
+        })
 
         dispatch(getCardsTC())
     }, [page, pageCount, search])
-
-
-
 
 
     const [active, setActive] = useState(false) // модалка
@@ -72,7 +72,6 @@ export const Cards = () => {
     }
 
     const callback = () => setActive(!active)
-
 
 
     if (!isLoggedIn) {
@@ -97,10 +96,11 @@ export const Cards = () => {
                 <HeaderTable callbackToAdd={myId === packUserId ? addNewCard : learnPack}
                              titleButton={myId === packUserId ? "Add new card" : "Learn to pack"}
                              title={namePack}
-                             disabled={((!dataCards.length) || (myId !== packUserId) || (appStatus === AppStatus.LOADING))}
+                             disabled={((!dataCards.length) ||  (appStatus === AppStatus.LOADING))}
                 />
 
-                {!dataCards.length && appStatus === AppStatus.SUCCEED && <div>В данной колоде нету карточек удовлетворяющих поиску</div>}
+                {!dataCards.length && appStatus === AppStatus.SUCCEED &&
+                    <div>В данной колоде нету карточек удовлетворяющих поиску</div>}
 
                 <div className={style.search}>
                     <SearchInput type={'card'}/>
@@ -118,3 +118,4 @@ export const Cards = () => {
     );
 };
 
+//(myId !== packUserId) ||
