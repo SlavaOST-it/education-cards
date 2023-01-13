@@ -1,0 +1,10 @@
+.settingIcon {
+    width: 20px;
+    height: 20px;
+    transition: 1s;
+}
+
+.settingIcon:hover {
+    transform: rotate(85deg);
+    transition: 1s;
+}
