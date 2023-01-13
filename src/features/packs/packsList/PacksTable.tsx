@@ -1,8 +1,6 @@
 import React from 'react';
 import s from "../Packs.module.css";
 
-import {styled} from "@mui/material";
-import TableCell, {tableCellClasses} from "@mui/material/TableCell";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Table from "@mui/material/Table";
@@ -10,52 +8,42 @@ import TableHead from "@mui/material/TableHead";
 import TableBody from "@mui/material/TableBody";
 import TableContainer from "@mui/material/TableContainer";
 
-import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
-import {SelectSort} from "../filters/sortSelect/SelectSort";
+import {useAppSelector} from "../../../utils/hooks/hooks";
+
 import {PackItem} from "./packItem/PackItem";
 import {StyledTableCell} from "../../../common/styles/StyleForTables";
-// import {setPackIdAC, setPackNameAC, setUserIdAC} from "../../../bll/reducers/packs-reducer";
-
+import {SelectSort} from "../filters/sortSelect/SelectSort";
 
 
 export const PacksTable = () => {
     const dataPacks = useAppSelector(state => state.packs.cardPacks)
+
+    const itemHeaderColumn = (nameColumn: string, valueSort: string) => {
+        return (
+            <StyledTableCell align="center">
+                <div className={""}
+                >
+                    <div className={s.columnName}>
+                        <SelectSort type={"pack"} valueSort={valueSort}>
+                            {nameColumn}
+                        </SelectSort>
+                    </div>
+                </div>
+            </StyledTableCell>
+        )
+    }
 
     return (
         <TableContainer component={Paper}>
             <Table aria-label="customized table">
                 <TableHead>
                     <TableRow>
-                        <StyledTableCell align="center">
-                            <div className={s.tableName}>
-                                Name
-                                <SelectSort type={"pack"} valueSort={'name'}/>
-                            </div>
-                        </StyledTableCell>
-
-                        <StyledTableCell align="center">
-                            <div className={s.tableName}>
-                                Cards
-                                <SelectSort type={"pack"} valueSort={'cardsCount'}/>
-                            </div>
-                        </StyledTableCell>
-
-                        <StyledTableCell align="center">
-                            <div className={s.tableName}>
-                                Last Updated
-                                <SelectSort type={"pack"} valueSort={'updated'}/>
-                            </div>
-                        </StyledTableCell>
-
-                        <StyledTableCell align="center">
-                            <div className={s.tableName}>
-                                Created by
-                                <SelectSort type={"pack"} valueSort={'user_name'}/>
-                            </div>
-                        </StyledTableCell>
-
+                        {itemHeaderColumn("Name", "name")}
+                        {itemHeaderColumn("Cards", "cardsCount")}
+                        {itemHeaderColumn("Last Updated", "updated")}
+                        {itemHeaderColumn("Created by", "user_name")}
                         <StyledTableCell sx={{width: 120}} align="center">
-                            <div className={s.tableName}>
+                            <div className={s.columnName}>
                                 Actions
                             </div>
                         </StyledTableCell>
@@ -63,8 +51,8 @@ export const PacksTable = () => {
                 </TableHead>
 
                 <TableBody>
-                    {dataPacks.map((el) => (
-                        <PackItem el={el}/>
+                    {dataPacks.map((item) => (
+                        <PackItem item={item}/>
                     ))}
                 </TableBody>
             </Table>

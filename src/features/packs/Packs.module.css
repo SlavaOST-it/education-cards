@@ -29,6 +29,7 @@
 
 .cards {
     display: flex;
+    justify-content: center;
 }
 
 .tableHeader{
@@ -46,10 +47,18 @@
 
 }
 
-.tableName{
+.columnName{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
+
+    cursor: pointer;
+}
+
+.sortArrow {
+    padding-left: 5px;
+
+    display:none;
 }
 
 .pagination{
