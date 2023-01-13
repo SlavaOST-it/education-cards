@@ -15,7 +15,7 @@ export const CardItem: FC<CardItemType> = ({el}) => {
             <StyledTableCell align="center">{el.question}</StyledTableCell>
             <StyledTableCell align="center">{el.answer}</StyledTableCell>
             <StyledTableCell align="center">{el.updated.substr(0, 10)}</StyledTableCell>
-            <StyledTableCell sx={{width: 50}} align="right">
+            <StyledTableCell sx={{width: 50}} align="left">
                 <div className={s.grade}>
                     <BasicRating grade={el.grade}/>
                     <ActionsPack type={'card'}
@@ -26,6 +26,7 @@ export const CardItem: FC<CardItemType> = ({el}) => {
                                  answer={el.answer}
                                  packName={''}
                                  deckCover={''}
+                                 disabled={false}
                     />
                 </div>
             </StyledTableCell>

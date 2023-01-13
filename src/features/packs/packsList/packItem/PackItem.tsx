@@ -12,9 +12,9 @@ import {resetCardsStatedAC, setCurrentPackIdAC} from "../../../../bll/reducers/c
 
 
 type PackItemType = {
-    el: PackType
+    item: PackType
 }
-export const PackItem: FC<PackItemType> = ({el}) => {
+export const PackItem: FC<PackItemType> = ({item}) => {
     const dispatch = useAppDispatch()
 
     const onClickHandler = (cardsPack_id: string) => {
@@ -23,31 +23,32 @@ export const PackItem: FC<PackItemType> = ({el}) => {
     }
 
     return (
-        <StyledTableRow key={el._id} className={style.tableHeader}>
+        <StyledTableRow key={item._id} className={style.tableHeader}>
 
             <StyledTableCell align="center">
                 <NavLink onClick={() => {
-                    onClickHandler(el._id)
+                    onClickHandler(item._id)
                 }} to={PATH.cardList}>
                     <div className={s.namePack}>
-                        <img src={el.deckCover && el.deckCover.length > 100 ? el.deckCover : baseDeckCover}
+                        <img src={item.deckCover && item.deckCover.length > 100 ? item.deckCover : baseDeckCover}
                              className={style.coverImg} alt={'cover'}></img>
-                        <div className={s.truncateLongTexts}>{el.name}</div>
+                        <div className={s.truncateLongTexts}>{item.name}</div>
                     </div>
                 </NavLink>
             </StyledTableCell>
-            <StyledTableCell align="center">{el.cardsCount}</StyledTableCell>
-            <StyledTableCell align="center">{el.updated.substr(0, 10)}</StyledTableCell>
-            <StyledTableCell align="center">{el.user_name}</StyledTableCell>
+            <StyledTableCell align="center">{item.cardsCount}</StyledTableCell>
+            <StyledTableCell align="center">{item.updated.substr(0, 10)}</StyledTableCell>
+            <StyledTableCell align="center">{item.user_name}</StyledTableCell>
             <StyledTableCell sx={{width: 70}} align="right">
                 {<ActionsPack type={'pack'}
-                              deckCover={el.deckCover}
-                              userId={el.user_id}
-                              packName={el.name}
-                              packId={el._id}
+                              deckCover={item.deckCover}
+                              userId={item.user_id}
+                              packName={item.name}
+                              packId={item._id}
                               cardId={''}
                               answer={''}
                               question={''}
+                              disabled={item.cardsCount === 0}
                 />}
             </StyledTableCell>
         </StyledTableRow>

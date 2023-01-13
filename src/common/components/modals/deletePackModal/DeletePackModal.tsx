@@ -16,13 +16,11 @@ type DeletePackModalType = {
     setActive: (active: boolean) => void
     name: string
     packId: string
-    type: 'card' | 'pack'
+    type: "card" | "pack"
     cardId: string
 }
 export const DeletePackModal: FC<DeletePackModalType> = ({cardId, packId, active, setActive, name, type}) => {
-
     const dispatch = useAppDispatch()
-
 
     const onSaveCallback = () => {
         if (type === "pack") {
@@ -30,7 +28,6 @@ export const DeletePackModal: FC<DeletePackModalType> = ({cardId, packId, active
         } else {
             dispatch(deleteCardTC(packId, cardId))
         }
-
         setActive(false)
     }
 

@@ -36,11 +36,13 @@ export const ResetFilters = () => {
             page === 1 &&
             filterSearchValue === '' &&
             sortByAllMy === 'All' &&
+            sortPacksValue === '0updated' &&
             min === 0 &&
             max === maxCardsCount
         ) {
             return
         }
+
         dispatch(setPageAC(1))
         dispatch(setSearchInputPacksAC(''))
         dispatch(setSearchCardsAC(''))
@@ -48,7 +50,7 @@ export const ResetFilters = () => {
         dispatch(setSortPacksValueAC(('0updated')))
         dispatch(setRerenderAC(false))
         dispatch(setSortMinMaxCardsAC(0, maxCardsCount))
-        dispatch(getPacksTC(true))
+        dispatch(getPacksTC())
     }
 
     return (
