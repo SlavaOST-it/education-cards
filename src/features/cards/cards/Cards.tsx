@@ -11,11 +11,13 @@ import {CardsTable} from "../cardsTable/CardsTable";
 import {EditAndAddCardsModal} from "../../../common/components/modals/addCardsModal/EditAndAddCardsModal";
 import {BackToPacksList} from "../../../common/components/backToPacksLink/BackToPacksList";
 import {AppStatus} from "../../../common/types/types";
+import {SettingsPack} from "../../packs/settingsPack/SettingsPack";
 
 
 export const Cards = () => {
 
     const dispatch = useAppDispatch()
+    const dataPacks = useAppSelector(state => state.packs.cardPacks)
     const appStatus = useAppSelector(state => state.app.status)
     const isLoggedIn = useAppSelector(state => state.login.loggedIn)
     const dataCards = useAppSelector(state => state.cards.cards)
@@ -28,6 +30,7 @@ export const Cards = () => {
     const sortCards = useAppSelector(state => state.cards.sortCards)
     const myId = useAppSelector(state => state.profile._id)
 
+    const selectedPack = dataPacks.filter(el => el._id === cardsPack_id)
 
     const [urlParams, setUrlParams] = useSearchParams()
 
@@ -61,17 +64,17 @@ export const Cards = () => {
     }, [page, pageCount, search])
 
 
-    const [active, setActive] = useState(false) // модалка
+    const [activeModal, setActiveModal] = useState(false)
 
     const addNewCard = () => {
-        setActive(true)
+        setActiveModal(true)
     }
 
     const learnPack = () => {
         alert('Lear Pack')
     }
 
-    const callback = () => setActive(!active)
+    const callback = () => setActiveModal(!activeModal)
 
 
     if (!isLoggedIn) {
@@ -84,20 +87,13 @@ export const Cards = () => {
             <BackToPacksList/>
 
             <div className={style.wrapper}>
-                <EditAndAddCardsModal
-                    answerCard={''}
-                    questionCard={''}
-                    type={'add'}
-                    cardsPackId={cardsPack_id}
-                    setActive={callback}
-                    active={active}
-                />
-
                 <HeaderTable callbackToAdd={myId === packUserId ? addNewCard : learnPack}
-                             titleButton={myId === packUserId ? "Add new card" : "Learn to pack"}
+                             titleButton={myId === packUserId ? "Add new card" : "Learn this pack"}
                              title={namePack}
-                             disabled={((!dataCards.length) ||  (appStatus === AppStatus.LOADING))}
-                />
+                             disabled={((!dataCards.length) || (appStatus === AppStatus.LOADING))}
+                >
+                    {myId === packUserId && <SettingsPack selectedPack={selectedPack}/>}
+                </HeaderTable>
 
                 {!dataCards.length && appStatus === AppStatus.SUCCEED &&
                     <div>В данной колоде нету карточек удовлетворяющих поиску</div>}
@@ -114,8 +110,16 @@ export const Cards = () => {
                     <BasicPagination type={'cards'}/>
                 </div>
             </div>
+
+            <EditAndAddCardsModal
+                answerCard={''}
+                questionCard={''}
+                type={'add'}
+                cardsPackId={cardsPack_id}
+                setActive={callback}
+                active={activeModal}
+            />
+
         </div>
     );
 };
-
-//(myId !== packUserId) ||
