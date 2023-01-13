@@ -1,5 +1,15 @@
-.header{
+.header {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
+
+.namePack {
+    display: flex;
+    align-items: center;
+}
+
+.setting {
+    margin-left: -10px;
+}
+

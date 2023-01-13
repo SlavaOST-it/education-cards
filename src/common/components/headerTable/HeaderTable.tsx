@@ -1,18 +1,32 @@
-import React, {FC} from 'react';
-import style from "./HeaderTable.module.css";
+import React, {FC, ReactNode} from 'react';
+import s from "./HeaderTable.module.css";
 import Button from "@mui/material/Button";
 
-type HeaderType={
-    callbackToAdd:()=>void
-    title?:string
+
+type HeaderType = {
+    callbackToAdd: () => void
+    title?: string
     titleButton: string
     disabled?: boolean
+    children?: ReactNode | JSX.Element
 }
 
-export const HeaderTable:FC<HeaderType> = ({callbackToAdd, title,titleButton, disabled}) => {
+export const HeaderTable: FC<HeaderType> = ({
+                                                children,
+                                                callbackToAdd, title,
+                                                titleButton,
+                                                disabled
+                                            }) => {
+
     return (
-        <div className={style.header}>
-            <h2>{title}</h2>
+        <div className={s.header}>
+            <div className={s.namePack}>
+                <div>
+                    <h2>{title}</h2>
+                </div>
+                {children}
+            </div>
+
             <div>
                 <Button
                     disabled={disabled}
