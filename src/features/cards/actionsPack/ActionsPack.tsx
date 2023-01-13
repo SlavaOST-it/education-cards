@@ -7,6 +7,7 @@ import s from "./ActionsPack.module.css"
 import {DeletePackModal} from "../../../common/components/modals/deletePackModal/DeletePackModal";
 import {EditPackModal} from "../../../common/components/modals/changePackModal/EditPackModal";
 import {ChangeCardModal} from "../../../common/components/modals/changeCardModal/ChangeCardModal";
+import {AppStatus} from "../../../common/types/types";
 
 
 type ActionsPackType = {
@@ -18,6 +19,7 @@ type ActionsPackType = {
     deckCover: string
     question: string
     answer: string
+    disabled: boolean
 }
 
 export const ActionsPack: FC<ActionsPackType> = ({
@@ -28,11 +30,12 @@ export const ActionsPack: FC<ActionsPackType> = ({
                                                      cardId,
                                                      packName,
                                                      question,
-                                                     answer
+                                                     answer,
+                                                     disabled
                                                  }) => {
 
     const myId = useAppSelector(state => state.profile._id)
-    const loadingStatus = useAppSelector((state) => state.app.status)
+    const appStatus = useAppSelector((state) => state.app.status)
 
     const [activeDeleteModal, setActiveDeleteModal] = useState(false)
     const [activeEditModal, setActiveEditModal] = useState(false)
@@ -46,22 +49,21 @@ export const ActionsPack: FC<ActionsPackType> = ({
     const onActiveEditModal = () => setActiveEditModal(!activeEditModal)
     const onActiveEditCardModal = () => setActiveEditCardModal(!activeEditCardModal)
 
-    const disableButton = loadingStatus === 'loading'
+    const disableButton = appStatus === AppStatus.LOADING
 
     return (
         <div className={s.actionBtn}>
-            {type === 'pack' && (
-                <>
-                    <LearnAction disabled={disableButton} onClickCallback={learnPackHandler}/>
+            {((type === 'pack') && ((myId !== userId))) &&
+                (<LearnAction disabled={disableButton || disabled} onClickCallback={learnPackHandler}/>)
+            }
 
-                    {myId === userId && (
-                        <>
-                            <EditAction disabled={disableButton} onClickCallback={onActiveEditModal}/>
-                            <DeleteAction disabled={disableButton} onClickCallback={onActiveModal}/>
-                        </>
-                    )}
-                </>
-            )}
+            {((type === 'pack') && (myId === userId)) &&
+                (
+                    <>
+                        <EditAction disabled={disableButton} onClickCallback={onActiveEditModal}/>
+                        <DeleteAction disabled={disableButton} onClickCallback={onActiveModal}/>
+                    </>
+                )}
 
             {(type === 'card' && myId === userId) && (
                 <>
@@ -108,7 +110,7 @@ const LearnAction = (props: ActionsType) => {
     )
 }
 
-const EditAction = (props: ActionsType) => {
+export const EditAction = (props: ActionsType) => {
     return (
         <button disabled={props.disabled} className={s.button} onClick={props.onClickCallback}>
             <BorderColorOutlinedIcon fontSize={'small'}/>
@@ -116,7 +118,7 @@ const EditAction = (props: ActionsType) => {
     )
 }
 
-const DeleteAction = (props: ActionsType) => {
+export const DeleteAction = (props: ActionsType) => {
     return (
         <button disabled={props.disabled} className={s.button} onClick={props.onClickCallback}>
             <DeleteIcon fontSize={'small'}/>
