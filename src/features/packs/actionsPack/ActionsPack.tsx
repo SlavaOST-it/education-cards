@@ -1,13 +1,21 @@
 import React, {FC, useState} from 'react';
-import {useAppSelector} from "../../../utils/hooks/hooks";
+import {NavLink} from "react-router-dom";
+
+import s from "./ActionsPack.module.css"
+
+import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
+
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
-import s from "./ActionsPack.module.css"
+
 import {DeletePackModal} from "../../../common/components/modals/deletePackModal/DeletePackModal";
 import {EditPackModal} from "../../../common/components/modals/changePackModal/EditPackModal";
 import {ChangeCardModal} from "../../../common/components/modals/changeCardModal/ChangeCardModal";
 import {AppStatus} from "../../../common/types/types";
+import {setCardsPackIdInLearnAC} from "../../../bll/reducers/learn-reducer";
+import {PATH} from "../../../utils/routes/routes";
+
 
 
 type ActionsPackType = {
@@ -33,7 +41,7 @@ export const ActionsPack: FC<ActionsPackType> = ({
                                                      answer,
                                                      disabled
                                                  }) => {
-
+    const dispatch = useAppDispatch()
     const myId = useAppSelector(state => state.profile._id)
     const appStatus = useAppSelector((state) => state.app.status)
 
@@ -42,7 +50,7 @@ export const ActionsPack: FC<ActionsPackType> = ({
     const [activeEditCardModal, setActiveEditCardModal] = useState(false)
 
     const learnPackHandler = () => {
-        alert('Learn pack')
+        dispatch(setCardsPackIdInLearnAC(packId))
     }
 
     const onActiveModal = () => setActiveDeleteModal(!activeDeleteModal)
@@ -54,7 +62,9 @@ export const ActionsPack: FC<ActionsPackType> = ({
     return (
         <div className={s.actionBtn}>
             {((type === 'pack') && ((myId !== userId))) &&
-                (<LearnAction disabled={disableButton || disabled} onClickCallback={learnPackHandler}/>)
+                (<NavLink className={s.learnButton} to={disabled ? "" : PATH.learn}>
+                    <LearnAction disabled={disableButton || disabled} onClickCallback={learnPackHandler}/>
+                </NavLink>)
             }
 
             {((type === 'pack') && (myId === userId)) &&
