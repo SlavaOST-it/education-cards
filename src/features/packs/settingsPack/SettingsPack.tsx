@@ -1,15 +1,15 @@
 import React, {FC, useState} from 'react';
 import s from "./SettingsPack.module.css"
-import {PackType} from "../../../api/apiConfig/types/types";
 import {useAppSelector} from "../../../utils/hooks/hooks";
 import {AppStatus} from "../../../common/types/types";
 import Button from "@mui/material/Button";
 import settingIcon from "../../../assets/img/icons/setting.png";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
-import {DeleteAction, EditAction} from "../../cards/actionsPack/ActionsPack";
+import {DeleteAction, EditAction} from "../actionsPack/ActionsPack";
 import {DeletePackModal} from "../../../common/components/modals/deletePackModal/DeletePackModal";
 import {EditPackModal} from "../../../common/components/modals/changePackModal/EditPackModal";
+import {PackType} from "../../../api/cardsAPI";
 
 
 type SettingsPackType = {

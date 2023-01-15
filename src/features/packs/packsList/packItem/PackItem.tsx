@@ -4,11 +4,11 @@ import s from "./PackItem.module.css"
 import {NavLink} from "react-router-dom";
 import {PATH} from "../../../../utils/routes/routes";
 import {baseDeckCover} from "../../../../assets/baseDeckCover";
-import {ActionsPack} from "../../../cards/actionsPack/ActionsPack";
+import {ActionsPack} from "../../actionsPack/ActionsPack";
 import {useAppDispatch} from "../../../../utils/hooks/hooks";
-import {PackType} from "../../../../api/apiConfig/types/types";
 import {StyledTableCell, StyledTableRow} from "../../../../common/styles/StyleForTables";
 import {resetCardsStatedAC, setCurrentPackIdAC} from "../../../../bll/reducers/cards-reducer";
+import {PackType} from "../../../../api/cardsAPI";
 
 
 type PackItemType = {

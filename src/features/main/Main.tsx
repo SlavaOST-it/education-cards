@@ -9,8 +9,9 @@ import {PasswordRecovery} from "../login/passwordRecovery/PasswordRecovery";
 import {Registration} from '../login/registration/Registration';
 import {NewPass} from "../login/newPassword/NewPass";
 import {Packs} from "../packs/Packs";
-import {Cards} from "../cards/cards/Cards";
+import {Cards} from "../cards/Cards";
 import {Profile} from "../profile/Profile";
+import {LearnPage} from "../learn/LearnPage";
 
 
 export const Main = () => {
@@ -26,6 +27,7 @@ export const Main = () => {
                 <Route path={PATH.setNewPassword} element={<NewPass/>}/>
                 <Route path={PATH.packList} element={<Packs/>}/>
                 <Route path={PATH.cardList} element={<Cards/>}/>
+                <Route path={PATH.learn} element={<LearnPage/>}/>
                 <Route path={'/*'} element={<PageNotFound/>}/>
             </Routes>
         </div>
