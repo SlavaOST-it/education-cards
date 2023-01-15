@@ -1,11 +1,10 @@
 import {AppThunkType} from "../store/store";
 import {setAppStatusAC} from "./app-reducer";
-import {packsAPI, PacksResponseType} from "../../api/cardsAPI";
+import {packsAPI, PacksResponseType, PackType} from "../../api/cardsAPI";
 import {baseErrorHandler} from "../../utils/error-utils/error-utils";
 import {AxiosError} from "axios";
 import {AppStatus} from "../../common/types/types";
 import {baseDeckCover} from "../../assets/baseDeckCover";
-import {PackType} from "../../api/apiConfig/types/types";
 
 
 const initialState = {
