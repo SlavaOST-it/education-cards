@@ -1,17 +1,18 @@
 import React, {useEffect, useState} from 'react';
 import {Navigate, useSearchParams} from "react-router-dom";
-import {PATH} from "../../../utils/routes/routes";
-import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
-import style from "./CardList.module.css"
-import {SearchInput} from "../../packs/filters/search/SearchInput";
-import {BasicPagination} from "../../../common/components/pagination/BasicPagination";
-import {getCardsTC, setCurrentPackIdAC, sortCardsAC} from '../../../bll/reducers/cards-reducer'
-import {HeaderTable} from "../../../common/components/headerTable/HeaderTable";
-import {CardsTable} from "../cardsTable/CardsTable";
-import {EditAndAddCardsModal} from "../../../common/components/modals/addCardsModal/EditAndAddCardsModal";
-import {BackToPacksList} from "../../../common/components/backToPacksLink/BackToPacksList";
-import {AppStatus} from "../../../common/types/types";
-import {SettingsPack} from "../../packs/settingsPack/SettingsPack";
+import {PATH} from "../../utils/routes/routes";
+import {useAppDispatch, useAppSelector} from "../../utils/hooks/hooks";
+import s from "./CardList.module.css"
+import {SearchInput} from "../packs/filters/search/SearchInput";
+import {BasicPagination} from "../../common/components/pagination/BasicPagination";
+import {getCardsTC, setCurrentPackIdAC, sortCardsAC} from '../../bll/reducers/cards-reducer'
+import {HeaderTable} from "../../common/components/headerTable/HeaderTable";
+import {CardsTable} from "./cardsTable/CardsTable";
+import {EditAndAddCardsModal} from "../../common/components/modals/addCardsModal/EditAndAddCardsModal";
+import {BackToPacksList} from "../../common/components/backToPacksLink/BackToPacksList";
+import {AppStatus} from "../../common/types/types";
+import {SettingsPack} from "../packs/settingsPack/SettingsPack";
+import {resetLearnCardStateAC, setCardsPackIdInLearnAC} from "../../bll/reducers/learn-reducer";
 
 
 export const Cards = () => {
@@ -44,23 +45,28 @@ export const Cards = () => {
         if (fromUrlSortCards !== null) {
             dispatch(sortCardsAC(fromUrlSortCards))
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
 
     // ======ОБУЧЕНИЕ ======//
 
-    // useEffect(() => {
-    //     dispatch(setCardsPackIdInLearnAC(cardsPack_id))
-    // }, [cardsPack_id])
+    useEffect(() => {
+        dispatch(setCardsPackIdInLearnAC(cardsPack_id))
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [cardsPack_id])
 
 
     useEffect(() => {
-        setUrlParams({
-            currentPackId: `${cardsPack_id}`,
-            sortCards: `${sortCards}`,
-        })
+        if (cardsPack_id) {
+            setUrlParams({
+                currentPackId: `${cardsPack_id}`,
+                sortCards: `${sortCards}`,
+            })
+        }
 
         dispatch(getCardsTC())
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page, pageCount, search])
 
 
@@ -71,7 +77,8 @@ export const Cards = () => {
     }
 
     const learnPack = () => {
-        alert('Lear Pack')
+        dispatch(resetLearnCardStateAC())
+        dispatch(setCardsPackIdInLearnAC(cardsPack_id))
     }
 
     const callback = () => setActiveModal(!activeModal)
@@ -82,31 +89,34 @@ export const Cards = () => {
     }
 
     return (
-        <div className={style.container}>
+        <div className={s.container}>
 
-            <BackToPacksList/>
+            <BackToPacksList type={'pack'}/>
 
-            <div className={style.wrapper}>
-                <HeaderTable callbackToAdd={myId === packUserId ? addNewCard : learnPack}
-                             titleButton={myId === packUserId ? "Add new card" : "Learn this pack"}
-                             title={namePack}
-                             disabled={((!dataCards.length) || (appStatus === AppStatus.LOADING))}
+            <div className={s.wrapper}>
+                <HeaderTable
+                    type={myId === packUserId ? "myPack" : "userPack"}
+                    callbackToAdd={myId === packUserId ? addNewCard : learnPack}
+                    title={namePack}
+                    nameButton={'Add new card'}
+                    disabled={((dataCards.length === 0) || (appStatus === AppStatus.LOADING))}
                 >
                     {myId === packUserId && <SettingsPack selectedPack={selectedPack}/>}
                 </HeaderTable>
 
-                {!dataCards.length && appStatus === AppStatus.SUCCEED &&
+                {dataCards.length === 0 && appStatus === AppStatus.SUCCEED &&
                     <div>В данной колоде нету карточек удовлетворяющих поиску</div>}
 
-                <div className={style.search}>
+                <div className={s.search}>
+                    Search
                     <SearchInput type={'card'}/>
                 </div>
 
-                <div className={style.table}>
+                <div className={s.table}>
                     <CardsTable/>
                 </div>
 
-                <div className={style.pagination}>
+                <div className={s.pagination}>
                     <BasicPagination type={'cards'}/>
                 </div>
             </div>

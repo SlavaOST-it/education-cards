@@ -2,7 +2,7 @@ import React, {FC} from 'react';
 import s from "../../../packs/Packs.module.css";
 import {StyledTableCell, StyledTableRow} from "../../../../common/styles/StyleForTables";
 import {BasicRating} from "../../ratingCards/RatingCard";
-import {ActionsPack} from "../../actionsPack/ActionsPack";
+import {ActionsPack} from "../../../packs/actionsPack/ActionsPack";
 import {CardResponseType} from "../../../../api/cardsAPI";
 
 
