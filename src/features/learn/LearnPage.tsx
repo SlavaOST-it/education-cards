@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import s from "./LearnPage.module.css"
 import {CardResponseType} from "../../api/cardsAPI";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks/hooks";
-import {Navigate, NavLink, useSearchParams} from "react-router-dom";
+import {Navigate, useSearchParams} from "react-router-dom";
 import {BackToPacksList} from "../../common/components/backToPacksLink/BackToPacksList";
 import {
     getCardsForLearnTC,
@@ -14,6 +14,7 @@ import {getCard} from "../../utils/getCard/getCard";
 import {setCurrentPackIdAC} from "../../bll/reducers/cards-reducer";
 import {Answer} from "./answer/Answer";
 import {PATH} from "../../utils/routes/routes";
+import {RepeatLearning} from "./repeatLearning/RepeatLearning";
 
 
 const initialCard = {
@@ -35,7 +36,7 @@ export const LearnPage = () => {
     const dispatch = useAppDispatch()
     const isLoggedIn = useAppSelector(state => state.login.loggedIn)
     const cards = useAppSelector(state => state.learn.cards)
-    const namePack = useAppSelector(state => state.learn.packName)
+    const packName = useAppSelector(state => state.learn.packName)
     const cardsPack_id = useAppSelector(state => state.learn.cardsPack_id)
     const questionsCompleted = useAppSelector(state => state.learn.questionsCompleted)
 
@@ -72,13 +73,12 @@ export const LearnPage = () => {
     }, [cards])
 
     const backToCardsListHandler = () => {
+        dispatch(resetLearnCardStateAC())
         dispatch(setCurrentPackIdAC(cardsPack_id))
-        // dispatch(resetLearnCardStateAC())
     }
 
     if (questionsCompleted) {
-        return (<div>Карточки в данной колоде изучены. Хотите повторить? <NavLink onClick={backToCardsListHandler} to={PATH.cardList}>back to cards</NavLink></div>
-        )
+        return (<RepeatLearning packName={packName} callBackToCards={backToCardsListHandler}/>)
     }
 
     if (!isLoggedIn) {
@@ -93,20 +93,23 @@ export const LearnPage = () => {
 
             <div className={s.blockLearn}>
                 <div className={s.namePack}>
-                    <h3>Learn pack "{namePack}"</h3>
+                    <h3>Learn pack "{packName}"</h3>
                 </div>
 
-                <div className={s.question}>
-                    <b>Question:</b> {card.question}
+                <div className={s.blockQuestion}>
+                    <div className={s.question}>
+                        <b>Question:</b> {card.question}
+                    </div>
+
+                    <div className={s.shots}>
+                        Количество попыток ответов на вопрос: <span>{card.shots}</span>
+                    </div>
+
+                    <div>
+                        <Answer card={card}/>
+                    </div>
                 </div>
 
-                <div className={s.shots}>
-                    Количество попыток ответов на вопрос: <span>{card.shots}</span>
-                </div>
-
-                <div>
-                    <Answer card={card}/>
-                </div>
             </div>
 
         </div>

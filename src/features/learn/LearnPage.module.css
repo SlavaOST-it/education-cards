@@ -3,28 +3,34 @@
     margin: 0 auto;
 }
 
-.blockLearn{
-    /*width: 500px;*/
+.blockLearn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
-.namePack{
+.namePack {
     font-style: normal;
     font-weight: 600;
     font-size: 22px;
     line-height: 27px;
 }
 
-.question{
-    /*font-family: 'Montserrat';*/
+.blockQuestion {
+
+}
+
+.question {
     font-size: 18px;
     font-style: normal;
     font-weight: 600;
     line-height: 24px;
 
-    margin-top: 50px;
+    text-align: left;
+    margin-top: 10px;
 }
 
-.shots{
+.shots {
     font-style: normal;
     font-weight: 400;
     font-size: 14px;
@@ -34,10 +40,39 @@
 
     opacity: 0.5;
 
-    margin: 18px 0 30px 0;
+    margin: 18px 0 0 0;
 }
 
-.shots span{
+.shots span {
     opacity: 1;
     font-weight: bold;
+}
+
+.gradeBlock {
+    text-align: left;
+    margin-top: 15px;
+}
+
+.grade {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 24px;
+
+    text-align: left;
+}
+
+.grade li {
+
+    font-style: normal;
+    font-weight: 600;
+    font-size: 18px;
+    line-height: 24px;
+
+    margin: 12px 0;
+    padding: 5px 0;
+    border-radius: 5px;
+    box-shadow: 0 0 4px 4px rgba(0, 0, 0, 0.3);
+
+    list-style-type: none;
 }
