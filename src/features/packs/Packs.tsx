@@ -100,7 +100,7 @@ export const Packs = () => {
     return (
         <div className={s.container}>
             <div>
-                <HeaderTable title={'Packs list'} callbackToAdd={addNewPackHandler} titleButton={"Add new pack"}/>
+                <HeaderTable type={"myPack"} title={'Packs list'} nameButton={'Add new pack'} callbackToAdd={addNewPackHandler}/>
             </div>
 
             <AddPackModal active={openAddPackModal} setActive={addNewPackHandler}/>
