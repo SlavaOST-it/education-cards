@@ -94,7 +94,7 @@ export const Profile = () => {
     return (
         <div className={s.profilePage}>
 
-            <BackToPacksList/>
+            <BackToPacksList type={'pack'}/>
 
             <div className={s.profile}>
                 <h2>Personal Information</h2>
