@@ -31,9 +31,7 @@ export const Answer: FC<AnswerType> = ({card}) => {
 
         if (cards) {
             const index = cards.findIndex(c => c._id === card._id)
-
             cards.splice(index, 1)
-
             dispatch(deleteStudiedCardAC([...cards]))
         }
     }
