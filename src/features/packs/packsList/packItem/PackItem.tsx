@@ -26,7 +26,7 @@ export const PackItem: FC<PackItemType> = ({item}) => {
         <StyledTableRow key={item._id} className={style.tableHeader}>
 
             <StyledTableCell align="center">
-                <NavLink onClick={() => {
+                <NavLink className={s.linkToPack} onClick={() => {
                     onClickHandler(item._id)
                 }} to={PATH.cardList}>
                     <div className={s.namePack}>

@@ -9,4 +9,14 @@
     display: flex;
     align-items: center;
 
+
+
+}
+
+.linkToPack{
+    cursor: pointer;
+    text-decoration: none;
+
+    color: black;
+    font-size: 16px;
 }
