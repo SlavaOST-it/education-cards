@@ -14,7 +14,7 @@ const initialState = {
     pageCount: 5,
     cardPacksTotalCount: 0,
     minCardsCount: 0,
-    maxCardsCount: 0,
+    maxCardsCount: 100,
     min: 0,
     max: 0,
     sortByAllMy: "All" as SortPacksAllMyType,

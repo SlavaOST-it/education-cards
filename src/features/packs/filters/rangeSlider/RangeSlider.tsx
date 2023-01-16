@@ -14,8 +14,6 @@ export const RangeSlider = () => {
     const min = useAppSelector(state => state.packs.min)
     const max = useAppSelector(state => state.packs.max)
     const rerender = useAppSelector(state => state.packs.rerender)
-
-    const sortByAllMy = useAppSelector(state => state.packs.sortByAllMy)
     const minCardsPackCount = useAppSelector(state => state.packs.minCardsCount)
     const maxCardsPackCount = useAppSelector(state => state.packs.maxCardsCount)
 
@@ -28,22 +26,19 @@ export const RangeSlider = () => {
         setValue(newValue as number[]);
     };
 
-
-
     useEffect(() => {
         setValue([min, max])
     }, [min, max])
 
     useEffect(() => {
-        if(!rerender){
+        // if(!rerender){
             setValue([0, maxCardsPackCount])
-        }
+        // }
     }, [maxCardsPackCount])
 
     useEffect(() => {
         dispatch(setSortMinMaxCardsAC(debouncedValue[0], debouncedValue[1]))
     }, [debouncedValue])
-
 
     return (
         <Box sx={{width: 300}}>
