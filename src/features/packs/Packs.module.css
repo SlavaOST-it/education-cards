@@ -40,8 +40,12 @@
 
 }
 .coverImg{
-    width: 100px;
-    height: 70px;
+    max-width: 90px;
+    min-width: 70px;
+
+    max-height: 90px;
+    min-height: 70px;
+
     background-position: center;
     background-size: cover;
 

@@ -21,7 +21,7 @@ const initialState = {
     searchInput: '',
     sortPacksValue: '0updated',
     rerender: true,
-    coverImg: baseDeckCover,
+    coverImg: "",
 }
 
 export type InitialStatePacksType = typeof initialState

@@ -12,12 +12,17 @@ type CardItemType = {
 export const CardItem: FC<CardItemType> = ({el}) => {
     return (
         <StyledTableRow key={el._id} className={s.tableHeader}>
+
             <StyledTableCell align="center">{el.question}</StyledTableCell>
+
             <StyledTableCell align="center">{el.answer}</StyledTableCell>
+
             <StyledTableCell align="center">{el.updated.substr(0, 10)}</StyledTableCell>
+
             <StyledTableCell sx={{width: 50}} align="left">
                 <div className={s.grade}>
                     <BasicRating grade={el.grade}/>
+
                     <ActionsPack type={'card'}
                                  userId={el.user_id}
                                  packId={el.cardsPack_id}
@@ -30,6 +35,7 @@ export const CardItem: FC<CardItemType> = ({el}) => {
                     />
                 </div>
             </StyledTableCell>
+
         </StyledTableRow>
     );
 };

@@ -36,9 +36,13 @@ export const PackItem: FC<PackItemType> = ({item}) => {
                     </div>
                 </NavLink>
             </StyledTableCell>
+
             <StyledTableCell align="center">{item.cardsCount}</StyledTableCell>
+
             <StyledTableCell align="center">{item.updated.substr(0, 10)}</StyledTableCell>
+
             <StyledTableCell align="center">{item.user_name}</StyledTableCell>
+
             <StyledTableCell sx={{width: 70}} align="right">
                 {<ActionsPack type={'pack'}
                               deckCover={item.deckCover}
@@ -51,6 +55,7 @@ export const PackItem: FC<PackItemType> = ({item}) => {
                               disabled={item.cardsCount === 0}
                 />}
             </StyledTableCell>
+
         </StyledTableRow>
     );
 };
