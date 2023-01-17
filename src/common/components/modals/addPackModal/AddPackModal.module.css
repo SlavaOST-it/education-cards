@@ -1,12 +1,61 @@
-.coverBlock{
+.wrapper {
     display: flex;
     flex-direction: column;
 }
-.coverHeader{
+
+.wrapper p {
+    text-align: center;
+}
+
+.coverBlock {
+    border: 1px solid gray;
+    border-radius: 4px;
+
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
-.coverImage img{
+
+
+.uploadBlock {
+    cursor: pointer;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    background-color: #b2b2b2;
+    height: 110px;
+    padding: 0 10px;
+}
+
+.deleteCoverBtn {
+    cursor: pointer;
+
+    border: none;
+    font-weight: bold;
+    font-size: 16px;
+
+
+    height: 110px;
+    width: 45px;
+
+    background-color: #b2b2b2;
+    padding: 0 10px;
+}
+
+.deleteCoverDiv{
+    padding: 0 10px;
+    width: 45px;
+}
+
+.coverImage img {
     max-width: 350px;
-    height: 100px;
+    max-height: 100px;
+}
+
+.cameraLogo {
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
 }
