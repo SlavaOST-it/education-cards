@@ -72,7 +72,6 @@ export const Profile = () => {
                 })
             } else {
                 dispatch(setAppErrorAC('Файл слишком большого размера'))
-                console.error('Error: ', 'Файл слишком большого размера')
             }
         }
     }
@@ -145,7 +144,8 @@ export const Profile = () => {
                             <BorderColorOutlinedIcon fontSize={'small'} sx={{marginLeft: '15px'}}/>
                         </span>
 
-                        </div>)}
+                        </div>)
+                    }
                 </div>
 
                 <div className={s.email}> {userEmail} </div>

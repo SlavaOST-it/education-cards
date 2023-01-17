@@ -37,7 +37,7 @@ export type PacksParamsType = {
 };
 
 export type PacksType = {
-    cardPacks: PackType[];
+    cardPacks: [];
     page: number;
     user_id: string;
     pageCount: number;
@@ -47,22 +47,6 @@ export type PacksType = {
     token: string;
 };
 
-export type PackType = {
-    _id: string;
-    cardsCount: number;
-    created: string;
-    grade: number;
-    more_id: string;
-    path: string;
-    name: string;
-    type: string;
-    private: boolean;
-    rating: number;
-    shots: number;
-    updated: string;
-    user_id: string;
-    user_name: string;
-    deckCover: string;
-};
+
 
 // ===== CARDS TYPE ===== //
