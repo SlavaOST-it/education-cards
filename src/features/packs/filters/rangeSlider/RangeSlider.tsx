@@ -2,7 +2,7 @@ import * as React from 'react';
 import {useEffect} from 'react';
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import style from "./RangeSlider.module.css"
+import s from "./RangeSlider.module.css"
 import {useAppDispatch, useAppSelector, useDebounce} from "../../../../utils/hooks/hooks";
 import {AppStatus} from "../../../../common/types/types";
 import {setSortMinMaxCardsAC} from "../../../../bll/reducers/packs-reducer";
@@ -42,8 +42,8 @@ export const RangeSlider = () => {
 
     return (
         <Box sx={{width: 300}}>
-            <div className={style.container}>
-                <div className={style.value}>
+            <div className={s.container}>
+                <div className={s.value}>
                     {value[0]}
                 </div>
                 <Slider
@@ -55,7 +55,7 @@ export const RangeSlider = () => {
                     onChange={handleChange}
                     valueLabelDisplay="auto"
                 />
-                <div className={style.value}>
+                <div className={s.value}>
                     {value[1]}
                 </div>
             </div>
