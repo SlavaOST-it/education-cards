@@ -32,7 +32,6 @@ export const HeaderTable: FC<HeaderType> = ({
 
             {type === "myPack" &&
                 (<Button
-                    disabled={disabled}
                     onClick={callbackToAdd}
                     sx={{borderRadius: 5}} size="small"
                     variant="contained"
@@ -43,7 +42,6 @@ export const HeaderTable: FC<HeaderType> = ({
 
             {type === "userPack" &&
                 (<Button
-
                     disabled={disabled}
                     sx={{borderRadius: 5}} size="small"
                     variant="contained"
