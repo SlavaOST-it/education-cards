@@ -20,7 +20,9 @@ import {RepeatLearning} from "./repeatLearning/RepeatLearning";
 const initialCard = {
     _id: '',
     answer: '',
+    answerImg: '',
     question: '',
+    questionImg: '',
     cardsPack_id: '',
     grade: 0,
     shots: 0,
@@ -43,6 +45,7 @@ export const LearnPage = () => {
 
     const [card, setCard] = useState<CardResponseType>(initialCard)
     const [urlParams, setUrlParams] = useSearchParams()
+
 
     useEffect(() => {
         const fromUrlCurrentPackId = urlParams.get('currentPackId')
@@ -98,7 +101,18 @@ export const LearnPage = () => {
 
                 <div className={s.blockQuestion}>
                     <div className={s.question}>
-                        <b>Question:</b> {card.question}
+                        <b>Question: </b>
+                        {card.questionImg && card.questionImg !== ''
+                            ? (
+                                <>
+                                    <img src={card.questionImg} alt={"question"} className={s.questionImg}/>
+                                </>
+                            )
+                            : (
+                                <>
+                                    {card.question}
+                                </>)
+                        }
                     </div>
 
                     <div className={s.shots}>

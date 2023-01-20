@@ -30,6 +30,10 @@
     margin-top: 10px;
 }
 
+.questionImg{
+    /*width: 200px;*/
+    height: 200px;
+}
 .shots {
     font-style: normal;
     font-weight: 400;
