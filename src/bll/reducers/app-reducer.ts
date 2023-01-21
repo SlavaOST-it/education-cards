@@ -56,5 +56,6 @@ export const initializeAppTC = (): AppThunkType => async (dispatch) => {
         baseErrorHandler(e as Error | AxiosError, dispatch)
     } finally {
         dispatch(setInitializedAC(true))
+        dispatch(setAppStatusAC(AppStatus.SUCCEED))
     }
 }
