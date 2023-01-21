@@ -1,9 +1,9 @@
 import React, {ChangeEvent, FC, useEffect, useState} from 'react';
-import style from "../modals/addPackModal/AddPackModal.module.css";
+import s from "../modals/packsModals/addPackModal/AddPackModal.module.css";
 import {setDeckCoverAC} from "../../../bll/reducers/packs-reducer";
 import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
 import cameraLogo from "../../../assets/img/icons/camera-svgrepo-com.svg"
-import {baseDeckCover} from "../../../assets/baseDeckCover";
+import baseDeckCover from "../../../assets/img/no_image.png";
 import {convertFileToBase64} from "../../../utils/convertFileToBase64/convertFileToBase64";
 import {setAppErrorAC} from "../../../bll/reducers/app-reducer";
 
@@ -28,7 +28,7 @@ export const CoverInput: FC<CoverInputType> = ({deckCover}) => {
                     dispatch(setDeckCoverAC(file64))
                 })
             } else {
-                dispatch(setAppErrorAC('Файл слишком большого размера'))
+                dispatch(setAppErrorAC('The file is too large'))
             }
         }
     }
@@ -43,9 +43,12 @@ export const CoverInput: FC<CoverInputType> = ({deckCover}) => {
     }
 
     useEffect(() => {
-        if (deckCover) {
-            dispatch(setDeckCoverAC(deckCover))
-        }
+            if (deckCover) {
+                dispatch(setDeckCoverAC(deckCover))
+            } else {
+                dispatch(setDeckCoverAC(''))
+            }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const deleteCoverHandler = () => {
@@ -53,28 +56,29 @@ export const CoverInput: FC<CoverInputType> = ({deckCover}) => {
     }
 
     return (
-        <div className={style.wrapper}>
+        <div className={s.wrapper}>
 
             <p>Add an image to the Pack (optional)</p>
 
-            <div className={style.coverBlock}>
-                <label className={style.uploadBlock}>
+            <div className={s.coverBlock}>
+                <label className={s.uploadBlock}>
                     <input type="file"
+                           value={''}
                            onChange={uploadHandler}
                            style={{display: 'none'}}
                     />
-                    <img src={cameraLogo} alt={'upload cover'} className={style.cameraLogo}/>
+                    <img src={cameraLogo} alt={'upload cover'} className={s.cameraLogo}/>
                 </label>
 
-                <div className={style.coverImage}>
+                <div className={s.coverImage}>
                     <img onError={errorHandler} src={isCoverBroken ? baseDeckCover : myDeckCover} alt="cover"/>
                 </div>
 
                 {myDeckCover !== baseDeckCover
-                    ? (<button className={style.deleteCoverBtn} onClick={deleteCoverHandler}>
+                    ? (<button className={s.deleteCoverBtn} onClick={deleteCoverHandler}>
                         X
                     </button>)
-                    : (<div className={style.deleteCoverDiv}></div>)
+                    : (<div className={s.deleteCoverDiv}></div>)
                 }
             </div>
         </div>

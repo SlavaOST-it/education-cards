@@ -134,6 +134,8 @@ export type CardResponseType = {
     min: number
     max: number
     _id: string
+    questionImg: string
+    answerImg: string
 }
 
 

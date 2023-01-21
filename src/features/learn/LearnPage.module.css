@@ -31,9 +31,10 @@
 }
 
 .questionImg{
-    /*width: 200px;*/
-    height: 200px;
+    max-width: 300px;
+    max-height: 200px;
 }
+
 .shots {
     font-style: normal;
     font-weight: 400;

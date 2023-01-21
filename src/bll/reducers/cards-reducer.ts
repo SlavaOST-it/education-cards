@@ -169,13 +169,13 @@ export const deleteCardTC = (cardsPack_id: string, cardsId: string): AppThunkTyp
 export const changeCardTC = (
     cardsPack_id: string,
     _id: string,
-    newQuestion: string,
-    newAnswer: string,
-    comment?: string
+    question: string,
+    answer: string,
+    questionImg?: string
 ): AppThunkType => async (dispatch) => {
     dispatch(setAppStatusAC(AppStatus.LOADING))
     try {
-        await cardsAPI.updateCard({_id: _id, question: newQuestion, answer: newAnswer, comments: comment})
+        await cardsAPI.updateCard({_id, question, answer, questionImg})
         dispatch(getCardsTC())
         dispatch(setAppStatusAC(AppStatus.SUCCEED))
     } catch (e) {
