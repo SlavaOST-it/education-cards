@@ -51,7 +51,16 @@ export const Answer: FC<AnswerType> = ({card}) => {
         return (
             <div>
                 <div className={s.question}>
-                    <b>Answer:</b> {card.answer}
+                    <b>Answer: </b>
+                    {card.answerImg && card.answerImg !== ''
+                        ? (<>
+                            <img src={card.answerImg} alt={"question"}
+                                 className={s.questionImg}/>
+                        </>)
+                        : (<>
+                            {card.answer}
+                        </>)
+                    }
                 </div>
 
                 <div className={s.gradeBlock}>
