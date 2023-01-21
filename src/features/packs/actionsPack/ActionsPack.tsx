@@ -9,13 +9,13 @@ import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 
-import {DeletePackModal} from "../../../common/components/modals/deletePackModal/DeletePackModal";
-import {EditPackModal} from "../../../common/components/modals/changePackModal/EditPackModal";
-import {ChangeCardModal} from "../../../common/components/modals/changeCardModal/ChangeCardModal";
+import {DeletePackModal} from "../../../common/components/modals/packsModals/deletePackModal/DeletePackModal";
+import {EditPackModal} from "../../../common/components/modals/packsModals/editPackModal/EditPackModal";
+import {EditCardModal} from "../../../common/components/modals/cardsModals/changeCardModal/EditCardModal";
 import {AppStatus} from "../../../common/types/types";
 import {setCardsPackIdInLearnAC} from "../../../bll/reducers/learn-reducer";
 import {PATH} from "../../../utils/routes/routes";
-
+import {AddCardModal} from "../../../common/components/modals/cardsModals/addCardModal/AddCardModal";
 
 
 type ActionsPackType = {
@@ -26,6 +26,7 @@ type ActionsPackType = {
     packName: string
     deckCover: string
     question: string
+    questionImg: string
     answer: string
     disabled: boolean
 }
@@ -38,6 +39,7 @@ export const ActionsPack: FC<ActionsPackType> = ({
                                                      cardId,
                                                      packName,
                                                      question,
+                                                     questionImg,
                                                      answer,
                                                      disabled
                                                  }) => {
@@ -96,23 +98,25 @@ export const ActionsPack: FC<ActionsPackType> = ({
                            active={activeEditModal}
                            setActive={onActiveEditModal}
             />
-            <ChangeCardModal cardId={cardId}
-                             packId={packId}
-                             active={activeEditCardModal}
-                             setActive={onActiveEditCardModal}
-                             question={question}
-                             answer={answer}
+            <EditCardModal cardId={cardId}
+                           packId={packId}
+                           active={activeEditCardModal}
+                           setActive={onActiveEditCardModal}
+                           question={question}
+                           questionImg={questionImg}
+                           answer={answer}
             />
         </div>
     );
 };
+
 
 type ActionsType = {
     disabled: boolean
     onClickCallback: () => void
 }
 
-const LearnAction = (props: ActionsType) => {
+export const LearnAction = (props: ActionsType) => {
     return (
         <button className={s.button} disabled={props.disabled} onClick={props.onClickCallback}>
             <SchoolOutlinedIcon fontSize={'small'}/>
