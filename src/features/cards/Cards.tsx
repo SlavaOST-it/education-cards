@@ -8,7 +8,7 @@ import {BasicPagination} from "../../common/components/pagination/BasicPaginatio
 import {getCardsTC, setCurrentPackIdAC, sortCardsAC} from '../../bll/reducers/cards-reducer'
 import {HeaderTable} from "../../common/components/headerTable/HeaderTable";
 import {CardsTable} from "./cardsTable/CardsTable";
-import {EditAndAddCardsModal} from "../../common/components/modals/addCardsModal/EditAndAddCardsModal";
+import {AddCardModal} from "../../common/components/modals/cardsModals/addCardModal/AddCardModal";
 import {BackToPacksList} from "../../common/components/backToPacksLink/BackToPacksList";
 import {AppStatus} from "../../common/types/types";
 import {SettingsPack} from "../packs/settingsPack/SettingsPack";
@@ -34,6 +34,7 @@ export const Cards = () => {
     const selectedPack = dataPacks.filter(el => el._id === cardsPack_id)
 
     const [urlParams, setUrlParams] = useSearchParams()
+    const [activeModal, setActiveModal] = useState(false)
 
     useEffect(() => {
         const fromUrlCurrentPackId = urlParams.get('currentPackId')
@@ -48,14 +49,10 @@ export const Cards = () => {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-
-    // ======ОБУЧЕНИЕ ======//
-
     useEffect(() => {
         dispatch(setCardsPackIdInLearnAC(cardsPack_id))
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [cardsPack_id])
-
 
     useEffect(() => {
         if (cardsPack_id) {
@@ -64,25 +61,20 @@ export const Cards = () => {
                 sortCards: `${sortCards}`,
             })
         }
-
         dispatch(getCardsTC())
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [page, pageCount, search])
 
-
-    const [activeModal, setActiveModal] = useState(false)
-
-    const addNewCard = () => {
+    const addNewCardHandler = () => {
         setActiveModal(true)
     }
 
-    const learnPack = () => {
+    const learnPackHandler = () => {
         dispatch(resetLearnCardStateAC())
         dispatch(setCardsPackIdInLearnAC(cardsPack_id))
     }
 
-    const callback = () => setActiveModal(!activeModal)
-
+    const activeAddCardModalHandler = () => setActiveModal(!activeModal)
 
     if (!isLoggedIn) {
         return <Navigate to={PATH.login}/>
@@ -96,7 +88,7 @@ export const Cards = () => {
             <div className={s.wrapper}>
                 <HeaderTable
                     type={myId === packUserId ? "myPack" : "userPack"}
-                    callbackToAdd={myId === packUserId ? addNewCard : learnPack}
+                    callbackToAdd={myId === packUserId ? addNewCardHandler : learnPackHandler}
                     title={namePack}
                     nameButton={'Add new card'}
                     disabled={((dataCards.length === 0) || (appStatus === AppStatus.LOADING))}
@@ -121,13 +113,10 @@ export const Cards = () => {
                 </div>
             </div>
 
-            <EditAndAddCardsModal
-                answerCard={''}
-                questionCard={''}
-                type={'add'}
-                cardsPackId={cardsPack_id}
-                setActive={callback}
+            <AddCardModal
+                packId={cardsPack_id}
                 active={activeModal}
+                setActive={activeAddCardModalHandler}
             />
 
         </div>
