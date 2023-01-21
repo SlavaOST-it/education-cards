@@ -5,7 +5,7 @@ import {Navigate, useSearchParams} from "react-router-dom";
 import {PATH} from "../../utils/routes/routes";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks/hooks";
 
-import {AddPackModal} from "../../common/components/modals/addPackModal/AddPackModal";
+import {AddPackModal} from "../../common/components/modals/packsModals/addPackModal/AddPackModal";
 import {HeaderTable} from "../../common/components/headerTable/HeaderTable";
 import {BasicPagination} from "../../common/components/pagination/BasicPagination";
 

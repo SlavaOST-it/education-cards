@@ -52,6 +52,7 @@ export const PackItem: FC<PackItemType> = ({item}) => {
                               cardId={''}
                               answer={''}
                               question={''}
+                              questionImg={''}
                               disabled={item.cardsCount === 0}
                 />}
             </StyledTableCell>
