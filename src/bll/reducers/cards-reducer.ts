@@ -144,10 +144,10 @@ export const getCardsTC = (): AppThunkType => async (dispatch, getState) => {
     }
 }
 
-export const addCardTC = (cardsPack_id: string, question: string, answer: string): AppThunkType => async (dispatch) => {
+export const addCardTC = (cardsPack_id: string, question: string, answer: string, questionImg?: string): AppThunkType => async (dispatch) => {
     dispatch(setAppStatusAC(AppStatus.LOADING))
     try {
-        await cardsAPI.createCard({cardsPack_id, question, answer})
+        await cardsAPI.createCard({cardsPack_id, question, answer, questionImg})
         dispatch(getCardsTC())
         dispatch(setAppStatusAC(AppStatus.SUCCEED))
     } catch (e) {
