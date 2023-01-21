@@ -13,7 +13,18 @@ export const CardItem: FC<CardItemType> = ({el}) => {
     return (
         <StyledTableRow key={el._id} className={s.tableHeader}>
 
-            <StyledTableCell align="center">{el.question}</StyledTableCell>
+            <StyledTableCell align="center">
+                {el.questionImg && el.questionImg !== ''
+                    ? <> <img
+                        src={el.questionImg}
+                        alt={"question"}
+                        className={s.questionImg}/>
+                    </>
+                    : <>
+                        {el.question}
+                    </>
+                }
+            </StyledTableCell>
 
             <StyledTableCell align="center">{el.answer}</StyledTableCell>
 
@@ -28,6 +39,7 @@ export const CardItem: FC<CardItemType> = ({el}) => {
                                  packId={el.cardsPack_id}
                                  cardId={el._id}
                                  question={el.question}
+                                 questionImg={el.questionImg}
                                  answer={el.answer}
                                  packName={''}
                                  deckCover={''}
