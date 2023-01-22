@@ -1,10 +1,11 @@
 import React, {FC, useState} from 'react';
+import s from "../LearnPage.module.css";
 import {CardResponseType} from "../../../api/cardsAPI";
 import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
 import {deleteStudiedCardAC, questionsCompletedAC, setGradeCardTC} from "../../../bll/reducers/learn-reducer";
 import {Grade} from "../grade/Grade";
 import Button from "@mui/material/Button";
-import s from "../LearnPage.module.css";
+import {AppStatus} from "../../../common/types/types";
 
 
 type AnswerType = {
@@ -12,12 +13,12 @@ type AnswerType = {
 }
 export const Answer: FC<AnswerType> = ({card}) => {
     const dispatch = useAppDispatch()
+    const appStatus = useAppSelector(state => state.app.status)
     const cards = useAppSelector(state => state.learn.cards)
 
 
     const [isHiddenAnswer, setIsHiddenAnswer] = useState(true)
     const [valueGrade, setValueGrade] = useState(0)
-
 
     const nextQuestionHandler = () => {
         setIsHiddenAnswer(true)
@@ -40,7 +41,9 @@ export const Answer: FC<AnswerType> = ({card}) => {
         return (
             <div>
                 <Button variant="contained" sx={{borderRadius: 5, marginTop: 3}} size={'large'}
-                        onClick={() => setIsHiddenAnswer(false)}>
+                        onClick={() => setIsHiddenAnswer(false)}
+                        disabled={appStatus === AppStatus.LOADING}
+                >
                     Show answer
                 </Button>
             </div>
@@ -80,6 +83,5 @@ export const Answer: FC<AnswerType> = ({card}) => {
             </div>
         )
     }
-
 }
 
