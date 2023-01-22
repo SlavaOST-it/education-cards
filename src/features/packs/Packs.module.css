@@ -70,6 +70,13 @@
     max-width: 100px;
 }
 
+.truncateLongTexts {
+    overflow: hidden;
+    width: 150px;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
+
 .pagination{
     display: flex;
     justify-content: center;

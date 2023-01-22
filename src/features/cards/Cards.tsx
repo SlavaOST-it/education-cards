@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import {Navigate, useSearchParams} from "react-router-dom";
 import {PATH} from "../../utils/routes/routes";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks/hooks";
-import s from "./CardList.module.css"
+import s from "./Card.module.css"
 import {SearchInput} from "../packs/filters/search/SearchInput";
 import {BasicPagination} from "../../common/components/pagination/BasicPagination";
 import {getCardsTC, setCurrentPackIdAC, sortCardsAC} from '../../bll/reducers/cards-reducer'
@@ -109,7 +109,7 @@ export const Cards = () => {
                 </div>
 
                 <div className={s.pagination}>
-                    <BasicPagination type={'cards'}/>
+                    <BasicPagination type={'card'}/>
                 </div>
             </div>
 

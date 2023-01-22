@@ -1,17 +1,17 @@
 .styleBtn{
-    width: 50px;
+    width: 70px;
     height: 36px;
     margin: 3px;
     border: 0.2px #bababa solid;
-    border-radius: 2px;
+    border-radius: 20px;
 }
 
 .activeBtn {
-    width: 50px;
+    width: 70px;
     height: 36px;
     margin: 3px;
     border: 0.2px #bababa solid;
-    border-radius: 2px;
+    border-radius: 20px;
     color: white;
 
     background-color: #366EFF;

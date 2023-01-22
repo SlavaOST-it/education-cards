@@ -9,24 +9,39 @@ import {CardResponseType} from "../../../../api/cardsAPI";
 type CardItemType = {
     el: CardResponseType
 }
+
 export const CardItem: FC<CardItemType> = ({el}) => {
+
     return (
         <StyledTableRow key={el._id} className={s.tableHeader}>
 
             <StyledTableCell align="center">
                 {el.questionImg && el.questionImg !== ''
-                    ? <> <img
-                        src={el.questionImg}
-                        alt={"question"}
-                        className={s.questionImg}/>
+                    ? <>
+                        <img
+                            src={el.questionImg}
+                            alt={"question"}
+                            className={s.questionImg}/>
                     </>
-                    : <>
+                    : <div className={s.truncateLongTexts}>
                         {el.question}
-                    </>
+                    </div>
                 }
             </StyledTableCell>
 
-            <StyledTableCell align="center">{el.answer}</StyledTableCell>
+            <StyledTableCell align="center">
+                {el.answerImg && el.answerImg !== ""
+                    ? <>
+                        <img
+                            src={el.answerImg}
+                            alt={"answer"}
+                            className={s.questionImg}/>
+                    </>
+                    : <div className={s.truncateLongTexts}>
+                        {el.answer}
+                    </div>
+                }
+            </StyledTableCell>
 
             <StyledTableCell align="center">{el.updated.substr(0, 10)}</StyledTableCell>
 
@@ -47,7 +62,6 @@ export const CardItem: FC<CardItemType> = ({el}) => {
                     />
                 </div>
             </StyledTableCell>
-
         </StyledTableRow>
     );
 };

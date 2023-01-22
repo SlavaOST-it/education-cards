@@ -33,13 +33,13 @@ export const Packs = () => {
     const sortPacksValue = useAppSelector(state => state.packs.sortPacksValue)
     const min = useAppSelector(state => state.packs.min)
     const max = useAppSelector(state => state.packs.max)
+
     const rerender = useAppSelector(state => state.packs.rerender)
 
 
     const [openAddPackModal, setOpenAddPackModal] = useState(false)
 
     const [searchParams, setSearchParams] = useSearchParams();
-
 
     useEffect(() => {
         const fromUrlPage = searchParams.get('page')
@@ -65,9 +65,9 @@ export const Packs = () => {
         if (fromUrlSortPacksValue !== null) {
             dispatch(setSortPacksValueAC(fromUrlSortPacksValue))
         }
-        if (fromUrlMin !== null || fromUrlMax !== null) {
-            dispatch(setSortMinMaxCardsAC(Number(searchParams.get('min')), Number(searchParams.get('max'))))
-        }
+        // if (fromUrlMin !== null || fromUrlMax !== null) {
+        //     dispatch(setSortMinMaxCardsAC(Number(searchParams.get('min')), Number(searchParams.get('max'))))
+        // }
     }, [])
 
     useEffect(() => {
@@ -86,8 +86,7 @@ export const Packs = () => {
         }
 
         dispatch(getPacksTC())
-    }, [page, pageCount, filterSearchValue,  sortPacksValue, min, max])
-
+    }, [page, pageCount, filterSearchValue, sortPacksValue, min, max])
 
     const addNewPackHandler = () => {
         setOpenAddPackModal(!openAddPackModal)
@@ -116,7 +115,7 @@ export const Packs = () => {
             </div>
 
             <div className={s.pagination}>
-                <BasicPagination type={'packs'}/>
+                <BasicPagination type={'pack'}/>
             </div>
         </div>
     );

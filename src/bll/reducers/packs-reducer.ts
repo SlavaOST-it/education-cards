@@ -15,6 +15,7 @@ const initialState = {
     cardPacksTotalCount: 0,
     minCardsCount: 0,
     maxCardsCount: 100,
+
     min: 0,
     max: 0,
     sortByAllMy: "All" as SortPacksAllMyType,
@@ -129,6 +130,7 @@ export const getPacksTC = (selectAllOrMyPacks = false): AppThunkType => async (d
         max = selectAllOrMyPacks ? undefined : getState().packs.maxCardsCount,
         sortPacksValue
     } = getState().packs
+
     const myId = getState().profile._id
     const user_id = sortByAllMy === 'All' ? '' : myId
 

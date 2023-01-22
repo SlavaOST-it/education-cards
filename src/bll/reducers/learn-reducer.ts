@@ -40,7 +40,6 @@ type InitialStateType = typeof initialState
 export const learnReducer = (state: InitialStateType = initialState, action: LearnActionsType): InitialStateType => {
     switch (action.type) {
         case "LEARN/SET_LEARN_CARDS":
-            debugger
             return {
                 ...state,
                 cards: action.data.cards,
@@ -101,7 +100,6 @@ export const resetLearnCardStateAC = () => ({type: "LEARN/RESET_CARD_STATE"} as 
 
 // ==================THUNK CREATORS =======================//
 export const getCardsForLearnTC = (): AppThunkType => async (dispatch, getState) => {
-    debugger
     dispatch(setAppStatusAC(AppStatus.LOADING))
     const cardsPack_id = getState().learn.cardsPack_id
     const pageCount = getState().learn.pageCount

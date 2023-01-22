@@ -52,7 +52,7 @@ export const PacksTable = () => {
 
                 <TableBody>
                     {dataPacks.map((item) => (
-                        <PackItem item={item}/>
+                        <PackItem key={item._id} item={item}/>
                     ))}
                 </TableBody>
             </Table>

@@ -12,6 +12,7 @@ import {PackType} from "../../../../api/cardsAPI";
 
 
 type PackItemType = {
+    key: any
     item: PackType
 }
 export const PackItem: FC<PackItemType> = ({item}) => {

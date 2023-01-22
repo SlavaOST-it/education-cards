@@ -62,7 +62,6 @@ export const LearnPage = () => {
                 currentPackId: `${cardsPack_id}`,
             })
         }
-        debugger
         dispatch(getCardsForLearnTC())
         dispatch(questionsCompletedAC(false))
 
@@ -87,7 +86,7 @@ export const LearnPage = () => {
     if (!isLoggedIn) {
         return <Navigate to={PATH.login}/>
     }
-    debugger
+
     return (
         <div className={s.container}>
             <div>

@@ -35,6 +35,11 @@
     max-height: 200px;
 }
 
+.questionText {
+   width: 200px;
+    height: 400px;
+}
+
 .shots {
     font-style: normal;
     font-weight: 400;
