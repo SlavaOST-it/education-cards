@@ -10,6 +10,7 @@ import {NewPassReducerActionType, setNewPassReducer} from '../reducers/newPass-r
 import {CardsActionsType, cardsReducer} from '../reducers/cards-reducer'
 import {PackListActionsType, packsReducer} from '../reducers/packs-reducer'
 import {LearnActionsType, learnReducer} from "../reducers/learn-reducer";
+import {UsersListActionType, usersReducer} from "../reducers/users-reducer";
 
 
 const rootReducer = combineReducers({
@@ -21,7 +22,8 @@ const rootReducer = combineReducers({
     newPassword: setNewPassReducer,
     packs: packsReducer,
     cards: cardsReducer,
-    learn: learnReducer
+    learn: learnReducer,
+    users: usersReducer
 })
 
 // ===== Принимаем типизацию всех редьюсеров ===== //
@@ -37,6 +39,7 @@ type ReduxActionType =
     | PackListActionsType
     | CardsActionsType
     | LearnActionsType
+    | UsersListActionType
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
 export type RootState = ReturnType<typeof store.getState>
