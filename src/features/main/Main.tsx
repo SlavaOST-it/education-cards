@@ -12,12 +12,13 @@ import {Packs} from "../packs/Packs";
 import {Cards} from "../cards/Cards";
 import {Profile} from "../profile/Profile";
 import {LearnPage} from "../learn/LearnPage";
+import {Users} from "../users/Users";
 
 
 export const Main = () => {
 
     return (
-        <div className={""}>
+        <div>
             <Routes>
                 <Route path={'/'} element={<Navigate to={PATH.login}/>}/>
                 <Route path={PATH.login} element={<Login/>}/>
@@ -28,6 +29,7 @@ export const Main = () => {
                 <Route path={PATH.packList} element={<Packs/>}/>
                 <Route path={PATH.cardList} element={<Cards/>}/>
                 <Route path={PATH.learn} element={<LearnPage/>}/>
+                <Route path={PATH.users} element={<Users/>}/>
                 <Route path={'/*'} element={<PageNotFound/>}/>
             </Routes>
         </div>
