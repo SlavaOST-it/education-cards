@@ -62,7 +62,15 @@ export const HeaderItem = () => {
                 <MenuItem onClick={onCloseHandle}>
                     <NavLink to={PATH.profile} className={s.menuLink}>
                         Profile
-                    </NavLink></MenuItem>
+                    </NavLink>
+                </MenuItem>
+                
+                <MenuItem>
+                    <NavLink to={PATH.users} className={""}>
+                        Users
+                    </NavLink>
+                </MenuItem>
+                
                 <MenuItem onClick={logOutHandle}>
                     Logout
                 </MenuItem>
