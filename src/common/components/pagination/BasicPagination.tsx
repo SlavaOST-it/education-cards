@@ -6,10 +6,11 @@ import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
 import {setPageCardsAC} from '../../../bll/reducers/cards-reducer'
 import {SelectPage} from "../handleChange/SelectPage";
 import {AppStatus, PacksOrCardsType} from "../../types/types";
+import {setPageUsersAC} from "../../../bll/reducers/users-reducer";
 
 
 type BasicPaginationType = {
-    type: PacksOrCardsType
+    type: PacksOrCardsType | "users"
 }
 
 export const BasicPagination: FC<BasicPaginationType> = ({type}) => {
@@ -24,16 +25,39 @@ export const BasicPagination: FC<BasicPaginationType> = ({type}) => {
     const cardsTotalCount = useAppSelector(state => state.cards.cardsTotalCount)
     const pageCardsCount = useAppSelector(state => state.cards.pageCount)
 
+    const pageUser = useAppSelector(state => state.users.page)
+    const pageCountUsers = useAppSelector(state => state.users.pageCount)
+    const usersTotalCount = useAppSelector(state => state.users.usersTotalCount)
+
 
     const onChangeHandler = (e: ChangeEvent<unknown>, page: number) => {
         if (type === 'pack') dispatch(setPageAC(page))
         if (type === 'card') dispatch(setPageCardsAC(page))
+        if (type === 'users') dispatch(setPageUsersAC(page))
     }
 
     let countPacks;
-    type === 'pack' ? countPacks = Math.ceil(packsTotalCount / pagePacksCount) : countPacks = Math.ceil(cardsTotalCount / pageCardsCount)
+    if(type === 'pack') {
+        countPacks = Math.ceil(packsTotalCount / pagePacksCount)
+    }
+    if(type === 'card'){
+        countPacks = Math.ceil(cardsTotalCount / pageCardsCount)
+    }
+    if(type === 'users'){
+        countPacks = Math.ceil(usersTotalCount / pageCountUsers)
+    }
 
-    const valuePage = type === 'pack' ? pagePacks : pageCards
+
+    let valuePage
+    if(type === 'pack'){
+        valuePage = pagePacks
+    }
+    if(type === 'card'){
+        valuePage = pageCards
+    }
+    if(type === 'users'){
+        valuePage = pageUser
+    }
 
     return (
         <Stack sx={{p: 1}} spacing={2}>
