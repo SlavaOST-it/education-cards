@@ -1,0 +1,19 @@
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.filtersBlock{
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+.users{
+    display: flex;
+    justify-content: space-between;
+}
+
+.pagination{
+    display: flex;
+    justify-content: center;
+}
