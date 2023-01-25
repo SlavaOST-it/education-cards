@@ -35,5 +35,5 @@ export type UsersType = {
     name: string,
     verified: false,
     publicCardPacksCount: number,
-    avatar: string
+    avatar: null | string
 }
