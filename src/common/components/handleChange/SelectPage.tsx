@@ -7,6 +7,7 @@ import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
 import {useState} from "react";
 import {setPageCardsCountAC} from "../../../bll/reducers/cards-reducer";
 import {AppStatus} from "../../types/types";
+import {setPageCountUsersAC} from "../../../bll/reducers/users-reducer";
 
 export const SelectPage = () => {
     const dispatch = useAppDispatch()
@@ -18,6 +19,7 @@ export const SelectPage = () => {
     const onChangeHandler = (e: SelectChangeEvent) => {
         dispatch(setPageCountAC(JSON.parse(e.target.value)))
         dispatch(setPageCardsCountAC(JSON.parse(e.target.value)))
+        dispatch(setPageCountUsersAC(JSON.parse(e.target.value)))
         setPage(e.target.value)
     }
 

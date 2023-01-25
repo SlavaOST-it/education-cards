@@ -5,6 +5,7 @@ import {useAppDispatch, useAppSelector, useDebounce} from "../../../../utils/hoo
 import {setSearchInputPacksAC} from "../../../../bll/reducers/packs-reducer";
 import {AppStatus, PacksOrCardsType} from "../../../../common/types/types";
 import {setSearchCardsAC} from "../../../../bll/reducers/cards-reducer";
+import {setUserNameSearchAC} from "../../../../bll/reducers/users-reducer";
 
 
 type SearchInputType = {
@@ -15,8 +16,15 @@ export const SearchInput: FC<SearchInputType> = ({type}) => {
     const appStatus = useAppSelector(state => state.app.status)
     const searchInputPacks = useAppSelector(state => state.packs.searchInput)
     const searchInputCards = useAppSelector(state => state.cards.filterSearchValue)
+    const searchInputUsers = useAppSelector(state => state.users.userName)
 
-    const valueInput = type === 'pack' ? searchInputPacks : searchInputCards
+    let valueInput = ''
+    // = type === 'pack' ? searchInputPacks : searchInputCards
+    if (type === 'pack') valueInput = searchInputPacks
+    if (type === 'card') valueInput = searchInputCards
+    if (type === 'users') valueInput = searchInputUsers
+
+
     const [value, setValue] = useState(valueInput)
     const debouncedValue = useDebounce<string>(value, 700)
 
@@ -24,16 +32,21 @@ export const SearchInput: FC<SearchInputType> = ({type}) => {
         setValue(e.currentTarget.value)
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         setValue(valueInput)
     }, [valueInput])
 
     useEffect(() => {
-        if(debouncedValue !== valueInput)
-        if(type==='pack'){
-            dispatch(setSearchInputPacksAC(debouncedValue))
-        } else {
-            dispatch(setSearchCardsAC(debouncedValue))
+        if (debouncedValue !== valueInput) {
+            if (type === 'pack') {
+                dispatch(setSearchInputPacksAC(debouncedValue))
+            }
+            if (type === 'card') {
+                dispatch(setSearchCardsAC(debouncedValue))
+            }
+            if (type === 'users') {
+                dispatch(setUserNameSearchAC(debouncedValue))
+            }
         }
     }, [debouncedValue])
 

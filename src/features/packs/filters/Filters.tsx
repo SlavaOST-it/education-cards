@@ -20,11 +20,11 @@ export const Filters = () => {
 
             <div className={s.range}>
                 Number of cards
-                <RangeSlider/>
+                <RangeSlider type={'pack'}/>
             </div>
 
             <div>
-                <ResetFilters/>
+                <ResetFilters type={'pack'}/>
             </div>
         </div>
     );

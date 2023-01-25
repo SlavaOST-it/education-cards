@@ -5,6 +5,7 @@ import {useAppDispatch, useAppSelector} from "../../../../utils/hooks/hooks";
 import {setSortPacksValueAC} from "../../../../bll/reducers/packs-reducer";
 import {AppStatus, PacksOrCardsType} from "../../../../common/types/types";
 import {getCardsTC, sortCardsAC} from "../../../../bll/reducers/cards-reducer";
+import {setValueSortUsersAC} from "../../../../bll/reducers/users-reducer";
 
 
 type SelectSortType = {
@@ -43,6 +44,14 @@ export const SelectSort: FC<SelectSortType> = ({type, valueSort,children}) => {
                 // setSelectedSort(true)
             }
 
+        }
+
+        if(type === 'users'){
+            if(selectedSort){
+                dispatch(setValueSortUsersAC(`1${valueSort}`))
+            } else {
+                dispatch(setValueSortUsersAC(`0${valueSort}`))
+            }
         }
         setSelectedSort(!selectedSort)
     }

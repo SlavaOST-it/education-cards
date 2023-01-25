@@ -1,23 +1,53 @@
-import * as React from 'react';
-import {useEffect, useRef, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
+import s from "./RangeSlider.module.css"
+
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
-import s from "./RangeSlider.module.css"
+
 import {useAppDispatch, useAppSelector, useDebounce} from "../../../../utils/hooks/hooks";
-import {AppStatus} from "../../../../common/types/types";
+import {AppStatus, PacksOrCardsType} from "../../../../common/types/types";
 import {setSortMinMaxCardsAC} from "../../../../bll/reducers/packs-reducer";
+import {setValueMinMaxCardsUsersAC} from "../../../../bll/reducers/users-reducer";
 
 
-export const RangeSlider = () => {
+type RangeSliderType = {
+    type: PacksOrCardsType
+}
+
+export const RangeSlider: FC<RangeSliderType> = ({type}) => {
     const dispatch = useAppDispatch()
 
     const appStatus = useAppSelector(state => state.app.status)
-    const min = useAppSelector(state => state.packs.min)
-    const max = useAppSelector(state => state.packs.max)
-    const rerender = useAppSelector(state => state.packs.rerender)
+
+    const minCards = useAppSelector(state => state.packs.min)
+    const maxCards = useAppSelector(state => state.packs.max)
     const minCardsPackCount = useAppSelector(state => state.packs.minCardsCount)
     const maxCardsPackCount = useAppSelector(state => state.packs.maxCardsCount)
 
+    const minCardsUser = useAppSelector(state => state.users.min)
+    const maxCardsUser = useAppSelector(state => state.users.max)
+    const minPublicCardPacksCount = useAppSelector(state => state.users.minPublicCardPacksCount)
+    const maxPublicCardPacksCount = useAppSelector(state => state.users.maxPublicCardPacksCount)
+
+
+    let min = 0
+    let max = 0
+    let minCardsCount = 0
+    let maxCardsCount = 0
+
+    if (type === 'pack') {
+        min = minCards
+        max = maxCards
+        minCardsCount = minCardsPackCount
+        maxCardsCount = maxCardsPackCount
+    }
+
+    if (type === 'users') {
+        min = minCardsUser
+        max = maxCardsUser
+        minCardsCount = minPublicCardPacksCount
+        maxCardsCount = maxPublicCardPacksCount
+    }
 
     const [value, setValue] = useState<number[]>([min, max]);
     const debouncedValue = useDebounce<number[]>(value, 700)
@@ -27,10 +57,8 @@ export const RangeSlider = () => {
     };
 
     useEffect(() => {
-
-            setValue([0, maxCardsPackCount])
-
-    }, [maxCardsPackCount])
+        setValue([0, maxCardsCount])
+    }, [maxCardsCount])
 
 
     useEffect(() => {
@@ -39,7 +67,8 @@ export const RangeSlider = () => {
 
 
     useEffect(() => {
-        dispatch(setSortMinMaxCardsAC(debouncedValue[0], debouncedValue[1]))
+        if (type === 'pack') dispatch(setSortMinMaxCardsAC(debouncedValue[0], debouncedValue[1]))
+        if (type === 'users') dispatch(setValueMinMaxCardsUsersAC(debouncedValue[0], debouncedValue[1]))
     }, [debouncedValue])
 
     return (
@@ -50,10 +79,9 @@ export const RangeSlider = () => {
                 </div>
                 <Slider
                     disabled={appStatus === AppStatus.LOADING}
-                    // getAriaLabel={() => 'cards count range'}
                     value={value}
-                    min={0}
-                    max={maxCardsPackCount}
+                    min={minCardsCount}
+                    max={maxCardsCount}
                     onChange={handleChange}
                     valueLabelDisplay="auto"
                 />
