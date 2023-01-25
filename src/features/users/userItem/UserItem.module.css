@@ -1,0 +1,39 @@
+.userItem{
+    width: 200px;
+    border: 1px black solid;
+    border-radius: 10px;
+}
+
+.linkToProfile{
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+}
+.nameAvatarBlock{
+    display: flex;
+    align-items: center;
+}
+
+.userAvatar {
+    width: 100px;
+    min-height: 100px;
+    max-height: 150px;
+    border: 0.5px black solid;
+    border-radius: 25px;
+
+    max-width: 90px;
+    min-width: 70px;
+
+    background-position: center;
+    background-size: cover;
+}
+
+.userName{
+    font-size: 16px;
+    margin-left: 20px;
+
+    overflow: hidden;
+    width: 250px;
+    white-space: nowrap;
+    text-overflow: ellipsis
+}
