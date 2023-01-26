@@ -51,8 +51,6 @@ export const Users = () => {
         if ( fromUrlSortCountCardUser !== null){
             dispatch(setValueSortUsersAC(fromUrlSortCountCardUser))
         }
-
-
     }, [])
 
     useEffect(() => {
@@ -64,7 +62,6 @@ export const Users = () => {
             userNameSearch: `${userNameSearch}`,
             sortCountCardUser: `${sortCountCardUser}`
         })
-
 
         dispatch(getUsersTC())
     }, [page, pageCount, min, max, userNameSearch, sortCountCardUser])
@@ -102,7 +99,6 @@ export const Users = () => {
             <div className={s.pagination}>
                 <BasicPagination type={"users"}/>
             </div>
-
         </div>
     );
 };

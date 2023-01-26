@@ -14,9 +14,7 @@ import {SelectSort} from "../../packs/filters/sortSelect/SelectSort";
 
 
 export const UsersTable = () => {
-
     const users = useAppSelector(state => state.users.users)
-
 
     const itemHeaderColumn = (nameColumn: string, valueSort: string) => {
         return (
@@ -31,7 +29,6 @@ export const UsersTable = () => {
     }
 
     return (
-
             <TableContainer component={Paper}>
                 <Table aria-label="customized table">
                     <TableHead>
@@ -55,6 +52,5 @@ export const UsersTable = () => {
                     </TableBody>
                 </Table>
             </TableContainer>
-
     );
 };
