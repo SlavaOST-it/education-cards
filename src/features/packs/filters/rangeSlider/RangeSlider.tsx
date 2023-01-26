@@ -8,6 +8,7 @@ import {useAppDispatch, useAppSelector, useDebounce} from "../../../../utils/hoo
 import {AppStatus, PacksOrCardsType} from "../../../../common/types/types";
 import {setSortMinMaxCardsAC} from "../../../../bll/reducers/packs-reducer";
 import {setValueMinMaxCardsUsersAC} from "../../../../bll/reducers/users-reducer";
+import {commonDisabled} from "../../../../utils/disabledOnBoot/disabledOnBoot";
 
 
 type RangeSliderType = {
@@ -78,7 +79,7 @@ export const RangeSlider: FC<RangeSliderType> = ({type}) => {
                     {value[0]}
                 </div>
                 <Slider
-                    disabled={appStatus === AppStatus.LOADING}
+                    disabled={commonDisabled(appStatus)}
                     value={value}
                     min={minCardsCount}
                     max={maxCardsCount}

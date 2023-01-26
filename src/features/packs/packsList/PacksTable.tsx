@@ -21,8 +21,7 @@ export const PacksTable = () => {
     const itemHeaderColumn = (nameColumn: string, valueSort: string) => {
         return (
             <StyledTableCell align="center">
-                <div className={""}
-                >
+                <div>
                     <div className={s.columnName}>
                         <SelectSort type={"pack"} valueSort={valueSort}>
                             {nameColumn}

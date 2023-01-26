@@ -58,7 +58,6 @@ export const Login = () => {
             <h2>Sing in</h2>
 
             <form onSubmit={formik.handleSubmit}>
-                <FormControl>
                     <FormGroup>
                         <TextField
                             label="Email"
@@ -108,7 +107,6 @@ export const Login = () => {
                         <ButtonForm nameButton={"Sign in"}/>
 
                     </FormGroup>
-                </FormControl>
             </form>
 
             <div className={commonStyle.textQuestion}>Already have an account?</div>

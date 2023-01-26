@@ -22,14 +22,6 @@ export const Grade: FC<GradeType> = ({setCurrentGrade}) => {
                 return (
                     <li key={i}>
                         <InputRadio id={'grade' + i} name={'grade'} type={"radio"} value={grade} onChange={setGrade}/>
-                        {/*<input*/}
-                        {/*    name={'grade'}*/}
-                        {/*    id={'grade' + i}*/}
-                        {/*    type={"radio"}*/}
-                        {/*    value={grade}*/}
-                        {/*    onChange={setGrade}*/}
-                        {/*/>*/}
-                        {/*{grade}*/}
                     </li>
                 )
             })}

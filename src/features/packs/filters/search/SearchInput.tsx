@@ -3,9 +3,10 @@ import {InputAdornment, TextField} from "@mui/material";
 import {Search} from "@mui/icons-material";
 import {useAppDispatch, useAppSelector, useDebounce} from "../../../../utils/hooks/hooks";
 import {setSearchInputPacksAC} from "../../../../bll/reducers/packs-reducer";
-import {AppStatus, PacksOrCardsType} from "../../../../common/types/types";
+import {PacksOrCardsType} from "../../../../common/types/types";
 import {setSearchCardsAC} from "../../../../bll/reducers/cards-reducer";
 import {setUserNameSearchAC} from "../../../../bll/reducers/users-reducer";
+import {commonDisabled} from "../../../../utils/disabledOnBoot/disabledOnBoot";
 
 
 type SearchInputType = {
@@ -57,7 +58,7 @@ export const SearchInput: FC<SearchInputType> = ({type}) => {
                 value={value}
                 size="small"
                 id="input-with-icon-textfield"
-                disabled={appStatus === AppStatus.LOADING}
+                disabled={commonDisabled(appStatus)}
                 InputProps={{
                     startAdornment: (
                         <InputAdornment position="start">

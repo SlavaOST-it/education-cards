@@ -66,6 +66,12 @@ export const HeaderItem = () => {
                 </MenuItem>
 
                 <MenuItem onClick={onCloseHandle}>
+                    <NavLink to={PATH.packList} className={({ isActive }) => isActive ? s.activeMenuLink : s.menuLink}>
+                        Packs list
+                    </NavLink>
+                </MenuItem>
+
+                <MenuItem onClick={onCloseHandle}>
                     <NavLink to={PATH.users} className={({ isActive }) => isActive ? s.activeMenuLink : s.menuLink}>
                         Users
                     </NavLink>

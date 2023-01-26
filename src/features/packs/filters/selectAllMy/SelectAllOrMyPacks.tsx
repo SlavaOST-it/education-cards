@@ -12,7 +12,6 @@ import {SelectButton} from "./selectButton/SelectButton";
 export const SelectAllOrMyPacks = () => {
     const dispatch = useAppDispatch()
     const sortByAllMy = useAppSelector(state => state.packs.sortByAllMy)
-    const maxCardsCount = useAppSelector(state => state.packs.maxCardsCount)
 
     const [styleButton, setStyleButton] = useState<SortPacksAllMyType>(sortByAllMy)
 
@@ -26,7 +25,6 @@ export const SelectAllOrMyPacks = () => {
         dispatch(setPageAC(1))
         dispatch(setRerenderAC(false))
         dispatch(getPacksTC(true))
-        // dispatch(setSortMinMaxCardsAC(0, maxCardsCount))
         setStyleButton(value)
     }
 

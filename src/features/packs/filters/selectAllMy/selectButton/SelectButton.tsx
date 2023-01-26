@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import s from "./SelectButton.module.css"
 import {useAppSelector} from "../../../../../utils/hooks/hooks";
-import {AppStatus} from "../../../../../common/types/types";
+import {commonDisabled} from "../../../../../utils/disabledOnBoot/disabledOnBoot";
 
 
 type SelectButtonType = {
@@ -9,6 +9,7 @@ type SelectButtonType = {
     callBack?: ()=>void
     classNameBtn?: string
 }
+
 export const SelectButton: FC<SelectButtonType> = ({nameBtn, callBack, classNameBtn}) => {
     const appStatus = useAppSelector(state => state.app.status)
 
@@ -18,7 +19,7 @@ export const SelectButton: FC<SelectButtonType> = ({nameBtn, callBack, className
         <button
             className={finalClassName}
             onClick={callBack}
-            disabled={appStatus === AppStatus.LOADING}
+            disabled={commonDisabled(appStatus)}
         >
             { nameBtn }
         </button>

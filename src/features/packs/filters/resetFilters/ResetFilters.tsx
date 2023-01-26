@@ -15,6 +15,7 @@ import {
     setUserNameSearchAC, setValueMinMaxCardsUsersAC,
     setValueSortUsersAC
 } from "../../../../bll/reducers/users-reducer";
+import {commonDisabled} from "../../../../utils/disabledOnBoot/disabledOnBoot";
 
 
 const styleButton = {
@@ -92,7 +93,7 @@ export const ResetFilters: FC<ResetFiltersType> = ({type}) => {
         <Button sx={styleButton}
                 size="small" variant="contained"
                 onClick={selectOnclickHandler}
-                disabled={appStatus === AppStatus.LOADING}
+                disabled={commonDisabled(appStatus)}
         >
             Reset
         </Button>

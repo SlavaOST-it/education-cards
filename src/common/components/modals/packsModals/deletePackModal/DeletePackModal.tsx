@@ -19,6 +19,7 @@ type DeletePackModalType = {
     type: "card" | "pack"
     cardId: string
 }
+
 export const DeletePackModal: FC<DeletePackModalType> = ({cardId, packId, active, setActive, name, type}) => {
     const dispatch = useAppDispatch()
 

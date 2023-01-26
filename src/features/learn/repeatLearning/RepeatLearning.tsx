@@ -32,18 +32,14 @@ export const RepeatLearning: FC<RepeatLearningType> = ({callBackToCards, packNam
                 Repeat again?
             </div>
 
-            {/*<NavLink to={PATH.learn}>*/}
-                <Button
-                    variant="contained"
-                    sx={{borderRadius: 5, marginTop: 3}}
-                    size={'large'}
-                    onClick={tryAgainLearningHandler}
-                >
-                    try again
-                </Button>
-            {/*</NavLink>*/}
-
-
+            <Button
+                variant="contained"
+                sx={{borderRadius: 5, marginTop: 3}}
+                size={'large'}
+                onClick={tryAgainLearningHandler}
+            >
+                try again
+            </Button>
         </div>
     );
 };

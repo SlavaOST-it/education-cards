@@ -13,6 +13,7 @@ import {BackToPacksList} from "../../common/components/backToPacksLink/BackToPac
 import {AppStatus} from "../../common/types/types";
 import {SettingsPack} from "../packs/settingsPack/SettingsPack";
 import {resetLearnCardStateAC, setCardsPackIdInLearnAC} from "../../bll/reducers/learn-reducer";
+import {commonDisabled} from "../../utils/disabledOnBoot/disabledOnBoot";
 
 
 export const Cards = () => {
@@ -91,12 +92,12 @@ export const Cards = () => {
                     callbackToAdd={myId === packUserId ? addNewCardHandler : learnPackHandler}
                     title={namePack}
                     nameButton={'Add new card'}
-                    disabled={((dataCards.length === 0) || (appStatus === AppStatus.LOADING))}
+                    disabled={((dataCards.length === 0) || (commonDisabled(appStatus)))}
                 >
                     {myId === packUserId && <SettingsPack selectedPack={selectedPack}/>}
                 </HeaderTable>
 
-                {dataCards.length === 0 && appStatus === AppStatus.SUCCEED &&
+                {dataCards.length === 0 &&
                     <div>В данной колоде нету карточек удовлетворяющих поиску</div>}
 
                 <div className={s.search}>

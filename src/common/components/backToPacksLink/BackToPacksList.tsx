@@ -5,6 +5,7 @@ import {PATH} from "../../../utils/routes/routes";
 import arrowLogo from "../../../assets/img/icons/arrow.png";
 import {AppStatus, PacksOrCardsType} from "../../types/types";
 import {useAppSelector} from "../../../utils/hooks/hooks";
+import {commonDisabled} from "../../../utils/disabledOnBoot/disabledOnBoot";
 
 
 type BackToPacksListType = {
@@ -19,7 +20,7 @@ export const BackToPacksList: FC<BackToPacksListType> = ({type, callBack}) => {
             {type === "pack" &&
                 <div className={s.back}>
                     <NavLink
-                        to={appStatus === AppStatus.LOADING ? "" : PATH.packList}
+                        to={commonDisabled(appStatus) ? "" : PATH.packList}
                         className={s.backLink}
                     >
                         <img src={arrowLogo} alt={'back'}/>
@@ -32,7 +33,7 @@ export const BackToPacksList: FC<BackToPacksListType> = ({type, callBack}) => {
                 <div className={s.back}>
                     <NavLink
                         onClick={() => callBack}
-                        to={appStatus === AppStatus.LOADING ? "" : PATH.cardList}
+                        to={commonDisabled(appStatus) ? "" : PATH.cardList}
                         className={s.backLink}
                     >
                         <img src={arrowLogo} alt={'back'}/>

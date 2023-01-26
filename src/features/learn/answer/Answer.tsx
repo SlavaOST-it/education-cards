@@ -6,6 +6,7 @@ import {deleteStudiedCardAC, questionsCompletedAC, setGradeCardTC} from "../../.
 import {Grade} from "../grade/Grade";
 import Button from "@mui/material/Button";
 import {AppStatus} from "../../../common/types/types";
+import {commonDisabled} from "../../../utils/disabledOnBoot/disabledOnBoot";
 
 
 type AnswerType = {
@@ -42,7 +43,7 @@ export const Answer: FC<AnswerType> = ({card}) => {
             <div>
                 <Button variant="contained" sx={{borderRadius: 5, marginTop: 3}} size={'large'}
                         onClick={() => setIsHiddenAnswer(false)}
-                        disabled={appStatus === AppStatus.LOADING}
+                        disabled={commonDisabled(appStatus)}
                 >
                     Show answer
                 </Button>

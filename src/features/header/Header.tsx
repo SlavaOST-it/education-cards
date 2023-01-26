@@ -7,6 +7,7 @@ import {HeaderItem} from "./headerItem/HeaderItem";
 import {SignInButton} from "../../common/components/buttons/signInButton/SignInButton";
 import {AppStatus} from "../../common/types/types";
 import LinearProgress from "@mui/material/LinearProgress";
+import {commonDisabled} from "../../utils/disabledOnBoot/disabledOnBoot";
 
 
 export const Header = () => {
@@ -27,7 +28,7 @@ export const Header = () => {
                     : <SignInButton/>
                 }
             </div>
-            {appStatus === AppStatus.LOADING && <LinearProgress/>}
+            {commonDisabled(appStatus) && <LinearProgress/>}
         </div>
     )
 };

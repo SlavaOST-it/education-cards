@@ -10,11 +10,13 @@ import {DeleteAction, EditAction} from "../actionsPack/ActionsPack";
 import {DeletePackModal} from "../../../common/components/modals/packsModals/deletePackModal/DeletePackModal";
 import {EditPackModal} from "../../../common/components/modals/packsModals/editPackModal/EditPackModal";
 import {PackType} from "../../../api/cardsAPI";
+import {commonDisabled} from "../../../utils/disabledOnBoot/disabledOnBoot";
 
 
 type SettingsPackType = {
     selectedPack: PackType[]
 }
+
 export const SettingsPack: FC<SettingsPackType> = ({selectedPack}) => {
     const appStatus = useAppSelector((state) => state.app.status)
 
@@ -35,8 +37,6 @@ export const SettingsPack: FC<SettingsPackType> = ({selectedPack}) => {
         setAnchorEl(null);
     }
 
-
-    const disableButton = appStatus === AppStatus.LOADING
     return (
         <div>
             <Button
@@ -59,8 +59,8 @@ export const SettingsPack: FC<SettingsPackType> = ({selectedPack}) => {
                 }}
             >
                 <MenuItem onClick={onCloseHandle}>
-                    <EditAction disabled={disableButton} onClickCallback={onActiveEditModal}/>
-                    <DeleteAction disabled={disableButton} onClickCallback={onActiveModal}/>
+                    <EditAction disabled={commonDisabled(appStatus)} onClickCallback={onActiveEditModal}/>
+                    <DeleteAction disabled={commonDisabled(appStatus)} onClickCallback={onActiveModal}/>
 
                 </MenuItem>
 

@@ -16,6 +16,7 @@ import {AppStatus} from "../../../common/types/types";
 import {setCardsPackIdInLearnAC} from "../../../bll/reducers/learn-reducer";
 import {PATH} from "../../../utils/routes/routes";
 import {AddCardModal} from "../../../common/components/modals/cardsModals/addCardModal/AddCardModal";
+import {commonDisabled} from "../../../utils/disabledOnBoot/disabledOnBoot";
 
 
 type ActionsPackType = {
@@ -59,28 +60,26 @@ export const ActionsPack: FC<ActionsPackType> = ({
     const onActiveEditModal = () => setActiveEditModal(!activeEditModal)
     const onActiveEditCardModal = () => setActiveEditCardModal(!activeEditCardModal)
 
-    const disableButton = appStatus === AppStatus.LOADING
-
     return (
         <div className={s.actionBtn}>
             {((type === 'pack') && ((myId !== userId))) &&
                 (<NavLink className={s.learnButton} to={disabled ? "" : PATH.learn}>
-                    <LearnAction disabled={disableButton || disabled} onClickCallback={learnPackHandler}/>
+                    <LearnAction disabled={commonDisabled(appStatus) || disabled} onClickCallback={learnPackHandler}/>
                 </NavLink>)
             }
 
             {((type === 'pack') && (myId === userId)) &&
                 (
                     <>
-                        <EditAction disabled={disableButton} onClickCallback={onActiveEditModal}/>
-                        <DeleteAction disabled={disableButton} onClickCallback={onActiveModal}/>
+                        <EditAction disabled={commonDisabled(appStatus)} onClickCallback={onActiveEditModal}/>
+                        <DeleteAction disabled={commonDisabled(appStatus)} onClickCallback={onActiveModal}/>
                     </>
                 )}
 
             {(type === 'card' && myId === userId) && (
                 <>
-                    <EditAction disabled={disableButton} onClickCallback={onActiveEditCardModal}/>
-                    <DeleteAction disabled={disableButton} onClickCallback={onActiveModal}/>
+                    <EditAction disabled={commonDisabled(appStatus)} onClickCallback={onActiveEditCardModal}/>
+                    <DeleteAction disabled={commonDisabled(appStatus)} onClickCallback={onActiveModal}/>
                 </>
 
             )}

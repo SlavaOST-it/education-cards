@@ -5,12 +5,13 @@ import {setPageAC} from "../../../bll/reducers/packs-reducer";
 import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
 import {setPageCardsAC} from '../../../bll/reducers/cards-reducer'
 import {SelectPage} from "../handleChange/SelectPage";
-import {AppStatus, PacksOrCardsType} from "../../types/types";
+import {PacksOrCardsType} from "../../types/types";
 import {setPageUsersAC} from "../../../bll/reducers/users-reducer";
+import {commonDisabled} from "../../../utils/disabledOnBoot/disabledOnBoot";
 
 
 type BasicPaginationType = {
-    type: PacksOrCardsType | "users"
+    type: PacksOrCardsType
 }
 
 export const BasicPagination: FC<BasicPaginationType> = ({type}) => {
@@ -66,7 +67,7 @@ export const BasicPagination: FC<BasicPaginationType> = ({type}) => {
                     page={valuePage}
                     onChange={onChangeHandler}
                     count={countPacks}
-                    disabled={appStatus === AppStatus.LOADING}
+                    disabled={commonDisabled(appStatus)}
                     color="primary"
                 />
 

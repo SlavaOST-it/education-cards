@@ -6,6 +6,7 @@ import {setSortPacksValueAC} from "../../../../bll/reducers/packs-reducer";
 import {AppStatus, PacksOrCardsType} from "../../../../common/types/types";
 import {getCardsTC, sortCardsAC} from "../../../../bll/reducers/cards-reducer";
 import {setValueSortUsersAC} from "../../../../bll/reducers/users-reducer";
+import {commonDisabled} from "../../../../utils/disabledOnBoot/disabledOnBoot";
 
 
 type SelectSortType = {
@@ -20,28 +21,24 @@ export const SelectSort: FC<SelectSortType> = ({type, valueSort,children}) => {
     const [selectedSort, setSelectedSort] = useState(true)
 
     const onclickUpHandler = () => {
-        if(appStatus === AppStatus.LOADING) {
+        if(commonDisabled(appStatus)) {
             return
         }
 
         if (type === "pack")
             if(selectedSort){
                 dispatch(setSortPacksValueAC(`0${valueSort}`))
-                // setSelectedSort(false)
             }else {
                 dispatch(setSortPacksValueAC(`1${valueSort}`))
-                // setSelectedSort(true)
             }
 
         if (type === "card") {
             if (selectedSort){
                 dispatch(sortCardsAC(`0${valueSort}`))
                 dispatch(getCardsTC())
-                // setSelectedSort(false)
             }else {
                 dispatch(sortCardsAC(`1${valueSort}`))
                 dispatch(getCardsTC())
-                // setSelectedSort(true)
             }
 
         }
