@@ -1,6 +1,26 @@
+
 .profilePage {
     width: 80%;
     margin: 0 auto;
+}
+
+
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.linkToUsers, .linkToUsers:visited {
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+    color: black;
+}
+
+.linkToUsers img {
+    margin-left: 10px;
+    rotate: 180deg;
 }
 
 .profile {

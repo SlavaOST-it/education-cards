@@ -1,5 +1,5 @@
 import React, {ChangeEvent, useRef, useState} from 'react';
-import {Navigate} from "react-router-dom";
+import {Navigate, NavLink} from "react-router-dom";
 import s from './Profile.module.css'
 
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
@@ -15,6 +15,7 @@ import {LogOutButton} from "../../common/components/buttons/logOutButton/LogOutB
 import {AvatarUser} from "./avatarUser/AvatarUser";
 import camera from "../../assets/img/icons/camera.png"
 import customAvatar from "../../assets/img/icons/avatar_user.png"
+import arrowLogo from "../../assets/img/icons/arrow.png";
 
 
 export const Profile = () => {
@@ -92,8 +93,14 @@ export const Profile = () => {
 
     return (
         <div className={s.profilePage}>
+            <div className={s.nav}>
+                <BackToPacksList type={'pack'}/>
 
-            <BackToPacksList type={'pack'}/>
+                <NavLink to={PATH.users} className={s.linkToUsers}>
+                    User list
+                    <img src={arrowLogo} alt={'back'}/>
+                </NavLink>
+            </div>
 
             <div className={s.profile}>
                 <h2>Personal Information</h2>
