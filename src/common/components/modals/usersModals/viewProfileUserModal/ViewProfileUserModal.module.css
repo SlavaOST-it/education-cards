@@ -1,0 +1,37 @@
+.modal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.modalHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modalCloseBtn{
+    border: none;
+    font-size: 25px;
+    color: #575757;
+    cursor: pointer;
+}
+
+.avatar{
+    max-height: 150px;
+    max-width: 150px;
+
+    min-height: 50px;
+    min-width: 50px;
+
+    border-radius: 25px;
+}
+
+.info{
+    line-height: 35px;
+}
+.buttons{
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin-top: 20px;
+}
