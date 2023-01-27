@@ -14,11 +14,12 @@ const styleButtonMUI = {
 }
 type AddPackModalType = {
     active: boolean
-    setActive: (active:boolean)=>void
+    setActive: (active: boolean) => void
 }
-export const AddPackModal:FC<AddPackModalType> = ({active, setActive}) => {
-    const myDeckCover=useAppSelector(state=>state.packs.coverImg)
+export const AddPackModal: FC<AddPackModalType> = ({active, setActive}) => {
     const dispatch = useAppDispatch()
+    const myDeckCover = useAppSelector(state => state.packs.coverImg)
+
     const [value, setValue] = useState('')
     const [checkValue, setCheckValue] = useState(false)
 
@@ -28,7 +29,7 @@ export const AddPackModal:FC<AddPackModalType> = ({active, setActive}) => {
     }
 
     const onSaveHandler = () => {
-        dispatch(addNewPackTC(value, checkValue,myDeckCover))
+        dispatch(addNewPackTC(value, checkValue, myDeckCover))
         dispatch(setDeckCoverAC(baseDeckCover))
         setActive(false)
         setValue('')

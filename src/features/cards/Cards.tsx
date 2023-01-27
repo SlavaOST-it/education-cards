@@ -97,7 +97,7 @@ export const Cards = () => {
                     {myId === packUserId && <SettingsPack selectedPack={selectedPack}/>}
                 </HeaderTable>
 
-                {dataCards.length === 0 &&
+                {dataCards.length === 0 && appStatus === AppStatus.SUCCEED &&
                     <div>В данной колоде нету карточек удовлетворяющих поиску</div>}
 
                 <div className={s.search}>

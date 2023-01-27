@@ -1,9 +1,10 @@
 import {AppThunkType} from '../store/store'
 import {setAppStatusAC} from './app-reducer'
-import {CardResponseType, cardsAPI, GetCardsResponseType} from '../../api/cardsAPI'
+import {cardsAPI} from '../../api/cardsAPI'
 import {baseErrorHandler} from "../../utils/error-utils/error-utils";
 import {AxiosError} from "axios";
 import {AppStatus} from "../../common/types/types";
+import {CardsResponseType, CardType} from "../../api/apiConfig/types/cardsAPI-types";
 
 type SetCardsAT = ReturnType<typeof setCardsAC>
 type SetSearchCardsAT = ReturnType<typeof setSearchCardsAC>
@@ -24,7 +25,7 @@ export type CardsActionsType =
 
 
 const initialState = {
-    cards: [] as CardResponseType[],
+    cards: [] as CardType[],
 
     cardsTotalCount: 0,
     minGrade: 0,
@@ -92,7 +93,7 @@ export const cardsReducer = (state = initialState, action: CardsActionsType): In
 }
 
 // ==================ACTION CREATORS =======================//
-export const setCardsAC = (data: GetCardsResponseType) => ({type: 'CARDS/SET_CARDS', data} as const)
+export const setCardsAC = (data: CardsResponseType) => ({type: 'CARDS/SET_CARDS', data} as const)
 
 export const setSearchCardsAC = (search: string) => {
     return {type: "CARDS/SET_SEARCH_CARDS", search} as const

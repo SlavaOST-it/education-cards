@@ -32,7 +32,9 @@ export const passRecoveryReducer = (state: InitialStateType = initialState, acti
             return {...state}
     }
 }
-// ======ActionCreators ===== //
+
+
+// ================== ACTION CREATORS =======================//
 export const infoMessageAC = (infoMessage: string) => ({type: "PASS_RECOVERY/PASS_RECOVERY", infoMessage} as const)
 
 export const statusSendMessageAC = (status: boolean) => ({
@@ -40,7 +42,8 @@ export const statusSendMessageAC = (status: boolean) => ({
     status
 } as const)
 
-// ======ThunkCreators ===== //
+
+// ================== THUNK CREATORS =======================//
 export const sendEmailTC = (email: string): AppThunkType => async (dispatch) => {
     dispatch(setAppStatusAC(AppStatus.LOADING))
     try {

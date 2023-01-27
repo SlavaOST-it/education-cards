@@ -8,7 +8,8 @@ import {ActionsPack} from "../../actionsPack/ActionsPack";
 import {useAppDispatch} from "../../../../utils/hooks/hooks";
 import {StyledTableCell, StyledTableRow} from "../../../../common/styles/StyleForTables";
 import {resetCardsStatedAC, setCurrentPackIdAC} from "../../../../bll/reducers/cards-reducer";
-import {PackType} from "../../../../api/cardsAPI";
+import {PackType} from "../../../../api/apiConfig/types/packsAPI-types";
+
 
 
 type PackItemType = {

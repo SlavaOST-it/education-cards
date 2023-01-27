@@ -6,8 +6,8 @@ import {baseErrorHandler} from "../../utils/error-utils/error-utils";
 import {AxiosError} from "axios";
 import {AppStatus} from "../../common/types/types";
 
+
 type LoggedInAT = ReturnType<typeof loggedInAC>
-// type PasswordErrorAT = ReturnType<typeof passwordErrorAC>
 export type LoginActionsType = LoggedInAT
 
 
@@ -18,9 +18,9 @@ const initialState = {
         name: '',
         publicCardPacksCount: 0
     },
-    loggedIn: false,
-    // passwordError: ''
+    loggedIn: false
 }
+
 type InitialStateType = typeof initialState
 
 export const authReducer = (state: InitialStateType = initialState, action: LoginActionsType): InitialStateType => {
@@ -29,20 +29,17 @@ export const authReducer = (state: InitialStateType = initialState, action: Logi
             return {...state, loggedIn: action.loggedIn}
         }
 
-        // case "PASSWORD_ERROR": {
-        //     return {...state, passwordError: action.error}
-        // }
-
         default:
             return {...state}
     }
 }
 
-// ==================ACTION CREATORS =======================//
-export const loggedInAC = (loggedIn: boolean) => ({type: "LOGGED_IN", loggedIn} as const)
-// export const passwordErrorAC = (error: string) => ({type: "PASSWORD_ERROR", error} as const)
 
-// ==================THUNK CREATORS =======================//
+// ================== ACTION CREATORS =======================//
+export const loggedInAC = (loggedIn: boolean) => ({type: "LOGGED_IN", loggedIn} as const)
+
+
+// ================== THUNK CREATORS =======================//
 export const loginThunkCreator = (email: string, password: string, rememberMe: boolean): AppThunkType => async (dispatch) => {
     dispatch(setAppStatusAC(AppStatus.LOADING))
     try {

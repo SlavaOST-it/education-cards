@@ -3,11 +3,12 @@ import s from "../../../packs/Packs.module.css";
 import {StyledTableCell, StyledTableRow} from "../../../../common/styles/StyleForTables";
 import {BasicRating} from "../../ratingCards/RatingCard";
 import {ActionsPack} from "../../../packs/actionsPack/ActionsPack";
-import {CardResponseType} from "../../../../api/cardsAPI";
+import {CardType} from "../../../../api/apiConfig/types/cardsAPI-types";
+
 
 
 type CardItemType = {
-    el: CardResponseType
+    el: CardType
 }
 
 export const CardItem: FC<CardItemType> = ({el}) => {

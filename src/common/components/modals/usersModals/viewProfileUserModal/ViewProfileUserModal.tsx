@@ -3,8 +3,8 @@ import Box from "@mui/material/Box";
 import s from "./ViewProfileUserModal.module.css";
 import {Button} from "@mui/material";
 import Modal from "@mui/material/Modal";
-import {UsersType} from "../../../../../api/usersAPI";
 import customAvatar from "../../../../../assets/img/icons/avatar_user.png";
+import {UsersType} from "../../../../../api/apiConfig/types/usersAPI-types";
 
 
 const style = {

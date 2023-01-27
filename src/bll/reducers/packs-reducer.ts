@@ -1,10 +1,10 @@
 import {AppThunkType} from "../store/store";
 import {setAppStatusAC} from "./app-reducer";
-import {packsAPI, PacksResponseType, PackType} from "../../api/cardsAPI";
 import {baseErrorHandler} from "../../utils/error-utils/error-utils";
 import {AxiosError} from "axios";
 import {AppStatus} from "../../common/types/types";
-import {baseDeckCover} from "../../assets/baseDeckCover";
+import {PacksResponseType, PackType} from "../../api/apiConfig/types/packsAPI-types";
+import {packsAPI} from "../../api/packsAPI";
 
 
 const initialState = {
@@ -69,7 +69,7 @@ export const packsReducer = (state: InitialStatePacksType = initialState, action
     }
 }
 
-// ==================ACTION CREATORS =======================//
+// ================== ACTION CREATORS =======================//
 export const setPacksAC = (data: PacksResponseType) => {
     return {type: "PACKS/SET_PACKS", data} as const
 }
@@ -117,7 +117,7 @@ export const setDeckCoverAC = (deckCover: string) => {
 }
 
 
-// ==================THUNK CREATORS =======================//
+// ================== THUNK CREATORS =======================//
 
 export const getPacksTC = (selectAllOrMyPacks = false): AppThunkType => async (dispatch, getState) => {
     dispatch(setAppStatusAC(AppStatus.LOADING))
@@ -157,7 +157,7 @@ export const getPacksTC = (selectAllOrMyPacks = false): AppThunkType => async (d
 export const addNewPackTC = (newValue: string, privateStatus: boolean, deckCover?: string): AppThunkType => async (dispatch,) => {
     dispatch(setAppStatusAC(AppStatus.LOADING))
     try {
-        await packsAPI.createPack(newValue, privateStatus, deckCover)
+        await packsAPI.createPack({name: newValue, isPrivate: privateStatus, deckCover})
         dispatch(getPacksTC())
         dispatch(setAppStatusAC(AppStatus.SUCCEED))
     } catch (e) {
@@ -179,7 +179,7 @@ export const deletePackTC = (id: string): AppThunkType => async (dispatch,) => {
 export const changePackTC = (id: string, name: string, isPrivate: boolean, deckCover?: string): AppThunkType => async (dispatch,) => {
     dispatch(setAppStatusAC(AppStatus.LOADING))
     try {
-        await packsAPI.updatePack(id, name, isPrivate, deckCover)
+        await packsAPI.updatePack({_id: id, name, isPrivate, deckCover})
         dispatch(getPacksTC())
         dispatch(setAppStatusAC(AppStatus.SUCCEED))
     } catch (e) {

@@ -1,7 +1,6 @@
 import React, {FC, useState} from 'react';
 import s from "./SettingsPack.module.css"
 import {useAppSelector} from "../../../utils/hooks/hooks";
-import {AppStatus} from "../../../common/types/types";
 import Button from "@mui/material/Button";
 import settingIcon from "../../../assets/img/icons/setting.png";
 import Menu from "@mui/material/Menu";
@@ -9,8 +8,8 @@ import MenuItem from "@mui/material/MenuItem";
 import {DeleteAction, EditAction} from "../actionsPack/ActionsPack";
 import {DeletePackModal} from "../../../common/components/modals/packsModals/deletePackModal/DeletePackModal";
 import {EditPackModal} from "../../../common/components/modals/packsModals/editPackModal/EditPackModal";
-import {PackType} from "../../../api/cardsAPI";
 import {commonDisabled} from "../../../utils/disabledOnBoot/disabledOnBoot";
+import {PackType} from "../../../api/apiConfig/types/packsAPI-types";
 
 
 type SettingsPackType = {

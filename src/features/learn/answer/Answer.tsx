@@ -1,16 +1,15 @@
 import React, {FC, useState} from 'react';
 import s from "../LearnPage.module.css";
-import {CardResponseType} from "../../../api/cardsAPI";
 import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
 import {deleteStudiedCardAC, questionsCompletedAC, setGradeCardTC} from "../../../bll/reducers/learn-reducer";
 import {Grade} from "../grade/Grade";
 import Button from "@mui/material/Button";
-import {AppStatus} from "../../../common/types/types";
 import {commonDisabled} from "../../../utils/disabledOnBoot/disabledOnBoot";
+import {CardType} from "../../../api/apiConfig/types/cardsAPI-types";
 
 
 type AnswerType = {
-    card: CardResponseType
+    card: CardType
 }
 export const Answer: FC<AnswerType> = ({card}) => {
     const dispatch = useAppDispatch()

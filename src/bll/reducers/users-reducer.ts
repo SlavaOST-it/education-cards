@@ -1,9 +1,10 @@
-import {usersAPI, UsersResponseType, UsersType} from "../../api/usersAPI";
+import {usersAPI} from "../../api/usersAPI";
 import {AppThunkType} from "../store/store";
 import {setAppStatusAC} from "./app-reducer";
 import {AppStatus} from "../../common/types/types";
 import {baseErrorHandler} from "../../utils/error-utils/error-utils";
 import {AxiosError} from "axios";
+import {UsersResponseType, UsersType} from "../../api/apiConfig/types/usersAPI-types";
 
 
 type SetUsersAT = ReturnType<typeof setUsersAC>

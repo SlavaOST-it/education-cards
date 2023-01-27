@@ -20,10 +20,12 @@ import {
 } from "../../bll/reducers/packs-reducer";
 import {PacksTable} from "./packsList/PacksTable";
 import {Filters} from "./filters/Filters";
+import {AppStatus} from "../../common/types/types";
 
 
 export const Packs = () => {
     const dispatch = useAppDispatch()
+    const appStatus = useAppSelector(state=> state.app.status)
     const isLoggedIn = useAppSelector(state => state.login.loggedIn)
     const dataPacks = useAppSelector(state => state.packs.cardPacks)
     const page = useAppSelector(state => state.packs.page)
@@ -104,7 +106,8 @@ export const Packs = () => {
 
             <AddPackModal active={openAddPackModal} setActive={addNewPackHandler}/>
 
-            {!dataPacks.length && <div>В данной колоде нету карточек удовлетворяющих поиску</div>}
+            {!dataPacks.length && appStatus === AppStatus.SUCCEED &&
+                <div>В данной колоде нету карточек удовлетворяющих поиску</div>}
 
             <div>
                 <Filters/>
