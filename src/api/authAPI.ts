@@ -1,6 +1,5 @@
-import {RegisterType} from '../bll/reducers/registration-reducer'
 import {instance} from "./apiConfig/instance"
-import {LoginResponseType, RegisterResponseType} from "./apiConfig/types/types";
+import {LoginResponseType, RegisterRequestType, RegisterResponseType} from "./apiConfig/types/authAPI-types";
 
 
 export const authAPI = {
@@ -22,7 +21,7 @@ export const authAPI = {
         return instance.delete('/auth/me')
     },
 
-    register(data: RegisterType) {
+    register(data: RegisterRequestType) {
         return instance.post<RegisterResponseType>('auth/register', data)
             .then(res => res.data)
     },

@@ -4,6 +4,6 @@ import {UsersRequestType, UsersResponseType} from "./apiConfig/types/usersAPI-ty
 
 export const usersAPI = {
     getUsers(data: UsersRequestType) {
-        return instance.get<UsersResponseType>('/social/users', {params: {...data}})
+        return instance.get<UsersResponseType>(`/social/users`, {params: {...data}})
     }
 }

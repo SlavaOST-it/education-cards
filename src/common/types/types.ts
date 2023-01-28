@@ -1,6 +1,6 @@
 export type InputPasswordType = 'text' | 'password'
 
-export type PacksOrCardsType = 'pack' | 'card' |'users'
+export type PacksOrCardsOrUsersType = 'pack' | 'card' |'users'
 
 export enum AppStatus {
     IDLE = 'idle',
