@@ -1,20 +1,19 @@
 {
   "files": {
-    "main.css": "/education-cards/static/css/main.17799f43.css",
-    "main.js": "/education-cards/static/js/main.e4957097.js",
+    "main.css": "/education-cards/static/css/main.c053c7ee.css",
+    "main.js": "/education-cards/static/js/main.9a4048d5.js",
     "static/js/787.80ecba5f.chunk.js": "/education-cards/static/js/787.80ecba5f.chunk.js",
     "static/media/avatar_user.png": "/education-cards/static/media/avatar_user.da4813bd8d4b2bb1c5cc.png",
     "static/media/no_image.png": "/education-cards/static/media/no_image.8f8ca2882d26da17de6e.png",
-    "static/media/logotype.jpg": "/education-cards/static/media/logotype.9747a560d35b97005582.jpg",
     "static/media/camera-svgrepo-com.svg": "/education-cards/static/media/camera-svgrepo-com.b4ccc21b6f0afe59cc67f2876fee9d1b.svg",
     "static/media/down-arrow-svgrepo-com.svg": "/education-cards/static/media/down-arrow-svgrepo-com.53e4ffd174554c1a117e166bb8f860c6.svg",
     "index.html": "/education-cards/index.html",
-    "main.17799f43.css.map": "/education-cards/static/css/main.17799f43.css.map",
-    "main.e4957097.js.map": "/education-cards/static/js/main.e4957097.js.map",
+    "main.c053c7ee.css.map": "/education-cards/static/css/main.c053c7ee.css.map",
+    "main.9a4048d5.js.map": "/education-cards/static/js/main.9a4048d5.js.map",
     "787.80ecba5f.chunk.js.map": "/education-cards/static/js/787.80ecba5f.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.17799f43.css",
-    "static/js/main.e4957097.js"
+    "static/css/main.c053c7ee.css",
+    "static/js/main.9a4048d5.js"
   ]
 }
