@@ -1,13 +1,15 @@
-import * as React from 'react';
-import {useState} from 'react';
-import Select, {SelectChangeEvent} from '@mui/material/Select';
-import MenuItem from "@mui/material/MenuItem";
-import {FormControl} from "@mui/material";
+import React, {useState} from 'react';
+
+import {FormControl, MenuItem, Select, SelectChangeEvent} from "@mui/material";
+
 import {setPageCountAC} from "../../../bll/reducers/packs-reducer";
-import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
-import {setPageCardsCountAC} from "../../../bll/reducers/cards-reducer";
 import {setPageCountUsersAC} from "../../../bll/reducers/users-reducer";
+import {setPageCardsCountAC} from "../../../bll/reducers/cards-reducer";
+
+import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
 import {commonDisabled} from "../../../utils/disabledOnBoot/disabledOnBoot";
+
+
 
 export const SelectPage = () => {
     const dispatch = useAppDispatch()

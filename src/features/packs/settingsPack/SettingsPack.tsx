@@ -1,15 +1,20 @@
 import React, {FC, useState} from 'react';
 import s from "./SettingsPack.module.css"
-import {useAppSelector} from "../../../utils/hooks/hooks";
-import Button from "@mui/material/Button";
-import settingIcon from "../../../assets/img/icons/setting.png";
+import {PackType} from "../../../api/apiConfig/types/packsAPI-types";
+
 import Menu from "@mui/material/Menu";
+import Button from "@mui/material/Button";
 import MenuItem from "@mui/material/MenuItem";
+
+import settingIcon from "../../../assets/img/icons/setting.png";
 import {DeleteAction, EditAction} from "../actionsPack/ActionsPack";
+
 import {DeletePackModal} from "../../../common/components/modals/packsModals/deletePackModal/DeletePackModal";
 import {EditPackModal} from "../../../common/components/modals/packsModals/editPackModal/EditPackModal";
+
+import {useAppSelector} from "../../../utils/hooks/hooks";
 import {commonDisabled} from "../../../utils/disabledOnBoot/disabledOnBoot";
-import {PackType} from "../../../api/apiConfig/types/packsAPI-types";
+
 
 
 type SettingsPackType = {

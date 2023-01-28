@@ -1,9 +1,10 @@
 import React, {useState} from 'react'
-import {useFormik} from 'formik'
 import {Navigate, NavLink} from 'react-router-dom'
+
+import * as Yup from "yup";
+import {useFormik} from 'formik'
+
 import {RegisterTC} from '../../../bll/reducers/registration-reducer'
-import {PATH} from '../../../utils/routes/routes'
-import {useAppDispatch, useAppSelector} from '../../../utils/hooks/hooks'
 import {
     FormControl,
     FormGroup,
@@ -13,20 +14,25 @@ import {
     OutlinedInput,
     TextField
 } from '@mui/material'
-import commonStyle from "../../../common/styles/commonStyles.module.css";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
-import {ButtonForm} from "../../../common/components/buttons/buttonForm/ButtonForm";
+
 import {InputPasswordType} from "../../../common/types/types";
-import * as Yup from "yup";
+import commonStyle from "../../../common/styles/commonStyles.module.css";
+import {ButtonForm} from "../../../common/components/buttons/buttonForm/ButtonForm";
+
+import {PATH} from '../../../utils/routes/routes'
+import {useAppDispatch, useAppSelector} from '../../../utils/hooks/hooks'
+
 
 
 export const Registration = () => {
     const dispatch = useAppDispatch()
+
     const loggedIn = useAppSelector(state => state.login.loggedIn)
     const isRegisterIn = useAppSelector(state => state.auth.isRegisterIn)
 
-    const [inputPassword, setInputPassword] = useState<InputPasswordType>('text');
-    const [inputConfirmPassword, setInputConfirmPassword] = useState<InputPasswordType>('text');
+    const [inputPassword, setInputPassword] = useState<InputPasswordType>('password');
+    const [inputConfirmPassword, setInputConfirmPassword] = useState<InputPasswordType>('password');
 
     const formik = useFormik({
         initialValues: {

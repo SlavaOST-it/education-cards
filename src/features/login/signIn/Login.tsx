@@ -1,10 +1,14 @@
 import React, {useState} from 'react';
+import {Navigate, NavLink} from "react-router-dom";
+
 import {useFormik} from "formik";
+import * as Yup from 'yup';
+
 import s from './Login.module.css'
 import commonStyle from "../../../common/styles/commonStyles.module.css"
+
 import {loginThunkCreator} from "../../../bll/reducers/auth-reducer";
 import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
-import {Navigate, NavLink} from "react-router-dom";
 import {
     Checkbox,
     FormControl,
@@ -17,16 +21,21 @@ import {
     TextField
 } from "@mui/material";
 import {Visibility, VisibilityOff} from "@mui/icons-material";
+
 import {PATH} from "../../../utils/routes/routes";
-import * as Yup from 'yup';
+
 import {ButtonForm} from "../../../common/components/buttons/buttonForm/ButtonForm";
 import {InputPasswordType} from "../../../common/types/types";
 
 
+
 export const Login = () => {
     const dispatch = useAppDispatch()
+
     const loggedIn = useAppSelector(state => state.login.loggedIn)
-    const [inputPassword, setInputPassword] = useState<InputPasswordType>('text');
+
+    const [inputPassword, setInputPassword] = useState<InputPasswordType>('password');
+
 
     const formik = useFormik({
         initialValues: {

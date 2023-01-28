@@ -1,7 +1,8 @@
 import React from 'react';
+import s from "./LogOutButton.module.css"
 import {logoutThunkCreator} from "../../../../bll/reducers/auth-reducer";
 import {useAppDispatch} from "../../../../utils/hooks/hooks";
-import s from "./LogOutButton.module.css"
+
 
 export const LogOutButton = () => {
     const dispatch = useAppDispatch()

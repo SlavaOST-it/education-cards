@@ -13,6 +13,5 @@ export const BasicRating: FC<BasicRatingType> = ({grade}) => {
             name="simple-controlled"
             value={grade}
         />
-
     );
 }

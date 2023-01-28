@@ -1,15 +1,19 @@
 import React, {FC} from 'react';
 import s from "./RepeatLearning.module.css"
+
+import {getCardsForLearnTC, questionsCompletedAC} from "../../../bll/reducers/learn-reducer";
+
 import {BackToPacksList} from "../../../common/components/backToPacksLink/BackToPacksList";
 import {Button} from "@mui/material";
 import {useAppDispatch} from "../../../utils/hooks/hooks";
-import {getCardsForLearnTC, questionsCompletedAC} from "../../../bll/reducers/learn-reducer";
+
 
 
 type RepeatLearningType = {
     callBackToCards: () => void
     packName: string
 }
+
 export const RepeatLearning: FC<RepeatLearningType> = ({callBackToCards, packName}) => {
     const dispatch = useAppDispatch()
 

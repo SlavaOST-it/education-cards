@@ -1,6 +1,8 @@
 import React, {FC} from 'react';
+
 import s from "../../../packs/Packs.module.css";
 import {StyledTableCell, StyledTableRow} from "../../../../common/styles/StyleForTables";
+
 import {BasicRating} from "../../ratingCards/RatingCard";
 import {ActionsPack} from "../../../packs/actionsPack/ActionsPack";
 import {CardType} from "../../../../api/apiConfig/types/cardsAPI-types";

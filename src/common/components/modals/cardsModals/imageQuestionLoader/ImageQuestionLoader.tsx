@@ -1,10 +1,13 @@
 import React, {ChangeEvent, FC, useEffect, useState} from 'react';
-import {convertFileToBase64} from "../../../../../utils/convertFileToBase64/convertFileToBase64";
-import {setAppErrorAC} from "../../../../../bll/reducers/app-reducer";
-import {useAppDispatch} from "../../../../../utils/hooks/hooks";
 import s from "../../packsModals/addPackModal/AddPackModal.module.css";
-import cameraLogo from "../../../../../assets/img/icons/camera-svgrepo-com.svg";
+
+import {setAppErrorAC} from "../../../../../bll/reducers/app-reducer";
+
+import {useAppDispatch} from "../../../../../utils/hooks/hooks";
+import {convertFileToBase64} from "../../../../../utils/convertFileToBase64/convertFileToBase64";
+
 import {baseDeckCover} from "../../../../../assets/baseDeckCover";
+import cameraLogo from "../../../../../assets/img/icons/camera-svgrepo-com.svg";
 
 
 type ImageQuestionLoaderType = {
@@ -39,10 +42,6 @@ export const ImageQuestionLoader: FC<ImageQuestionLoaderType> = ({questionImg,se
         dispatch(setAppErrorAC('Broken picture'))
     }
 
-    // if(questionImg === ''){
-    //     setImage(baseDeckCover)
-    // }
-
     useEffect(() => {
         if (questionImg !== "") {
             setImage(questionImg)
@@ -56,7 +55,6 @@ export const ImageQuestionLoader: FC<ImageQuestionLoaderType> = ({questionImg,se
         setImage(baseDeckCover)
         setValueQuestionImg("")
     }
-
 
     return (
         <div className={s.coverBlock}>
@@ -79,8 +77,6 @@ export const ImageQuestionLoader: FC<ImageQuestionLoaderType> = ({questionImg,se
                 </button>)
                 : (<div className={s.deleteCoverDiv}></div>)
             }
-
-
         </div>
     );
 };

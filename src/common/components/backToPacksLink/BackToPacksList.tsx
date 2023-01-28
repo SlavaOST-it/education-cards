@@ -1,17 +1,21 @@
 import React, {FC} from 'react';
 import s from "./BackToPacksList.module.css";
+
 import {NavLink} from "react-router-dom";
-import {PATH} from "../../../utils/routes/routes";
+
 import arrowLogo from "../../../assets/img/icons/arrow.png";
-import {AppStatus, PacksOrCardsType} from "../../types/types";
+
+import {AppStatus, PacksOrCardsOrUsersType} from "../../types/types";
+import {PATH} from "../../../utils/routes/routes";
 import {useAppSelector} from "../../../utils/hooks/hooks";
 import {commonDisabled} from "../../../utils/disabledOnBoot/disabledOnBoot";
 
 
 type BackToPacksListType = {
-    type: PacksOrCardsType
+    type: PacksOrCardsOrUsersType
     callBack?: () => void
 }
+
 export const BackToPacksList: FC<BackToPacksListType> = ({type, callBack}) => {
     const appStatus = useAppSelector(state => state.app.status)
 

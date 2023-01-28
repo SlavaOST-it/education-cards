@@ -1,15 +1,13 @@
 import React, {ChangeEvent, FC, useState} from 'react';
-import {useAppDispatch} from "../../../../../utils/hooks/hooks";
+
 import {BasicModal} from "../../BasicModal";
 import TextField from "@mui/material/TextField";
+import { styleButtonMUI } from '../../stylesModal';
+import {useAppDispatch} from "../../../../../utils/hooks/hooks";
 import {changeCardTC} from "../../../../../bll/reducers/cards-reducer";
 import {ImageQuestionLoader} from "../imageQuestionLoader/ImageQuestionLoader";
 
 
-const styleButtonMUI = {
-    borderRadius: 10,
-    width: 120
-}
 
 type EditCardModalType = {
     cardId: string

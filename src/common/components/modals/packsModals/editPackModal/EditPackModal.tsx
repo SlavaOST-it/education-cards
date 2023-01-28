@@ -1,17 +1,16 @@
 import React, {ChangeEvent, FC, useState} from 'react';
+
+import {Checkbox, TextField} from '@mui/material';
+
 import {BasicModal} from "../../BasicModal";
-import Checkbox from "@mui/material/Checkbox";
-import TextField from "@mui/material/TextField";
-import {useAppDispatch, useAppSelector} from "../../../../../utils/hooks/hooks";
 import {changePackTC, setDeckCoverAC} from "../../../../../bll/reducers/packs-reducer";
+import {useAppDispatch, useAppSelector} from "../../../../../utils/hooks/hooks";
 import {CoverInput} from "../../../coverInput/CoverInput";
 import {baseDeckCover} from "../../../../../assets/baseDeckCover";
+import {styleButtonMUI} from '../../stylesModal';
 
 
-const styleButtonMUI = {
-    borderRadius: 10,
-    width: 120
-}
+
 type EditPackModalType = {
     active: boolean
     setActive: (active: boolean) => void
@@ -19,11 +18,13 @@ type EditPackModalType = {
     name: string
     deckCover: string
 }
+
 export const EditPackModal: FC<EditPackModalType> = ({deckCover, name, packId, active, setActive}) => {
     const dispatch = useAppDispatch()
+    const myDeckCover = useAppSelector(state => state.packs.coverImg)
+
     const [value, setValue] = useState(name)
     const [checkValue, setCheckValue] = useState(false)
-    const myDeckCover = useAppSelector(state => state.packs.coverImg)
 
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setValue(e.currentTarget.value)
@@ -54,10 +55,18 @@ export const EditPackModal: FC<EditPackModalType> = ({deckCover, name, packId, a
             styleButton={styleButtonMUI}
         >
             <div>
-                <TextField value={value} label="Name pack" margin="normal" fullWidth={true} placeholder={"Name pack"}
-                           onChange={onChangeHandler}/>
+                <TextField
+                    value={value}
+                    label="Name pack"
+                    margin="normal"
+                    fullWidth={true}
+                    placeholder={"Name pack"}
+                    onChange={onChangeHandler}
+                />
             </div>
+
             <CoverInput deckCover={deckCover}/>
+
             <div>
                 <Checkbox onChange={onChangeChecked} value={checkValue}/>Private pack
             </div>

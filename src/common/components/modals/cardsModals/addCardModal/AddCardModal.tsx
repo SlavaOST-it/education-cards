@@ -1,23 +1,21 @@
 import React, {ChangeEvent, FC, useState} from 'react';
 import s from "./AddCardModal.module.css"
+import { styleButtonMUI } from '../../stylesModal';
+
 import {BasicModal} from "../../BasicModal";
-import TextField from "@mui/material/TextField";
 import {useAppDispatch} from "../../../../../utils/hooks/hooks";
 import {addCardTC} from "../../../../../bll/reducers/cards-reducer";
-import {FormControl, FormGroup, InputLabel, MenuItem, Select} from "@mui/material";
-import {SelectChangeEvent} from "@mui/material/Select";
 import {ImageQuestionLoader} from "../imageQuestionLoader/ImageQuestionLoader";
+import {FormControl, FormGroup, InputLabel, MenuItem, Select, TextField, SelectChangeEvent} from "@mui/material";
 
 
-const styleButtonMUI = {
-    borderRadius: 10,
-    width: 120
-}
+
 type AddCardsModalType = {
     packId: string
     active: boolean
     setActive: (active: boolean) => void
 }
+
 export const AddCardModal: FC<AddCardsModalType> = ({
                                                                 packId,
                                                                 active,
@@ -27,8 +25,10 @@ export const AddCardModal: FC<AddCardsModalType> = ({
 
     const [typeQuestion, setTypeQuestion] = useState<"text" | "image" | "">("")
     const [valueQuestion, setValueQuestion] = useState("")
+
     const [imageQuestion, setImageQuestion] = useState("")
     const [valueAnswer, setValueAnswer] = useState("")
+
 
     const onChangeQuestionHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
         setValueQuestion(e.currentTarget.value)

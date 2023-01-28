@@ -1,21 +1,20 @@
 import React, {ChangeEvent, FC, useState} from 'react';
+
+import {Checkbox, TextField} from '@mui/material';
+import {styleButtonMUI} from '../../stylesModal';
 import {BasicModal} from "../../BasicModal";
-import Checkbox from "@mui/material/Checkbox";
-import TextField from "@mui/material/TextField";
+
 import {useAppDispatch, useAppSelector} from "../../../../../utils/hooks/hooks";
 import {addNewPackTC, setDeckCoverAC} from "../../../../../bll/reducers/packs-reducer";
 import {CoverInput} from "../../../coverInput/CoverInput";
 import {baseDeckCover} from "../../../../../assets/baseDeckCover";
 
 
-const styleButtonMUI = {
-    borderRadius: 10,
-    width: 120
-}
 type AddPackModalType = {
     active: boolean
     setActive: (active: boolean) => void
 }
+
 export const AddPackModal: FC<AddPackModalType> = ({active, setActive}) => {
     const dispatch = useAppDispatch()
     const myDeckCover = useAppSelector(state => state.packs.coverImg)
@@ -44,7 +43,6 @@ export const AddPackModal: FC<AddPackModalType> = ({active, setActive}) => {
         setCheckValue(e.currentTarget.checked)
     }
 
-
     return (
         <BasicModal
             title={"Add new pack"}
@@ -57,8 +55,14 @@ export const AddPackModal: FC<AddPackModalType> = ({active, setActive}) => {
         >
             <CoverInput deckCover={''}/>
             <div>
-                <TextField value={value} label="Name pack" margin="normal" fullWidth={true} placeholder={"Name pack"}
-                           onChange={onChangeHandler}/>
+                <TextField
+                    value={value}
+                    label="Name pack"
+                    margin="normal"
+                    fullWidth={true}
+                    placeholder={"Name pack"}
+                    onChange={onChangeHandler}
+                />
             </div>
             <div>
                 <Checkbox onChange={onChangeChecked} value={checkValue}/>Private pack

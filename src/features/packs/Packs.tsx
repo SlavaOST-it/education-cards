@@ -1,13 +1,14 @@
 import React, {useEffect, useState} from 'react';
-import s from "./Packs.module.css"
 import {Navigate, useSearchParams} from "react-router-dom";
+
+import s from "./Packs.module.css"
 
 import {PATH} from "../../utils/routes/routes";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks/hooks";
 
-import {AddPackModal} from "../../common/components/modals/packsModals/addPackModal/AddPackModal";
 import {HeaderTable} from "../../common/components/headerTable/HeaderTable";
 import {BasicPagination} from "../../common/components/pagination/BasicPagination";
+import {AddPackModal} from "../../common/components/modals/packsModals/addPackModal/AddPackModal";
 
 import {
     getPacksTC,
@@ -25,17 +26,18 @@ import {AppStatus} from "../../common/types/types";
 
 export const Packs = () => {
     const dispatch = useAppDispatch()
+
     const appStatus = useAppSelector(state=> state.app.status)
     const isLoggedIn = useAppSelector(state => state.login.loggedIn)
-    const dataPacks = useAppSelector(state => state.packs.cardPacks)
+
     const page = useAppSelector(state => state.packs.page)
+    const dataPacks = useAppSelector(state => state.packs.cardPacks)
     const pageCount = useAppSelector(state => state.packs.pageCount)
     const filterSearchValue = useAppSelector(state => state.packs.searchInput)
     const sortByAllMy = useAppSelector(state => state.packs.sortByAllMy)
     const sortPacksValue = useAppSelector(state => state.packs.sortPacksValue)
     const min = useAppSelector(state => state.packs.min)
     const max = useAppSelector(state => state.packs.max)
-
     const rerender = useAppSelector(state => state.packs.rerender)
 
 
@@ -67,9 +69,6 @@ export const Packs = () => {
         if (fromUrlSortPacksValue !== null) {
             dispatch(setSortPacksValueAC(fromUrlSortPacksValue))
         }
-        // if (fromUrlMin !== null || fromUrlMax !== null) {
-        //     dispatch(setSortMinMaxCardsAC(Number(searchParams.get('min')), Number(searchParams.get('max'))))
-        // }
     }, [])
 
     useEffect(() => {
@@ -86,7 +85,6 @@ export const Packs = () => {
             dispatch(setRerenderAC(true))
             return
         }
-
         dispatch(getPacksTC())
     }, [page, pageCount, filterSearchValue, sortPacksValue, min, max])
 

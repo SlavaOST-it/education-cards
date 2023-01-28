@@ -1,16 +1,19 @@
 import React, {useEffect, useState} from 'react';
+
 import {
     getPacksTC,
     setIsMyPacksAC, setPageAC, setRerenderAC, setSearchInputPacksAC,
     setSortMinMaxCardsAC,
     SortPacksAllMyType
 } from "../../../../bll/reducers/packs-reducer";
+
 import {useAppDispatch, useAppSelector} from "../../../../utils/hooks/hooks";
 import {SelectButton} from "./selectButton/SelectButton";
 
 
 export const SelectAllOrMyPacks = () => {
     const dispatch = useAppDispatch()
+
     const sortByAllMy = useAppSelector(state => state.packs.sortByAllMy)
 
     const [styleButton, setStyleButton] = useState<SortPacksAllMyType>(sortByAllMy)

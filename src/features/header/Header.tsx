@@ -5,7 +5,6 @@ import logotype from "../../assets/img/logotype.jpg"
 
 import {HeaderItem} from "./headerItem/HeaderItem";
 import {SignInButton} from "../../common/components/buttons/signInButton/SignInButton";
-import {AppStatus} from "../../common/types/types";
 import LinearProgress from "@mui/material/LinearProgress";
 import {commonDisabled} from "../../utils/disabledOnBoot/disabledOnBoot";
 

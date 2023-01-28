@@ -1,17 +1,20 @@
 import React, {ChangeEvent, FC} from 'react';
 import s from "./BasicPagination.module.css"
+
 import {Pagination, Stack} from "@mui/material";
 import {setPageAC} from "../../../bll/reducers/packs-reducer";
-import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
 import {setPageCardsAC} from '../../../bll/reducers/cards-reducer'
-import {SelectPage} from "../handleChange/SelectPage";
-import {PacksOrCardsType} from "../../types/types";
 import {setPageUsersAC} from "../../../bll/reducers/users-reducer";
+
+import {SelectPage} from "../handleChange/SelectPage";
+import {PacksOrCardsOrUsersType} from "../../types/types";
+
+import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
 import {commonDisabled} from "../../../utils/disabledOnBoot/disabledOnBoot";
 
 
 type BasicPaginationType = {
-    type: PacksOrCardsType
+    type: PacksOrCardsOrUsersType
 }
 
 export const BasicPagination: FC<BasicPaginationType> = ({type}) => {

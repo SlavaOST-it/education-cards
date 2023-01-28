@@ -1,19 +1,25 @@
 import React, {useState} from 'react';
-import {useFormik} from "formik";
 import {NavLink} from "react-router-dom";
-import {PATH} from "../../../utils/routes/routes";
+
+import { FormGroup, TextField } from '@mui/material';
 import commonStyle from "../../../common/styles/commonStyles.module.css"
+
+import * as Yup from "yup";
+import {useFormik} from "formik";
+
 import {sendEmailTC} from "../../../bll/reducers/passRecovery-reducer";
-import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
-import FormGroup from "@mui/material/FormGroup";
-import TextField from "@mui/material/TextField";
+
 import {CheckEmail} from "../checkEmail/CheckEmail";
 import {ButtonForm} from "../../../common/components/buttons/buttonForm/ButtonForm";
-import * as Yup from "yup";
+
+import {PATH} from "../../../utils/routes/routes";
+import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
+
 
 
 export const PasswordRecovery = () => {
     const dispatch = useAppDispatch()
+
     const statusSendMessage = useAppSelector(state => state.passRecovery.statusSendMessage)
 
     const [email, setEmail] = useState('')

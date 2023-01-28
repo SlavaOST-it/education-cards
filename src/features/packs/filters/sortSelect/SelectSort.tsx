@@ -3,14 +3,14 @@ import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 
 import {useAppDispatch, useAppSelector} from "../../../../utils/hooks/hooks";
 import {setSortPacksValueAC} from "../../../../bll/reducers/packs-reducer";
-import {AppStatus, PacksOrCardsType} from "../../../../common/types/types";
+import {AppStatus, PacksOrCardsOrUsersType} from "../../../../common/types/types";
 import {getCardsTC, sortCardsAC} from "../../../../bll/reducers/cards-reducer";
 import {setValueSortUsersAC} from "../../../../bll/reducers/users-reducer";
 import {commonDisabled} from "../../../../utils/disabledOnBoot/disabledOnBoot";
 
 
 type SelectSortType = {
-    type: PacksOrCardsType,
+    type: PacksOrCardsOrUsersType,
     valueSort: string,
     children?: ReactNode | JSX.Element
 }

@@ -1,25 +1,13 @@
 import React, {FC} from 'react';
-import Box from "@mui/material/Box";
 import s from "./ViewProfileUserModal.module.css";
-import {Button} from "@mui/material";
-import Modal from "@mui/material/Modal";
-import customAvatar from "../../../../../assets/img/icons/avatar_user.png";
+
+import {Box, Button, Modal } from '@mui/material';
 import {UsersType} from "../../../../../api/apiConfig/types/usersAPI-types";
 
+import customAvatar from "../../../../../assets/img/icons/avatar_user.png";
+import {styleUserModal} from "../../stylesModal";
 
-const style = {
-    position: 'absolute' as 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: 400,
-    bgcolor: 'background.paper',
-    border: '0px solid #000',
-    boxShadow: 24,
-    paddingLeft: 4,
-    paddingRight: 4,
-    paddingBottom: 4,
-};
+
 
 type ViewProfileUserModalType = {
     active: boolean
@@ -38,7 +26,7 @@ export const ViewProfileUserModal: FC<ViewProfileUserModalType> = ({active, setA
             aria-labelledby="modal-modal-title"
             aria-describedby="modal-modal-description"
         >
-            <Box sx={style}>
+            <Box sx={styleUserModal}>
                 <div className={s.modal}>
                     <div className={s.modalHeader}>
                         <h2>User profile</h2>
@@ -48,7 +36,6 @@ export const ViewProfileUserModal: FC<ViewProfileUserModalType> = ({active, setA
                     <div>
                         <img src={userItem.avatar && userItem.avatar.length > 100 ? userItem.avatar : customAvatar}
                              alt={'avatar'} className={s.avatar}/>
-
                     </div>
 
                     <div className={s.info}>
@@ -58,8 +45,6 @@ export const ViewProfileUserModal: FC<ViewProfileUserModalType> = ({active, setA
 
                         <div>Card count: <b>{userItem.publicCardPacksCount}</b></div>
                     </div>
-
-
                 </div>
 
                 <div className={s.buttons}>
@@ -69,4 +54,3 @@ export const ViewProfileUserModal: FC<ViewProfileUserModalType> = ({active, setA
         </Modal>
     );
 };
-

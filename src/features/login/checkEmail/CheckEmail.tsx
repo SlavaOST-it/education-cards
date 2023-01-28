@@ -1,8 +1,10 @@
 import React, {FC} from "react";
-import mailLogo from "../../../assets/img/icons/mail.png";
-import s from "./CheckEmail.module.css";
-import commonStyle from "../../../common/styles/commonStyles.module.css";
 import {Link} from "react-router-dom";
+
+import s from "./CheckEmail.module.css";
+import mailLogo from "../../../assets/img/icons/mail.png";
+import commonStyle from "../../../common/styles/commonStyles.module.css";
+
 import {PATH} from "../../../utils/routes/routes";
 import {ButtonForm} from "../../../common/components/buttons/buttonForm/ButtonForm";
 

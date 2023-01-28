@@ -28,4 +28,3 @@ export const Grade: FC<GradeType> = ({setCurrentGrade}) => {
         </div>
     );
 };
-

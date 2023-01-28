@@ -1,20 +1,24 @@
 import React, {FC} from 'react';
+
 import Button from "@mui/material/Button";
+
 import {
     getPacksTC,
     setIsMyPacksAC, setPageAC, setRerenderAC,
     setSearchInputPacksAC,
     setSortMinMaxCardsAC, setSortPacksValueAC
 } from "../../../../bll/reducers/packs-reducer";
-import {useAppDispatch, useAppSelector} from "../../../../utils/hooks/hooks";
-import {setSearchCardsAC} from "../../../../bll/reducers/cards-reducer";
-import {AppStatus, PacksOrCardsType} from "../../../../common/types/types";
 import {
     setPageCountUsersAC,
     setPageUsersAC,
     setUserNameSearchAC, setValueMinMaxCardsUsersAC,
     setValueSortUsersAC
 } from "../../../../bll/reducers/users-reducer";
+import {setSearchCardsAC} from "../../../../bll/reducers/cards-reducer";
+
+import {AppStatus, PacksOrCardsOrUsersType} from "../../../../common/types/types";
+
+import {useAppDispatch, useAppSelector} from "../../../../utils/hooks/hooks";
 import {commonDisabled} from "../../../../utils/disabledOnBoot/disabledOnBoot";
 
 
@@ -24,7 +28,7 @@ const styleButton = {
 }
 
 type  ResetFiltersType = {
-    type: PacksOrCardsType
+    type: PacksOrCardsOrUsersType
 }
 export const ResetFilters: FC<ResetFiltersType> = ({type}) => {
 

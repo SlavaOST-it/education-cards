@@ -1,15 +1,13 @@
 import React, {FC} from 'react';
-import {useAppDispatch} from "../../../../../utils/hooks/hooks";
-import {BasicModal} from "../../BasicModal";
+
 import {deletePackTC} from "../../../../../bll/reducers/packs-reducer";
 import {deleteCardTC} from "../../../../../bll/reducers/cards-reducer";
 
+import {BasicModal} from "../../BasicModal";
+import {styleButtonRedMUI} from "../../stylesModal";
+import {useAppDispatch} from "../../../../../utils/hooks/hooks";
 
-const styleButtonMUI = {
-    borderRadius: 10,
-    width: 120,
-    background: 'red'
-}
+
 
 type DeletePackModalType = {
     active: boolean
@@ -37,14 +35,21 @@ export const DeletePackModal: FC<DeletePackModalType> = ({cardId, packId, active
     }
 
     return (
-        <BasicModal active={active} setActive={onCloseHandler} onSaveCallback={onSaveCallback} nameButton={"Delete"}
-                    title={`Delete ${type}`} styleButton={styleButtonMUI}>
+        <BasicModal
+            active={active}
+            setActive={onCloseHandler}
+            onSaveCallback={onSaveCallback}
+            nameButton={"Delete"}
+            title={`Delete ${type}`}
+            styleButton={styleButtonRedMUI}
+        >
             {type === "pack" && (
                 <div>
                     Do you really want to remove <b>{name}</b>?
                     All cards will be deleted.
                 </div>
             )}
+
             {type === "card" && (
                 <div>
                     Do you really want to remove <b>{name}</b>?

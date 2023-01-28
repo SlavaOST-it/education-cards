@@ -1,22 +1,25 @@
-import React, {FC, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {NavLink} from "react-router-dom";
 
 import s from "./ActionsPack.module.css"
-
-import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
 
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
 import SchoolOutlinedIcon from '@mui/icons-material/SchoolOutlined';
 
-import {DeletePackModal} from "../../../common/components/modals/packsModals/deletePackModal/DeletePackModal";
+import {setCurrentPackIdAC} from "../../../bll/reducers/cards-reducer";
+import {setCardsPackIdInLearnAC} from "../../../bll/reducers/learn-reducer";
+
+import {AppStatus} from "../../../common/types/types";
+import {AddCardModal} from "../../../common/components/modals/cardsModals/addCardModal/AddCardModal";
 import {EditPackModal} from "../../../common/components/modals/packsModals/editPackModal/EditPackModal";
 import {EditCardModal} from "../../../common/components/modals/cardsModals/changeCardModal/EditCardModal";
-import {AppStatus} from "../../../common/types/types";
-import {setCardsPackIdInLearnAC} from "../../../bll/reducers/learn-reducer";
+import {DeletePackModal} from "../../../common/components/modals/packsModals/deletePackModal/DeletePackModal";
+
 import {PATH} from "../../../utils/routes/routes";
-import {AddCardModal} from "../../../common/components/modals/cardsModals/addCardModal/AddCardModal";
+import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
 import {commonDisabled} from "../../../utils/disabledOnBoot/disabledOnBoot";
+
 
 
 type ActionsPackType = {
@@ -45,6 +48,7 @@ export const ActionsPack: FC<ActionsPackType> = ({
                                                      disabled
                                                  }) => {
     const dispatch = useAppDispatch()
+
     const myId = useAppSelector(state => state.profile._id)
     const appStatus = useAppSelector((state) => state.app.status)
 
@@ -52,8 +56,9 @@ export const ActionsPack: FC<ActionsPackType> = ({
     const [activeEditModal, setActiveEditModal] = useState(false)
     const [activeEditCardModal, setActiveEditCardModal] = useState(false)
 
-    const learnPackHandler = () => {
+     const learnPackHandler = () => {
         dispatch(setCardsPackIdInLearnAC(packId))
+        dispatch(setCurrentPackIdAC(packId))
     }
 
     const onActiveModal = () => setActiveDeleteModal(!activeDeleteModal)

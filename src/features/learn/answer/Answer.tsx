@@ -1,11 +1,15 @@
 import React, {FC, useState} from 'react';
+
 import s from "../LearnPage.module.css";
-import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
+
+import {CardType} from "../../../api/apiConfig/types/cardsAPI-types";
 import {deleteStudiedCardAC, questionsCompletedAC, setGradeCardTC} from "../../../bll/reducers/learn-reducer";
+
 import {Grade} from "../grade/Grade";
 import Button from "@mui/material/Button";
+
+import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
 import {commonDisabled} from "../../../utils/disabledOnBoot/disabledOnBoot";
-import {CardType} from "../../../api/apiConfig/types/cardsAPI-types";
 
 
 type AnswerType = {
@@ -13,7 +17,9 @@ type AnswerType = {
 }
 export const Answer: FC<AnswerType> = ({card}) => {
     const dispatch = useAppDispatch()
+
     const appStatus = useAppSelector(state => state.app.status)
+
     const cards = useAppSelector(state => state.learn.cards)
 
 
@@ -84,4 +90,3 @@ export const Answer: FC<AnswerType> = ({card}) => {
         )
     }
 }
-

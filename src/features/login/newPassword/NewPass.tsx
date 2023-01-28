@@ -1,25 +1,30 @@
 import React from 'react';
 import {Navigate, useParams} from "react-router-dom";
-import {PATH} from "../../../utils/routes/routes";
-import {useFormik} from "formik";
-import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
-import {setNewPassTC} from "../../../bll/reducers/newPass-reducer";
-import commonStyle from "../../../common/styles/commonStyles.module.css";
-import FormGroup from "@mui/material/FormGroup";
-import OutlinedInput from "@mui/material/OutlinedInput";
-import {IconButton, InputAdornment, InputLabel} from "@mui/material";
+
+import { FormGroup, IconButton, InputAdornment, InputLabel, OutlinedInput } from '@mui/material';
 import {Visibility, VisibilityOff} from "@mui/icons-material";
-import {ButtonForm} from "../../../common/components/buttons/buttonForm/ButtonForm";
-import {InputPasswordType} from "../../../common/types/types";
+import {useFormik} from "formik";
 import * as Yup from "yup";
+
+import {setNewPassTC} from "../../../bll/reducers/newPass-reducer";
+
+import {InputPasswordType} from "../../../common/types/types";
+import commonStyle from "../../../common/styles/commonStyles.module.css";
+import {ButtonForm} from "../../../common/components/buttons/buttonForm/ButtonForm";
+
+import {PATH} from "../../../utils/routes/routes";
+import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
+
 
 
 export const NewPass = () => {
     const dispatch = useAppDispatch()
+
     const statusChangePass = useAppSelector<boolean>(state => state.newPassword.statusChangePass)
+
     const {token} = useParams<string>()
 
-    const [inputPassword, setInputPassword] = React.useState<InputPasswordType>('text');
+    const [inputPassword, setInputPassword] = React.useState<InputPasswordType>('password');
 
     const formik = useFormik({
         initialValues: {

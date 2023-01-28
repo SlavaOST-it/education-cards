@@ -1,14 +1,18 @@
 import React, {FC} from 'react';
-import style from "../../Packs.module.css";
-import s from "./PackItem.module.css"
 import {NavLink} from "react-router-dom";
-import {PATH} from "../../../../utils/routes/routes";
+
+import s from "./PackItem.module.css"
+import style from "../../Packs.module.css";
+import {StyledTableCell, StyledTableRow} from "../../../../common/styles/StyleForTables";
+
+import {PackType} from "../../../../api/apiConfig/types/packsAPI-types";
+import {resetCardsStatedAC, setCurrentPackIdAC} from "../../../../bll/reducers/cards-reducer";
+
 import {baseDeckCover} from "../../../../assets/baseDeckCover";
 import {ActionsPack} from "../../actionsPack/ActionsPack";
+
+import {PATH} from "../../../../utils/routes/routes";
 import {useAppDispatch} from "../../../../utils/hooks/hooks";
-import {StyledTableCell, StyledTableRow} from "../../../../common/styles/StyleForTables";
-import {resetCardsStatedAC, setCurrentPackIdAC} from "../../../../bll/reducers/cards-reducer";
-import {PackType} from "../../../../api/apiConfig/types/packsAPI-types";
 
 
 
@@ -16,6 +20,7 @@ type PackItemType = {
     key: any
     item: PackType
 }
+
 export const PackItem: FC<PackItemType> = ({item}) => {
     const dispatch = useAppDispatch()
 

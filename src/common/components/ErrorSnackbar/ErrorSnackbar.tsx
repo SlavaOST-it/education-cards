@@ -5,15 +5,16 @@ import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
 import {setAppErrorAC} from "../../../bll/reducers/app-reducer";
 import {SnackbarCloseReason} from "@mui/material/Snackbar/Snackbar";
 
+
+
 const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
     props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
 
 export function ErrorSnackbar() {
-
-    const error = useAppSelector<string | null>(state => state.app.error)
     const dispatch = useAppDispatch()
+    const error = useAppSelector<string | null>(state => state.app.error)
 
     const handleClose = (event?: React.SyntheticEvent<any> | Event, reason?: SnackbarCloseReason) => {
         if (reason === 'clickaway') {

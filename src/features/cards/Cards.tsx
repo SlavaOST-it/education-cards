@@ -1,40 +1,49 @@
 import React, {useEffect, useState} from 'react';
 import {Navigate, useSearchParams} from "react-router-dom";
+
+import s from "./Card.module.css"
+
+import {getCardsTC, setCurrentPackIdAC, sortCardsAC} from '../../bll/reducers/cards-reducer'
+import {resetLearnCardStateAC, setCardsPackIdInLearnAC} from "../../bll/reducers/learn-reducer";
+
+import {AppStatus} from "../../common/types/types";
+import {HeaderTable} from "../../common/components/headerTable/HeaderTable";
+import {BasicPagination} from "../../common/components/pagination/BasicPagination";
+import {BackToPacksList} from "../../common/components/backToPacksLink/BackToPacksList";
+import {AddCardModal} from "../../common/components/modals/cardsModals/addCardModal/AddCardModal";
+
+import {CardsTable} from "./cardsTable/CardsTable";
+import {SearchInput} from "../packs/filters/search/SearchInput";
+import {SettingsPack} from "../packs/settingsPack/SettingsPack";
+
 import {PATH} from "../../utils/routes/routes";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks/hooks";
-import s from "./Card.module.css"
-import {SearchInput} from "../packs/filters/search/SearchInput";
-import {BasicPagination} from "../../common/components/pagination/BasicPagination";
-import {getCardsTC, setCurrentPackIdAC, sortCardsAC} from '../../bll/reducers/cards-reducer'
-import {HeaderTable} from "../../common/components/headerTable/HeaderTable";
-import {CardsTable} from "./cardsTable/CardsTable";
-import {AddCardModal} from "../../common/components/modals/cardsModals/addCardModal/AddCardModal";
-import {BackToPacksList} from "../../common/components/backToPacksLink/BackToPacksList";
-import {AppStatus} from "../../common/types/types";
-import {SettingsPack} from "../packs/settingsPack/SettingsPack";
-import {resetLearnCardStateAC, setCardsPackIdInLearnAC} from "../../bll/reducers/learn-reducer";
 import {commonDisabled} from "../../utils/disabledOnBoot/disabledOnBoot";
 
 
 export const Cards = () => {
 
     const dispatch = useAppDispatch()
-    const dataPacks = useAppSelector(state => state.packs.cardPacks)
     const appStatus = useAppSelector(state => state.app.status)
     const isLoggedIn = useAppSelector(state => state.login.loggedIn)
+
+    const dataPacks = useAppSelector(state => state.packs.cardPacks)
+
+    const myId = useAppSelector(state => state.profile._id)
+
     const dataCards = useAppSelector(state => state.cards.cards)
+    const packUserId = useAppSelector(state => state.cards.packUserId)
     const cardsPack_id = useAppSelector(state => state.cards.currentPackId)
     const page = useAppSelector(state => state.cards.page)
     const pageCount = useAppSelector(state => state.cards.pageCount)
-    const search = useAppSelector(state => state.cards.filterSearchValue)
     const namePack = useAppSelector(state => state.cards.packName)
-    const packUserId = useAppSelector(state => state.cards.packUserId)
+    const search = useAppSelector(state => state.cards.filterSearchValue)
     const sortCards = useAppSelector(state => state.cards.sortCards)
-    const myId = useAppSelector(state => state.profile._id)
 
     const selectedPack = dataPacks.filter(el => el._id === cardsPack_id)
 
     const [urlParams, setUrlParams] = useSearchParams()
+
     const [activeModal, setActiveModal] = useState(false)
 
     useEffect(() => {

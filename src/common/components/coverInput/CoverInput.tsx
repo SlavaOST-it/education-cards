@@ -1,11 +1,15 @@
 import React, {ChangeEvent, FC, useEffect, useState} from 'react';
 import s from "../modals/packsModals/addPackModal/AddPackModal.module.css";
+
 import {setDeckCoverAC} from "../../../bll/reducers/packs-reducer";
-import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
-import cameraLogo from "../../../assets/img/icons/camera-svgrepo-com.svg"
-import baseDeckCover from "../../../assets/img/no_image.png";
-import {convertFileToBase64} from "../../../utils/convertFileToBase64/convertFileToBase64";
 import {setAppErrorAC} from "../../../bll/reducers/app-reducer";
+
+import baseDeckCover from "../../../assets/img/no_image.png";
+import cameraLogo from "../../../assets/img/icons/camera-svgrepo-com.svg"
+
+import {useAppDispatch, useAppSelector} from "../../../utils/hooks/hooks";
+import {convertFileToBase64} from "../../../utils/convertFileToBase64/convertFileToBase64";
+
 
 
 type CoverInputType = {

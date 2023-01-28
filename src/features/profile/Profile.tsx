@@ -1,8 +1,10 @@
 import React, {ChangeEvent, useRef, useState} from 'react';
 import {Navigate, NavLink} from "react-router-dom";
+
 import s from './Profile.module.css'
 
 import BorderColorOutlinedIcon from '@mui/icons-material/BorderColorOutlined';
+
 import {changeAvatarThunkCreator, changeNameThunkCreator, setUserPhotoAC} from "../../bll/reducers/profile-reducer";
 import {setAppErrorAC} from "../../bll/reducers/app-reducer";
 
@@ -13,13 +15,16 @@ import {convertFileToBase64} from "../../utils/convertFileToBase64/convertFileTo
 import {BackToPacksList} from "../../common/components/backToPacksLink/BackToPacksList";
 import {LogOutButton} from "../../common/components/buttons/logOutButton/LogOutButton";
 import {AvatarUser} from "./avatarUser/AvatarUser";
+
 import camera from "../../assets/img/icons/camera.png"
 import customAvatar from "../../assets/img/icons/avatar_user.png"
 import arrowLogo from "../../assets/img/icons/arrow.png";
 
 
+
 export const Profile = () => {
     const dispatch = useAppDispatch()
+
     const userName = useAppSelector(state => state.profile.name)
     const userEmail = useAppSelector(state => state.profile.email)
     const loggedIn = useAppSelector(state => state.login.loggedIn)

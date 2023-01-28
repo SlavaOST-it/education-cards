@@ -4,15 +4,18 @@ import s from "./RangeSlider.module.css"
 import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 
-import {useAppDispatch, useAppSelector, useDebounce} from "../../../../utils/hooks/hooks";
-import {AppStatus, PacksOrCardsType} from "../../../../common/types/types";
-import {setSortMinMaxCardsAC} from "../../../../bll/reducers/packs-reducer";
 import {setValueMinMaxCardsUsersAC} from "../../../../bll/reducers/users-reducer";
+import {setRerenderAC, setSortMinMaxCardsAC} from "../../../../bll/reducers/packs-reducer";
+
+import {AppStatus, PacksOrCardsOrUsersType} from "../../../../common/types/types";
+
 import {commonDisabled} from "../../../../utils/disabledOnBoot/disabledOnBoot";
+import {useAppDispatch, useAppSelector, useDebounce} from "../../../../utils/hooks/hooks";
+
 
 
 type RangeSliderType = {
-    type: PacksOrCardsType
+    type: PacksOrCardsOrUsersType
 }
 
 export const RangeSlider: FC<RangeSliderType> = ({type}) => {
@@ -24,6 +27,7 @@ export const RangeSlider: FC<RangeSliderType> = ({type}) => {
     const maxCards = useAppSelector(state => state.packs.max)
     const minCardsPackCount = useAppSelector(state => state.packs.minCardsCount)
     const maxCardsPackCount = useAppSelector(state => state.packs.maxCardsCount)
+    const rerender = useAppSelector(state => state.packs.rerender)
 
     const minCardsUser = useAppSelector(state => state.users.min)
     const maxCardsUser = useAppSelector(state => state.users.max)
@@ -58,6 +62,10 @@ export const RangeSlider: FC<RangeSliderType> = ({type}) => {
     };
 
     useEffect(() => {
+        if(rerender){
+            dispatch(setRerenderAC(false))
+            return
+        }
         setValue([0, maxCardsCount])
     }, [maxCardsCount])
 

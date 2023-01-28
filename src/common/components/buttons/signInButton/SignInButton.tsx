@@ -1,8 +1,11 @@
 import React from 'react';
-import {PATH} from "../../../../utils/routes/routes";
 import s from "./SignInButton.module.css"
-import Button from "@mui/material/Button";
+
 import {Link} from "react-router-dom";
+
+import Button from "@mui/material/Button";
+
+import {PATH} from "../../../../utils/routes/routes";
 
 
 export const SignInButton = () => {

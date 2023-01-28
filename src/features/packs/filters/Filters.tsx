@@ -1,9 +1,13 @@
 import React from 'react';
+
 import s from "./Filters.module.css"
+
 import {SearchInput} from "./search/SearchInput";
 import {SelectAllOrMyPacks} from "./selectAllMy/SelectAllOrMyPacks";
 import {RangeSlider} from "./rangeSlider/RangeSlider";
 import {ResetFilters} from "./resetFilters/ResetFilters";
+
+
 
 export const Filters = () => {
     return (

@@ -1,19 +1,23 @@
 import React, {useEffect, useState} from 'react';
-import s from "./LearnPage.module.css"
-import {CardResponseType} from "../../api/cardsAPI";
-import {useAppDispatch, useAppSelector} from "../../utils/hooks/hooks";
 import {Navigate, useSearchParams} from "react-router-dom";
+
+import s from "./LearnPage.module.css"
 import {BackToPacksList} from "../../common/components/backToPacksLink/BackToPacksList";
+
+import {CardType} from "../../api/apiConfig/types/cardsAPI-types";
+import {setCurrentPackIdAC} from "../../bll/reducers/cards-reducer";
 import {
     getCardsForLearnTC,
     questionsCompletedAC,
     resetLearnCardStateAC,
     setCardsPackIdInLearnAC
 } from "../../bll/reducers/learn-reducer";
-import {getCard} from "../../utils/getCard/getCard";
-import {setCurrentPackIdAC} from "../../bll/reducers/cards-reducer";
-import {Answer} from "./answer/Answer";
+
 import {PATH} from "../../utils/routes/routes";
+import {getCard} from "../../utils/getCard/getCard";
+import {useAppDispatch, useAppSelector} from "../../utils/hooks/hooks";
+
+import {Answer} from "./answer/Answer";
 import {RepeatLearning} from "./repeatLearning/RepeatLearning";
 
 
@@ -35,15 +39,19 @@ const initialCard = {
 }
 
 export const LearnPage = () => {
+
     const dispatch = useAppDispatch()
+
     const isLoggedIn = useAppSelector(state => state.login.loggedIn)
+
     const cards = useAppSelector(state => state.learn.cards)
     const packName = useAppSelector(state => state.learn.packName)
     const cardsPack_id = useAppSelector(state => state.learn.cardsPack_id)
     const questionsCompleted = useAppSelector(state => state.learn.questionsCompleted)
 
 
-    const [card, setCard] = useState<CardResponseType>(initialCard)
+    const [card, setCard] = useState<CardType>(initialCard)
+
     const [urlParams, setUrlParams] = useSearchParams()
 
 
@@ -64,7 +72,6 @@ export const LearnPage = () => {
         }
         dispatch(getCardsForLearnTC())
         dispatch(questionsCompletedAC(false))
-
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
@@ -122,9 +129,7 @@ export const LearnPage = () => {
                         <Answer card={card}/>
                     </div>
                 </div>
-
             </div>
-
         </div>
     );
 };

@@ -3,14 +3,14 @@ import thunkMiddleware, {ThunkAction, ThunkDispatch} from 'redux-thunk'
 
 import {AppActionType, appReducer} from '../reducers/app-reducer'
 import {authReducer, LoginActionsType} from '../reducers/auth-reducer'
+import {CardsActionsType, cardsReducer} from '../reducers/cards-reducer'
+import {LearnActionsType, learnReducer} from "../reducers/learn-reducer";
+import {PackListActionsType, packsReducer} from '../reducers/packs-reducer'
+import {UsersListActionType, usersReducer} from "../reducers/users-reducer";
 import {registerReducer, SetRegisterInType} from '../reducers/registration-reducer'
 import {ProfileActionsType, profileReducer} from '../reducers/profile-reducer'
-import {PassRecoveryActionsType, passRecoveryReducer} from '../reducers/passRecovery-reducer'
 import {NewPassReducerActionType, setNewPassReducer} from '../reducers/newPass-reducer'
-import {CardsActionsType, cardsReducer} from '../reducers/cards-reducer'
-import {PackListActionsType, packsReducer} from '../reducers/packs-reducer'
-import {LearnActionsType, learnReducer} from "../reducers/learn-reducer";
-import {UsersListActionType, usersReducer} from "../reducers/users-reducer";
+import {PassRecoveryActionsType, passRecoveryReducer} from '../reducers/passRecovery-reducer'
 
 
 const rootReducer = combineReducers({
@@ -31,15 +31,15 @@ export const store = legacy_createStore(rootReducer, applyMiddleware(thunkMiddle
 
 type ReduxActionType =
     AppActionType
-    | SetRegisterInType
+    | LearnActionsType
     | LoginActionsType
+    | CardsActionsType
+    | SetRegisterInType
     | ProfileActionsType
+    | UsersListActionType
+    | PackListActionsType
     | PassRecoveryActionsType
     | NewPassReducerActionType
-    | PackListActionsType
-    | CardsActionsType
-    | LearnActionsType
-    | UsersListActionType
 
 export type AppRootStateType = ReturnType<typeof rootReducer>
 export type RootState = ReturnType<typeof store.getState>
