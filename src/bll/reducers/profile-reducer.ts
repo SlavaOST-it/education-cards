@@ -2,15 +2,9 @@ import {profileAPI} from "../../api/profileAPI";
 import {AppThunkType} from "../store/store";
 import {setAppStatusAC, SetAppStatusAT} from "./app-reducer";
 import {baseErrorHandler} from "../../utils/error-utils/error-utils";
+import {UserType} from "../../api/apiConfig/types/profileAPI-types";
 import {AxiosError} from "axios";
 import {AppStatus} from "../../common/types/types";
-import {UserType} from "../../api/apiConfig/types/types";
-
-
-export type SetUserProfileAT = ReturnType<typeof setUserProfileAC>
-export type SetUserNameAC = ReturnType<typeof setUserNameAC>
-export type SetUserPhotoAT = ReturnType<typeof setUserPhotoAC>
-export type ProfileActionsType = SetUserProfileAT | SetUserNameAC | SetUserPhotoAT | SetAppStatusAT
 
 
 const initialState: UserType = {
@@ -37,12 +31,15 @@ export const profileReducer = (state: UserType = initialState, action: ProfileAc
             return {...state}
     }
 }
-// ==================ACTION CREATORS =======================//
+
+
+// ================== ACTION CREATORS =======================//
 export const setUserProfileAC = (profile: any) => ({type: "PROFILE/SET_USER_PROFILE", profile} as const)
 export const setUserNameAC = (userName: string) => ({type: "PROFILE/SET_USER_NAME", userName} as const)
-export const setUserPhotoAC = (photo: string) => ({type: "PROFILE/SET_USER_PHOTO", photo} as const)
+export const setUserPhotoAC = (photo: string | null) => ({type: "PROFILE/SET_USER_PHOTO", photo} as const)
 
-// ==================THUNK CREATORS =======================//
+
+// ================== THUNK CREATORS =======================//
 export const changeNameThunkCreator = (newName: string): AppThunkType => async (dispatch) => {
     dispatch(setAppStatusAC(AppStatus.LOADING))
     try {
@@ -64,3 +61,11 @@ export const changeAvatarThunkCreator = (avatar: string): AppThunkType => async 
         baseErrorHandler(e as Error | AxiosError, dispatch)
     }
 }
+
+
+// ================== ACTION TYPES =======================//
+export type SetUserNameAC = ReturnType<typeof setUserNameAC>
+export type SetUserPhotoAT = ReturnType<typeof setUserPhotoAC>
+export type SetUserProfileAT = ReturnType<typeof setUserProfileAC>
+
+export type ProfileActionsType = SetUserProfileAT | SetUserNameAC | SetUserPhotoAT | SetAppStatusAT

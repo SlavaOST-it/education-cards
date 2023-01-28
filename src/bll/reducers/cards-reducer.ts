@@ -1,27 +1,11 @@
+import {cardsAPI} from '../../api/cardsAPI'
 import {AppThunkType} from '../store/store'
 import {setAppStatusAC} from './app-reducer'
-import {cardsAPI} from '../../api/cardsAPI'
+import {CardsResponseType, CardType} from "../../api/apiConfig/types/cardsAPI-types";
 import {baseErrorHandler} from "../../utils/error-utils/error-utils";
 import {AxiosError} from "axios";
 import {AppStatus} from "../../common/types/types";
-import {CardsResponseType, CardType} from "../../api/apiConfig/types/cardsAPI-types";
 
-type SetCardsAT = ReturnType<typeof setCardsAC>
-type SetSearchCardsAT = ReturnType<typeof setSearchCardsAC>
-type SortCardsAT = ReturnType<typeof sortCardsAC>
-type SetPageCardsAT = ReturnType<typeof setPageCardsAC>
-type SetPageCardsCountAT = ReturnType<typeof setPageCardsCountAC>
-type ResetCardsStatedAT = ReturnType<typeof resetCardsStatedAC>
-type SetCurrentPackIdAT = ReturnType<typeof setCurrentPackIdAC>
-
-export type CardsActionsType =
-    SetCardsAT
-    | SetSearchCardsAT
-    | SortCardsAT
-    | SetPageCardsAT
-    | SetPageCardsCountAT
-    | ResetCardsStatedAT
-    | SetCurrentPackIdAT
 
 
 const initialState = {
@@ -92,7 +76,8 @@ export const cardsReducer = (state = initialState, action: CardsActionsType): In
     }
 }
 
-// ==================ACTION CREATORS =======================//
+
+// ================== ACTION CREATORS =======================//
 export const setCardsAC = (data: CardsResponseType) => ({type: 'CARDS/SET_CARDS', data} as const)
 
 export const setSearchCardsAC = (search: string) => {
@@ -120,23 +105,25 @@ export const resetCardsStatedAC = () => {
 }
 
 
-// ==================THUNK CREATORS =======================//
+// ================== THUNK CREATORS =======================//
 
 export const getCardsTC = (): AppThunkType => async (dispatch, getState) => {
     dispatch(setAppStatusAC(AppStatus.LOADING))
-    const cardsPack_id = getState().cards.currentPackId
-    const page = getState().cards.page
-    const pageCount = getState().cards.pageCount
-    const cardQuestion = getState().cards.filterSearchValue
-    const sortCards = getState().cards.sortCards
+    const {
+        currentPackId,
+        page,
+        pageCount,
+        filterSearchValue,
+        sortCards
+    }= getState().cards
 
     try {
         const res = await cardsAPI.getCards({
-            cardsPack_id,
+            cardsPack_id: currentPackId,
             page,
             pageCount,
             sortCards,
-            cardQuestion
+            cardQuestion: filterSearchValue
         })
         dispatch(setCardsAC(res.data))
         dispatch(setAppStatusAC(AppStatus.SUCCEED))
@@ -184,37 +171,22 @@ export const changeCardTC = (
     }
 }
 
-export const learnCardTC = (packUserId: string): AppThunkType => async (dispatch) => {
-    dispatch(setAppStatusAC(AppStatus.LOADING))
-    try {
-        const data: GetCardsParamsType = {
-            cardAnswer: '',
-            cardQuestion: '',
-            cardsPack_id: packUserId,
-            min: 0,
-            max: 0,
-            sortCards: '0question',
-            page: 1,
-            pageCount: 1000,
-            id: ''
-        }
-        const res = await cardsAPI.getCards(data)
-        dispatch(setCardsAC(res.data))
-        dispatch(setAppStatusAC(AppStatus.SUCCEED))
-    } catch (e) {
-        baseErrorHandler(e as Error | AxiosError, dispatch)
-    }
-}
 
+// ================== ACTION TYPES =======================//
 
-export type GetCardsParamsType = {
-    cardAnswer: string
-    cardQuestion: string
-    cardsPack_id: string // обязательно!
-    min: number
-    max: number
-    sortCards: string
-    page: number
-    pageCount: number
-    id: string
-}
+type SetCardsAT = ReturnType<typeof setCardsAC>
+type SetSearchCardsAT = ReturnType<typeof setSearchCardsAC>
+type SortCardsAT = ReturnType<typeof sortCardsAC>
+type SetPageCardsAT = ReturnType<typeof setPageCardsAC>
+type SetPageCardsCountAT = ReturnType<typeof setPageCardsCountAC>
+type ResetCardsStatedAT = ReturnType<typeof resetCardsStatedAC>
+type SetCurrentPackIdAT = ReturnType<typeof setCurrentPackIdAC>
+
+export type CardsActionsType =
+    SetCardsAT
+    | SetSearchCardsAT
+    | SortCardsAT
+    | SetPageCardsAT
+    | SetPageCardsCountAT
+    | ResetCardsStatedAT
+    | SetCurrentPackIdAT

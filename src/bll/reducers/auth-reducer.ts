@@ -7,10 +7,6 @@ import {AxiosError} from "axios";
 import {AppStatus} from "../../common/types/types";
 
 
-type LoggedInAT = ReturnType<typeof loggedInAC>
-export type LoginActionsType = LoggedInAT
-
-
 const initialState = {
     data: {
         email: '',
@@ -25,7 +21,7 @@ type InitialStateType = typeof initialState
 
 export const authReducer = (state: InitialStateType = initialState, action: LoginActionsType): InitialStateType => {
     switch (action.type) {
-        case "LOGGED_IN": {
+        case "AUTH/LOGGED_IN": {
             return {...state, loggedIn: action.loggedIn}
         }
 
@@ -36,7 +32,7 @@ export const authReducer = (state: InitialStateType = initialState, action: Logi
 
 
 // ================== ACTION CREATORS =======================//
-export const loggedInAC = (loggedIn: boolean) => ({type: "LOGGED_IN", loggedIn} as const)
+export const loggedInAC = (loggedIn: boolean) => ({type: "AUTH/LOGGED_IN", loggedIn} as const)
 
 
 // ================== THUNK CREATORS =======================//
@@ -63,3 +59,9 @@ export const logoutThunkCreator = (): AppThunkType => async (dispatch) => {
         baseErrorHandler(e as Error | AxiosError, dispatch)
     }
 }
+
+
+// ================== ACTION TYPES =======================//
+type LoggedInAT = ReturnType<typeof loggedInAC>
+
+export type LoginActionsType = LoggedInAT

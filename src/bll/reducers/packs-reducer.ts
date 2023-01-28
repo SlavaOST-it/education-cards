@@ -1,10 +1,10 @@
+import {packsAPI} from "../../api/packsAPI";
 import {AppThunkType} from "../store/store";
 import {setAppStatusAC} from "./app-reducer";
 import {baseErrorHandler} from "../../utils/error-utils/error-utils";
+import {PacksResponseType, PackType} from "../../api/apiConfig/types/packsAPI-types";
 import {AxiosError} from "axios";
 import {AppStatus} from "../../common/types/types";
-import {PacksResponseType, PackType} from "../../api/apiConfig/types/packsAPI-types";
-import {packsAPI} from "../../api/packsAPI";
 
 
 const initialState = {
@@ -118,7 +118,6 @@ export const setDeckCoverAC = (deckCover: string) => {
 
 
 // ================== THUNK CREATORS =======================//
-
 export const getPacksTC = (selectAllOrMyPacks = false): AppThunkType => async (dispatch, getState) => {
     dispatch(setAppStatusAC(AppStatus.LOADING))
     const {
@@ -188,17 +187,17 @@ export const changePackTC = (id: string, name: string, isPrivate: boolean, deckC
 }
 
 
+// ================== ACTION TYPES =======================//
 export type SortPacksAllMyType = "All" | "My"
+type setPageType = ReturnType<typeof setPageAC>
+type setSortType = ReturnType<typeof setSortPacksValueAC>
 type SetPacksType = ReturnType<typeof setPacksAC>
 type SetRerenderAT = ReturnType<typeof setRerenderAC>
-type setSearchPacksType = ReturnType<typeof setSearchInputPacksAC>
 type setIsMyPacksType = ReturnType<typeof setIsMyPacksAC>
-type setPageType = ReturnType<typeof setPageAC>
 type setPageCountType = ReturnType<typeof setPageCountAC>
-type setSortType = ReturnType<typeof setSortPacksValueAC>
 type setDeckCoverType = ReturnType<typeof setDeckCoverAC>
+type setSearchPacksType = ReturnType<typeof setSearchInputPacksAC>
 type SetSortMinMaxCardsAT = ReturnType<typeof setSortMinMaxCardsAC>
-
 
 export type PackListActionsType =
     | setSearchPacksType

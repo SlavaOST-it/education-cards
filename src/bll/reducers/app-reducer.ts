@@ -7,27 +7,23 @@ import {AxiosError} from "axios";
 import {AppStatus} from "../../common/types/types";
 
 
-export type SetInitializedAT = ReturnType<typeof setInitializedAC>
-export type SetAppStatusAT = ReturnType<typeof setAppStatusAC>
-export type SetAppErrorAT = ReturnType<typeof setAppErrorAC>
-export type AppActionType = SetInitializedAT | SetAppStatusAT | SetAppErrorAT
-
 const initialState = {
     status: AppStatus.IDLE,
     error: null as string | null,
     isInitialized: false
 }
+
 type InitialStateType = typeof initialState
 
 export const appReducer = (state: InitialStateType = initialState, action: AppActionType): InitialStateType => {
     switch (action.type) {
-        case "APP/SET-INITIALIZED":
+        case "APP/SET_INITIALIZED":
             return {...state, isInitialized: action.value}
 
-        case "APP/SET-APP-STATUS":
+        case "APP/SET_APP_STATUS":
             return {...state, status: action.status}
 
-        case 'APP/SET-ERROR':
+        case 'APP/SET_ERROR':
             return {...state, error: action.error}
 
         default:
@@ -35,15 +31,17 @@ export const appReducer = (state: InitialStateType = initialState, action: AppAc
     }
 }
 
-// ===== ActionCreators ===== //
-export const setInitializedAC = (value: boolean) => ({type: "APP/SET-INITIALIZED", value} as const)
+
+// ================== ACTION CREATORS =======================//
+export const setInitializedAC = (value: boolean) => ({type: "APP/SET_INITIALIZED", value} as const)
 export const setAppStatusAC = (status: AppStatus) => ({
-    type: 'APP/SET-APP-STATUS' as const,
+    type: 'APP/SET_APP_STATUS' as const,
     status
 })
-export const setAppErrorAC = (error: string | null) => ({type: 'APP/SET-ERROR', error} as const)
+export const setAppErrorAC = (error: string | null) => ({type: 'APP/SET_ERROR', error} as const)
 
-// ===== ThunkCreators ===== //
+
+// ================== THUNK CREATORS =======================//
 export const initializeAppTC = (): AppThunkType => async (dispatch) => {
     dispatch(setAppStatusAC(AppStatus.LOADING))
     try {
@@ -59,3 +57,12 @@ export const initializeAppTC = (): AppThunkType => async (dispatch) => {
         dispatch(setAppStatusAC(AppStatus.SUCCEED))
     }
 }
+
+
+// ================== ACTION TYPES =======================//
+
+export type SetInitializedAT = ReturnType<typeof setInitializedAC>
+export type SetAppStatusAT = ReturnType<typeof setAppStatusAC>
+export type SetAppErrorAT = ReturnType<typeof setAppErrorAC>
+
+export type AppActionType = SetInitializedAT | SetAppStatusAT | SetAppErrorAT

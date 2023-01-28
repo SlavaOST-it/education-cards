@@ -1,26 +1,11 @@
 import {usersAPI} from "../../api/usersAPI";
 import {AppThunkType} from "../store/store";
 import {setAppStatusAC} from "./app-reducer";
-import {AppStatus} from "../../common/types/types";
 import {baseErrorHandler} from "../../utils/error-utils/error-utils";
-import {AxiosError} from "axios";
 import {UsersResponseType, UsersType} from "../../api/apiConfig/types/usersAPI-types";
+import {AppStatus} from "../../common/types/types";
+import {AxiosError} from "axios";
 
-
-type SetUsersAT = ReturnType<typeof setUsersAC>
-type SetPageUsersAT = ReturnType<typeof setPageUsersAC>
-type SetPageCountUsersAT = ReturnType<typeof setPageCountUsersAC>
-type SetUserNameSearchAT = ReturnType<typeof setUserNameSearchAC>
-type SetValueSortUsersAT = ReturnType<typeof setValueSortUsersAC>
-type SetValueMinMaxCardsUsersAT = ReturnType<typeof setValueMinMaxCardsUsersAC>
-
-export type  UsersListActionType =
-    SetUsersAT
-    | SetPageUsersAT
-    | SetPageCountUsersAT
-    | SetUserNameSearchAT
-    | SetValueSortUsersAT
-| SetValueMinMaxCardsUsersAT
 
 const initialState = {
     users: [] as UsersType[],
@@ -129,3 +114,21 @@ export const getUsersTC = (): AppThunkType => async (dispatch, getState) => {
         baseErrorHandler(e as Error | AxiosError, dispatch)
     }
 }
+
+
+// ================== ACTION TYPES =======================//
+
+type SetUsersAT = ReturnType<typeof setUsersAC>
+type SetPageUsersAT = ReturnType<typeof setPageUsersAC>
+type SetPageCountUsersAT = ReturnType<typeof setPageCountUsersAC>
+type SetUserNameSearchAT = ReturnType<typeof setUserNameSearchAC>
+type SetValueSortUsersAT = ReturnType<typeof setValueSortUsersAC>
+type SetValueMinMaxCardsUsersAT = ReturnType<typeof setValueMinMaxCardsUsersAC>
+
+export type  UsersListActionType =
+    SetUsersAT
+    | SetPageUsersAT
+    | SetPageCountUsersAT
+    | SetUserNameSearchAT
+    | SetValueSortUsersAT
+    | SetValueMinMaxCardsUsersAT

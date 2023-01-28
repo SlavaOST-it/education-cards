@@ -4,12 +4,8 @@ import {AppThunkType} from "../store/store";
 import {baseErrorHandler} from "../../utils/error-utils/error-utils";
 import {AxiosError} from "axios";
 import {AppStatus} from "../../common/types/types";
+import {RegisterRequestType} from "../../api/apiConfig/types/authAPI-types";
 
-export type SetRegisterInType = ReturnType<typeof setRegisterIn>
-export type RegisterType = {
-    email: string
-    password: string
-}
 
 const initialState = {
     isRegisterIn: false
@@ -26,7 +22,8 @@ export const registerReducer = (state: InitialStateType = initialState, action: 
     }
 }
 
-// ===== Action Creators ===== //
+
+// ================== ACTION CREATORS =======================//
 export const setRegisterIn = (isRegisterIn: boolean) => {
     return {
         type: "REGISTER/SET_REGISTER_IN",
@@ -34,8 +31,9 @@ export const setRegisterIn = (isRegisterIn: boolean) => {
     } as const
 }
 
-// ===== Thunk Creators ===== //
-export const RegisterTC = (data: RegisterType): AppThunkType => async (dispatch) => {
+
+// ================== THUNK CREATORS =======================//
+export const RegisterTC = (data: RegisterRequestType): AppThunkType => async (dispatch) => {
     dispatch(setAppStatusAC(AppStatus.LOADING))
     try {
         await authAPI.register(data)
@@ -45,3 +43,7 @@ export const RegisterTC = (data: RegisterType): AppThunkType => async (dispatch)
         baseErrorHandler(e as Error | AxiosError, dispatch)
     }
 }
+
+
+// ================== ACTION TYPES =======================//
+export type SetRegisterInType = ReturnType<typeof setRegisterIn>

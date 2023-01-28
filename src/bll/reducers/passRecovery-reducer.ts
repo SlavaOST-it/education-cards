@@ -6,10 +6,6 @@ import {AxiosError} from "axios";
 import {AppStatus} from "../../common/types/types";
 
 
-export type InfoMessageAT = ReturnType<typeof infoMessageAC>
-export type StatusSendMessageAT = ReturnType<typeof statusSendMessageAC>
-export type PassRecoveryActionsType = InfoMessageAT | StatusSendMessageAT | SetAppStatusAT
-
 const initialState = {
     textMessage: '',
     statusSendMessage: false
@@ -55,3 +51,10 @@ export const sendEmailTC = (email: string): AppThunkType => async (dispatch) => 
         baseErrorHandler(e as Error | AxiosError, dispatch)
     }
 }
+
+
+// ================== ACTION TYPES =======================//
+export type InfoMessageAT = ReturnType<typeof infoMessageAC>
+export type StatusSendMessageAT = ReturnType<typeof statusSendMessageAC>
+
+export type PassRecoveryActionsType = InfoMessageAT | StatusSendMessageAT | SetAppStatusAT

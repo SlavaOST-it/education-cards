@@ -1,30 +1,14 @@
-import {CardResponseType, cardsAPI, GetCardsResponseType} from "../../api/cardsAPI";
+import {cardsAPI} from "../../api/cardsAPI";
 import {AppThunkType} from "../store/store";
 import {setAppStatusAC} from "./app-reducer";
-import {AppStatus} from "../../common/types/types";
+import {CardsResponseType, CardType} from "../../api/apiConfig/types/cardsAPI-types";
 import {baseErrorHandler} from "../../utils/error-utils/error-utils";
 import {AxiosError} from "axios";
-
-
-type SetCardsForLearnAT = ReturnType<typeof setCardsForLearnAC>
-type SetCardsPackIdInLearnAT = ReturnType<typeof setCardsPackIdInLearnAC>
-type SetStatusLearnAT = ReturnType<typeof setStatusLearnAC>
-type SetNamePackForLearnAT = ReturnType<typeof setNamePackForLearnAC>
-type QuestionsCompletedAT = ReturnType<typeof questionsCompletedAC>
-type ResetLearnCardStateAT = ReturnType<typeof resetLearnCardStateAC>
-type DeleteStudiedCardAT = ReturnType<typeof deleteStudiedCardAC>
-export type LearnActionsType =
-    SetCardsForLearnAT
-    | SetCardsPackIdInLearnAT
-    | SetStatusLearnAT
-    | SetNamePackForLearnAT
-    | QuestionsCompletedAT
-    | ResetLearnCardStateAT
-    | DeleteStudiedCardAT
+import {AppStatus} from "../../common/types/types";
 
 
 const initialState = {
-    cards: null as CardResponseType[] | null,
+    cards: null as CardType[] | null,
 
     cardsPack_id: '',
     packName: '',
@@ -80,8 +64,8 @@ export const learnReducer = (state: InitialStateType = initialState, action: Lea
 }
 
 
-// ==================ACTION CREATORS =======================//
-export const setCardsForLearnAC = (data: GetCardsResponseType) => ({type: "LEARN/SET_LEARN_CARDS", data} as const)
+// ================== ACTION CREATORS =======================//
+export const setCardsForLearnAC = (data: CardsResponseType) => ({type: "LEARN/SET_LEARN_CARDS", data} as const)
 
 export const setCardsPackIdInLearnAC = (cardsPack_id: string) => {
     return {type: "LEARN/SET_CARDS_PACK_ID", cardsPack_id} as const
@@ -93,12 +77,12 @@ export const setNamePackForLearnAC = (namePack: string) => ({type: "LEARN/SET_NA
 
 export const questionsCompletedAC = (value: boolean) => ({type: "LEARN/QUESTIONS_COMPLETED", value} as const)
 
-export const deleteStudiedCardAC = (cards: CardResponseType[]) => ({type: "LEARN/DELETE_STUDIED_CARD", cards} as const)
+export const deleteStudiedCardAC = (cards: CardType[]) => ({type: "LEARN/DELETE_STUDIED_CARD", cards} as const)
 
 export const resetLearnCardStateAC = () => ({type: "LEARN/RESET_CARD_STATE"} as const)
 
 
-// ==================THUNK CREATORS =======================//
+// ================== THUNK CREATORS =======================//
 export const getCardsForLearnTC = (): AppThunkType => async (dispatch, getState) => {
     dispatch(setAppStatusAC(AppStatus.LOADING))
     const cardsPack_id = getState().learn.cardsPack_id
@@ -117,9 +101,29 @@ export const getCardsForLearnTC = (): AppThunkType => async (dispatch, getState)
 export const setGradeCardTC = (grade: number, card_id: string): AppThunkType => async (dispatch) => {
     dispatch(setAppStatusAC(AppStatus.LOADING))
     try {
-        const res = await cardsAPI.updateGradeCard({grade, card_id})
+        await cardsAPI.updateGradeCard({grade, card_id});
         dispatch(setAppStatusAC(AppStatus.SUCCEED))
     } catch (e) {
         baseErrorHandler(e as Error | AxiosError, dispatch)
     }
 }
+
+
+// ================== ACTION TYPES =======================//
+
+type SetCardsForLearnAT = ReturnType<typeof setCardsForLearnAC>
+type SetCardsPackIdInLearnAT = ReturnType<typeof setCardsPackIdInLearnAC>
+type SetStatusLearnAT = ReturnType<typeof setStatusLearnAC>
+type SetNamePackForLearnAT = ReturnType<typeof setNamePackForLearnAC>
+type QuestionsCompletedAT = ReturnType<typeof questionsCompletedAC>
+type ResetLearnCardStateAT = ReturnType<typeof resetLearnCardStateAC>
+type DeleteStudiedCardAT = ReturnType<typeof deleteStudiedCardAC>
+
+export type LearnActionsType =
+    SetCardsForLearnAT
+    | SetCardsPackIdInLearnAT
+    | SetStatusLearnAT
+    | SetNamePackForLearnAT
+    | QuestionsCompletedAT
+    | ResetLearnCardStateAT
+    | DeleteStudiedCardAT

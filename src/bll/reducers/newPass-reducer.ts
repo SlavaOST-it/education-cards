@@ -5,8 +5,6 @@ import {baseErrorHandler} from "../../utils/error-utils/error-utils";
 import {AxiosError} from "axios";
 import {AppStatus} from "../../common/types/types";
 
-export type SetNewPassAT = ReturnType<typeof setNewPassAC>
-export type NewPassReducerActionType = SetNewPassAT | SetAppStatusAT
 
 const initialState = {
     infoMessage: '',
@@ -27,10 +25,11 @@ export const setNewPassReducer = (state: InitialStateType = initialState, action
     }
 }
 
-// ===== Action Creators ===== //
+// ================== ACTION CREATORS =======================//
 export const setNewPassAC = (infoMessage: string) => ({type: "NEW_PASS/SET_NEW_PASS", infoMessage} as const)
 
-// ===== Thunk Creators ===== //
+
+// ================== THUNK CREATORS =======================//
 export const setNewPassTC = (newPassword: string, token: string | undefined): AppThunkType => async (dispatch) => {
     dispatch(setAppStatusAC(AppStatus.LOADING))
     try {
@@ -41,3 +40,9 @@ export const setNewPassTC = (newPassword: string, token: string | undefined): Ap
         baseErrorHandler(e as Error | AxiosError, dispatch)
     }
 }
+
+
+// ================== ACTION TYPES =======================//
+export type SetNewPassAT = ReturnType<typeof setNewPassAC>
+
+export type NewPassReducerActionType = SetNewPassAT | SetAppStatusAT
