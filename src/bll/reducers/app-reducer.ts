@@ -51,7 +51,7 @@ export const initializeAppTC = (): AppThunkType => async (dispatch) => {
         dispatch(setUserProfileAC(res))
         dispatch(setAppStatusAC(AppStatus.SUCCEED))
     } catch (e) {
-        baseErrorHandler(e as Error | AxiosError, dispatch)
+        console.error(e)
     } finally {
         dispatch(setInitializedAC(true))
         dispatch(setAppStatusAC(AppStatus.SUCCEED))
