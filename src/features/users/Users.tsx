@@ -16,6 +16,7 @@ import {SearchInput} from "../packs/filters/search/SearchInput";
 import {RangeSlider} from "../packs/filters/rangeSlider/RangeSlider";
 import {ResetFilters} from "../packs/filters/resetFilters/ResetFilters";
 import {UsersTable} from "./usersTable/UsersTable";
+import {setRerenderAC} from "../../bll/reducers/packs-reducer";
 
 
 export const Users = () => {
@@ -28,6 +29,8 @@ export const Users = () => {
     const max = useAppSelector(state => state.users.max)
     const userNameSearch = useAppSelector(state => state.users.userName)
     const sortCountCardUser = useAppSelector(state => state.users.sortUsers)
+
+    const rerender = useAppSelector(state => state.packs.rerender)
 
     const [searchParams, setSearchParams] = useSearchParams();
 
@@ -62,6 +65,10 @@ export const Users = () => {
             userNameSearch: `${userNameSearch}`,
             sortCountCardUser: `${sortCountCardUser}`
         })
+        if (!rerender) {
+            dispatch(setRerenderAC(true))
+            return
+        }
 
         dispatch(getUsersTC())
     }, [page, pageCount, min, max, userNameSearch, sortCountCardUser])
@@ -73,8 +80,7 @@ export const Users = () => {
     return (
         <div className={s.container}>
 
-            <BackToPacksList type={'pack'} callBack={() => {
-            }}/>
+            <BackToPacksList type={'pack'}/>
 
             <div className={s.filtersBlock}>
                 <div className={s.searchInput}>
